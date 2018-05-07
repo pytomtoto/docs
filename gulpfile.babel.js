@@ -52,14 +52,14 @@ gulp.task('build-dev', (cb) => {
 });
 
 gulp.task('hugo', (cb) => {
-  return spawn('hugo', ['--buildFuture', '--baseURL=/'], { stdio: 'inherit' }).on('close', (/* code */) => {
+  return spawn('hugo', ['--buildFuture', '--baseURL=/docs-cn'], { stdio: 'inherit' }).on('close', (/* code */) => {
     browserSync.reload();
     cb();
   });
 });
 
 gulp.task('hugo-staging', (cb) => {
-  return spawn('hugo', ['--buildDrafts', '--buildFuture', '--baseURL=/'], { stdio: 'inherit' }).on('close', (/* code */) => {
+  return spawn('hugo', ['--buildDrafts', '--buildFuture', '--baseURL=/docs-cn'], { stdio: 'inherit' }).on('close', (/* code */) => {
     browserSync.reload();
     cb();
   });
