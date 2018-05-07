@@ -2,18 +2,16 @@
 FROM registry.cn-shanghai.aliyuncs.com/rancher_cn/website:build as build1
 
 WORKDIR /run
-
-ADD https://github.com/hongxiaolu/docs/archive/master.tar.gz master.tar.gz
-
-RUN tar -xzf master.tar.gz --strip 1 -C /run && rm master.tar.gz
-
 COPY config.toml /run/
 
 ENV HUGO_ENV production
 
-ADD https://github.com/hongxiaolu/website-theme/archive/master.tar.gz master.tar.gz
+ADD https://github.com/hongxiaolu/docs/archive/master.tar.gz master.tar.gz
+RUN tar -xzf master.tar.gz --strip 1 -C /run && rm master.tar.gz
 
+ADD https://github.com/hongxiaolu/website-theme/archive/master.tar.gz master.tar.gz
 RUN tar -xzf master.tar.gz --strip 1 -C /run/node_modules/rancher-website-theme && rm master.tar.gz
+
 RUN gulp build-staging
 
 # Make sure something got built
