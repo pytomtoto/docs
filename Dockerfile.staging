@@ -42,7 +42,7 @@ RUN gulp build-staging
 # Make sure something got built
 RUN stat /run/public/index.html
 
-# 阶段3
+# 阶段3-制作镜像
 FROM nginx
 
 COPY --from=build1 /run/public /usr/share/nginx/html/docs-cn/
