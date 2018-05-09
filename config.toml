@@ -6,6 +6,8 @@ themesDir = "node_modules"
 pluralizeListTitles = false
 
 enableRobotsTXT = true
+pygmentsCodeFences=true
+pygmentsCodeFencesGuessSyntax=true
 
 [permalinks]
   inside-pages = "/:filename/"
