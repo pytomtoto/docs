@@ -1,21 +1,21 @@
 ---
-  title: About
+  title: 关于Rancher
   weight: 5000
   draft: true
 ---
 
 # About
 
-## Contributing to Rancher
+## 贡献 Rancher
 
-### Developing
+### 发展
 
 In our GitHub repository, our wiki contains all the steps to get started with developing Rancher.
 
 Start with our first cowpoke to get started!
 
 
-### Repositories
+### 代码仓库
 
 All of repositories are located within our main GitHub page. There are many repositories used for Rancher, but we’ll provide descriptions of some of the main ones used in Rancher.
 
