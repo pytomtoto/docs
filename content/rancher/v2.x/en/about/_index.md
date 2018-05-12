@@ -1,7 +1,6 @@
 ---
   title: 关于Rancher
   weight: 5000
-  draft: true
 ---
 
 # About
