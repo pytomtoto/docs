@@ -6,10 +6,10 @@ COPY config.toml /run/
 
 ENV HUGO_ENV production
 
-ADD https://github.com/hongxiaolu/docs/archive/master.tar.gz master.tar.gz
+ADD https://github.com/xiaoluhong/docs/archive/master.tar.gz master.tar.gz
 RUN tar -xzf master.tar.gz --strip 1 -C /run && rm master.tar.gz
 
-ADD https://github.com/hongxiaolu/website-theme/archive/master.tar.gz master.tar.gz
+ADD https://github.com/xiaoluhong/website-theme/archive/master.tar.gz master.tar.gz
 RUN tar -xzf master.tar.gz --strip 1 -C /run/node_modules/rancher-website-theme && rm master.tar.gz
 
 RUN gulp build-staging
@@ -30,7 +30,7 @@ COPY config.toml /run/
 
 ENV HUGO_ENV production
 
-ADD https://github.com/hongxiaolu/website-theme/archive/master.tar.gz master.tar.gz
+ADD https://github.com/xiaoluhong/website-theme/archive/master.tar.gz master.tar.gz
 
 RUN tar -xzf master.tar.gz --strip 1 -C /run/node_modules/rancher-website-theme && rm master.tar.gz && sed -i "s/docs/docs-en/g" /run/gulpfile.babel.js
 RUN gulp build-staging

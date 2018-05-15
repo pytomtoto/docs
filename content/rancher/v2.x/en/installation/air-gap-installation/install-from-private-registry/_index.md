@@ -4,7 +4,7 @@ weight: 350
 ---
 # Installing From a Private Registry
 
-Rancher supports installing from a private registry. In every [release](https://github.com/rancher/rancher/releases), we provide you with the needed images and scripts to mirror those images to your own registry.
+Rancher 支持s installing from a private registry. In every [release](https://github.com/rancher/rancher/releases), we provide you with the needed images and scripts to mirror those images to your own registry.
 
 >**Prerequisite:** It is assumed you either have your own private registry or other means of distributing docker images to your machine. If you need help with creating a private registry, please refer to the [Docker documentation for private registries](https://docs.docker.com/registry/).
 

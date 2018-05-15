@@ -71,7 +71,7 @@ docker run -d -p 80:80 -p 443:443 \
 
 ### Using Automatically Requested Let's Encrypt Certificates
 
-Rancher supports requesting Let's Encrypt certificates out-of-the-box. This request uses **HTTP-01 challenge**, which means that the hostname you choose for accessing Rancher (for example, `rancher.mydomain.com`) must point to the IP address of the host that Rancher runs on. Therefore, you must bind your hostname to the Rancher host IP address on your DNS.
+Rancher 支持s requesting Let's Encrypt certificates out-of-the-box. This request uses **HTTP-01 challenge**, which means that the hostname you choose for accessing Rancher (for example, `rancher.mydomain.com`) must point to the IP address of the host that Rancher runs on. Therefore, you must bind your hostname to the Rancher host IP address on your DNS.
 
 Because the Let's Encrypt challenge can originate from any source IP address, port **TCP/80** must be open for every source IP address. You enable the Let's Encrypt functionality by passing the parameter `--acme-domain rancher.mydomain.com` when running the `rancher/rancher` container.
 
@@ -81,7 +81,7 @@ Because the Let's Encrypt challenge can originate from any source IP address, po
 docker run -d -p 80:80 -p 443:443 rancher/rancher:v2.0.0 --acme-domain rancher.mydomain.com
 ```
 
->**Note:** Let's Encrypt provides rate limits for requesting new certificates, keep this in mind when creating and destroying the container multiple times. Read more on this in the [Let's Encrypt documentation on rate limits](https://letsencrypt.org/docs/rate-limits/).
+>**Note:** Let's Encrypt provides rate limits for requesting new certificates, keep this in mind when creating and destroying the container multiple times. 了解更多 on this in the [Let's Encrypt documentation on rate limits](https://letsencrypt.org/docs/rate-limits/).
 
 ## Options When Using an External Load Balancer or Proxy
 

@@ -19,7 +19,7 @@ RancherOS is available as an image in GCE, and can be easily run in Google Compu
 
 ### Launching RancherOS using `gcloud compute`
 
-After the image is uploaded, we can use the `gcloud compute` [command-line tool](https://cloud.google.com/compute/docs/gcloud-compute/) to start a new instance. It automatically merges the SSH keys from the project and adds the keys to the **rancher** user. If you don't have any project level SSH keys, go to the _Adding SSH Keys_ section to learn more about adding SSH keys.
+After the image is uploaded, we can use the `gcloud compute` [command-line tool](https://cloud.google.com/compute/docs/gcloud-compute/) to start a new instance. It automatically merges the SSH keys from the project and adds the keys to the **rancher** user. If you don't have any project level SSH keys, go to the _Adding SSH Keys_ section to 了解更多 about adding SSH keys.
 
 Since the image is private, we need to follow Google's [instructions](https://cloud.google.com/compute/docs/creating-custom-image#start_an_instance_from_a_custom_image).
 

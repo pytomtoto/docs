@@ -23,6 +23,6 @@ All of repositories are located within our main GitHub page. There are many repo
 
 ### Bugs
 
-If you find any bugs or are having any trouble, please contact us by filing an issue. Though we have many repositories related to Rancher, we want the majority of the bugs in the Rancher repo so we won’t miss them!
+If you find any bugs or are having any trouble, please 联系我们 by filing an issue. Though we have many repositories related to Rancher, we want the majority of the bugs in the Rancher repo so we won’t miss them!
 
 If you have any updates to our documentation, please make any PRs to our docs repo.

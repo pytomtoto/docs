@@ -69,7 +69,7 @@ All of repositories are located within our main GitHub [page](https://github.com
 
 ## Bugs
 
-If you find any bugs or are having any trouble, please contact us by filing an [issue](https://github.com/rancher/os/issues/new).
+If you find any bugs or are having any trouble, please 联系我们 by filing an [issue](https://github.com/rancher/os/issues/new).
 
 If you have any updates to our documentation, please make any PRs to our [docs repo](https://github.com/rancher/docs).
 

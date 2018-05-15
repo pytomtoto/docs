@@ -7,7 +7,7 @@ weight: 3050
 
 ## Adding Custom Node Drivers
 
-If you create a cluster using a cloud provider that {{< product >}} doesn't support out-of-the-box, you may need to add the provider's drivers (or create them yourself) so that your nodes function properly.
+If you 创建集群 using a cloud provider that {{< product >}} doesn't support out-of-the-box, you may need to add the provider's drivers (or create them yourself) so that your nodes function properly.
 
 1.	From the **Global** view, select **Node Drivers** from the main menu.
 
@@ -17,7 +17,7 @@ If you create a cluster using a cloud provider that {{< product >}} doesn't supp
 
 ## Activating Node Drivers
 
-Using the **Custom** option, you can create a cluster using virtually any cloud provider. However, by default, {{< product >}} only activates drivers for the most popular cloud providers. If you want to use another provider, you'll have to activate their drivers.
+Using the **Custom** option, you can 创建集群 using virtually any cloud provider. However, by default, {{< product >}} only activates drivers for the most popular cloud providers. If you want to use another provider, you'll have to activate their drivers.
 
 1.	From the **Global** view, select **Node Drivers** from the main menu.
 

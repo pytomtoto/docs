@@ -16,7 +16,7 @@ While Helm supports versioned deployments, Rancher added capabilities to track a
 
 ## Streamlined Application Launch
 
-Rancher supports simplified README files and questions files to streamline the application launch process. Users need not read through the entire list of Helm variables to understand how to launch an application.
+Rancher 支持s simplified README files and questions files to streamline the application launch process. Users need not read through the entire list of Helm variables to understand how to launch an application.
 
 ## Application Resource Management
 

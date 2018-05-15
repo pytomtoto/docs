@@ -133,7 +133,7 @@ After obtaining your certificate, run the Docker command to deploy Rancher, poin
 
 ### Option D—Let's Encrypt Certificate
 
-Rancher supports Let's Encrypt certificates. Let's Encrypt uses an **http-01 challenge** to verify that you have control over your domain. You can confirm that you control the domain by pointing the hostname that you want to use for Rancher access (for example, `rancher.mydomain.com`) to the IP of the machine it is running on. You can bind the hostname to the IP address by creating an A record in DNS.
+Rancher 支持s Let's Encrypt certificates. Let's Encrypt uses an **http-01 challenge** to verify that you have control over your domain. You can confirm that you control the domain by pointing the hostname that you want to use for Rancher access (for example, `rancher.mydomain.com`) to the IP of the machine it is running on. You can bind the hostname to the IP address by creating an A record in DNS.
 
 **Before You Start:**
 
