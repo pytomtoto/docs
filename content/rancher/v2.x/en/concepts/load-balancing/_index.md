@@ -2,10 +2,7 @@
 title: Load Balancing
 weight: 2175
 ---
-
-# Load Balancing
-
-Kubernetes 支持s load balancing in two ways: Layer-4 Load Balancing and Layer-7 Load Balancing.
+Kubernetes supports load balancing in two ways: Layer-4 Load Balancing and Layer-7 Load Balancing.
 
 ## Layer-4 Load Balancer
 

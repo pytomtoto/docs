@@ -2,8 +2,6 @@
 title: 安装 Rancher
 weight: 50
 ---
-# 安装 Rancher
-
 本章节包含在开发和生产环境中安装Rancher的说明。
 
 从以下安装选择中选择：

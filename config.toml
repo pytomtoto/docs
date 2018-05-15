@@ -96,6 +96,12 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
    parent     = "what-is-rancher"
    weight     = "10"
 
+  [[menu.main]]
+  # name       = "How is Rancher Built"
+  # url        = "/what-is-rancher/how-is-rancher-built/"
+  # parent     = "what-is-rancher"
+  # weight     = "10"
+
 
 [[menu.main]]
 identifier = "products"

@@ -3,8 +3,6 @@
   weight: 5000
 ---
 
-# About
-
 ## 贡献 Rancher
 
 ### 发展
