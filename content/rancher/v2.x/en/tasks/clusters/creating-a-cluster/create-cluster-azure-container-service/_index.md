@@ -1,12 +1,10 @@
 ---
-title: Creating an AKS Cluster
+title: Creating an Azure Container Service Cluster
 shortTitle: Azure Container Service
 weight: 3350
 ---
 
-# Creating an Azure Container Service Cluster
-
-You can use Rancher to 创建集群 using Microsoft Azure Container Service.
+You can use Rancher to create a cluster using Microsoft Azure Container Service.
 
 <!-- VJF... Broken tag for: beta-note_azure -->
 

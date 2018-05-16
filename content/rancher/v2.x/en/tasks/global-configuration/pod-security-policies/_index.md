@@ -2,7 +2,6 @@
 title: Adding Pod Security Policies
 weight: 3150
 ---
-## Adding Pod Security Policies
 
 Using {{< product >}}, you can create a Pod Security Policy using our GUI rather than creating a .yaml file.
 
