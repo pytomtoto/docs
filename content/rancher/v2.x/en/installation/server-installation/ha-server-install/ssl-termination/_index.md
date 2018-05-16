@@ -9,7 +9,7 @@ In this scenario, your Load Balancer handles all SSL decryption, and then forwar
 
 ## Before You Start
 
-Complete [SSL Config: External Load Balancer or Proxy]({{< baseurl >}}/rancher/v2.x/en/installation/ssl-config/#instructions-for-the-loadbalancer-or-proxy)
+Complete [SSL Config: External Load Balancer or Proxy]({{< baseurl >}}/rancher/v2.x/cn/installation/ssl-config/#instructions-for-the-loadbalancer-or-proxy)
 
 ## Objectives
 

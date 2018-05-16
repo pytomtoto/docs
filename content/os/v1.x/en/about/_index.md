@@ -1,5 +1,5 @@
 ---
-title: About
+title: Contributing to RancherOS
 weight: 4
 ---
 

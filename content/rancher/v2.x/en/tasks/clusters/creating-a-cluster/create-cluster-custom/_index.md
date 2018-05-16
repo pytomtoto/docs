@@ -4,6 +4,8 @@ shortTitle: Custom Cluster
 weight: 3225
 ---
 
+# Creating a Custom Cluster
+
 ## Objectives
 
 1.	[Provision a Linux Host](#provision-a-linux-host)

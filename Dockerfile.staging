@@ -41,7 +41,7 @@ RUN stat /run/public/index.html
 # 阶段3-制作镜像
 FROM nginx
 
-COPY --from=build1 /run/public /usr/share/nginx/html/docs-cn/
+COPY --from=build1 /run/public /usr/share/nginx/html/docs/
 COPY --from=build2 /run/public /usr/share/nginx/html/docs-en/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

@@ -139,7 +139,7 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
 
   [[menu.main]]
   name       = "文档-中文"
-  url        = "https://web.cnrancher.com/docs-cn/"
+  url        = "https://web.cnrancher.com/docs/"
   parent     = "learn"
 
   [[menu.main]]

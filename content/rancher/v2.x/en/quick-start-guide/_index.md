@@ -3,7 +3,7 @@ title: Quick Start Guide
 short title: Quick Start
 weight: 25
 ---
->**Note:** This Quick Start Guide will get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/en/installation/).
+>**Note:** This Quick Start Guide will get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/).
 
 Howdy Partner! This tutorial walks you through:
 
@@ -29,7 +29,7 @@ This Quick Start Guide is divided into different tasks for easier consumption.
 
 4.  [Create the Cluster](#create-the-cluster)
 
-    Use the versatile **Custom** option to add your Linux host into a new Kubernetes cluster.
+    Use the versatile **Custom** option to clone your Linux host into a new Kubernetes cluster.
 
 5.  [Deploy a Workload](#deploy-a-workload)
 

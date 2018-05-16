@@ -9,7 +9,7 @@ In this scenario, your High-Availability Rancher Servers handle SSL decryption r
 
 ## Before you Start:
 
-Complete [SSL Config: In the Rancher Container]({{< baseurl >}}/rancher/v2.x/en/installation/ssl-config/#certificate-host-inside-the-rancher-container).
+Complete [SSL Config: In the Rancher Container]({{< baseurl >}}/rancher/v2.x/cn/installation/ssl-config/#certificate-host-inside-the-rancher-container).
 
 ## Objectives
 

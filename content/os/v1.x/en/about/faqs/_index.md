@@ -1,5 +1,5 @@
 ---
-title: FAQs
+title: Frequently Asked Questions
 weight: 301
 ---
 
