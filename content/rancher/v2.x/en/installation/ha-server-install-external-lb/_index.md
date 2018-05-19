@@ -1,6 +1,7 @@
 ---
 title: High Availability Installation with External Load Balancer
 weight: 276
+draft: true
 ---
 This set of instructions creates a new Kubernetes cluster that's dedicated to running Rancher in a high-availability (HA) configuration. This procedure walks you through setting up a 3-node cluster using the Rancher Kubernetes Engine (RKE). The cluster's sole purpose is running pods for Rancher. The setup is based on:
 
@@ -293,6 +294,10 @@ INFO[0101] Finished building Kubernetes cluster successfully
 During installation, RKE generates a config file named `kube_config_rancher-cluster.yml` in the same directory as the RKE binary. Copy this file and back it up to a safe location. You'll use this file later when upgrading Rancher Server.
 
 ## Part 12-Remove Default Certificates
+
+**For those using a certificate signed by a recognized CA:**
+
+>**Note:** If you're using a self-signed certificate, you don't have to complete this part. Continue to [What's Next?](#whats-next).
 
 By default, Rancher automatically generates self-signed certificates for itself after installation. However, since you've provided your own certificates, you must disable the certificates that Rancher generated for itself.
 

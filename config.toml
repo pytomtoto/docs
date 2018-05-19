@@ -61,44 +61,38 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
   weight     = "4"
 
   [[menu.main]]
-   name       = "集群操作"
-   url        = "https://web.cnrancher.com/what-is-rancher/cluster-operations/"
-   parent     = "what-is-rancher"
-   weight     = "5"
+  # name       = "Cluster Operations"
+  # url        = "https://rancher.com/what-is-rancher/cluster-operations/"
+  # parent     = "what-is-rancher"
+  # weight     = "5"
 
   [[menu.main]]
-   name       = "Hybrid cloud & multi-cloud"
-   url        = "https://web.cnrancher.com/what-is-rancher/hybrid-multi-cloud/"
-   parent     = "what-is-rancher"
-   weight     = "6"
+  # name       = "Hybrid cloud & multi-cloud"
+  # url        = "https://rancher.com/what-is-rancher/hybrid-multi-cloud/"
+  # parent     = "what-is-rancher"
+  # weight     = "6"
 
   [[menu.main]]
-   name       = "Security & compliance"
-   url        = "https://web.cnrancher.com/what-is-rancher/security-and-compliance/"
-   parent     = "what-is-rancher"
-   weight     = "7"
+  # name       = "Security & compliance"
+  # url        = "https://rancher.com/what-is-rancher/security-and-compliance/"
+  # parent     = "what-is-rancher"
+  # weight     = "7"
 
   [[menu.main]]
-   name       = "Workload Management"
-   url        = "https://web.cnrancher.com/what-is-rancher/workload-management/"
-   parent     = "what-is-rancher"
-   weight     = "8"
+  # name       = "Workload Management"
+  # url        = "https://rancher.com/what-is-rancher/workload-management/"
+  # parent     = "what-is-rancher"
+  # weight     = "8"
 
   [[menu.main]]
-   name       = "完全开源"
-   url        = "https://web.cnrancher.com/what-is-rancher/open-source/"
-   parent     = "what-is-rancher"
-   weight     = "9"
-
-  [[menu.main]]
-   name       = "如何构建Rancher"
-   url        = "https://web.cnrancher.com/what-is-rancher/how-is-rancher-built/"
-   parent     = "what-is-rancher"
-   weight     = "10"
+  # name       = "100% Open Source"
+  # url        = "https://rancher.com/what-is-rancher/open-source/"
+  # parent     = "what-is-rancher"
+  # weight     = "9"
 
   [[menu.main]]
   # name       = "How is Rancher Built"
-  # url        = "/what-is-rancher/how-is-rancher-built/"
+  # url        = "https://rancher.com/what-is-rancher/how-is-rancher-built/"
   # parent     = "what-is-rancher"
   # weight     = "10"
 
@@ -111,19 +105,19 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
 
   [[menu.main]]
   name       = "Rancher"
-  url        = "https://web.cnrancher.com/what-is-rancher/overview/"
+  url        = "https://rancher.com/what-is-rancher/overview/"
   parent     = "products"
 
   [[menu.main]]
   name       = "RancherOS"
-  url        = "https://web.cnrancher.com/rancher-os/"
+  url        = "https://rancher.com/rancher-os/"
   parent     = "products"
 
 
 [[menu.main]]
 #identifier = "customers"
 #name       = "Customers"
-#url        = "https://web.cnrancher.com/customers/"
+#url        = "https://rancher.com//customers/"
 #weight     = "3"
 
 [[menu.main]]
@@ -148,8 +142,8 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
   parent     = "learn"
 
   [[menu.main]]
-  name       = "培训"
-  url        = "https://web.cnrancher.com/training/"
+  name       = "Training"
+  url        = "https://rancher.com/training/"
   parent     = "learn"
 
   [[menu.main]]
@@ -161,45 +155,45 @@ pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
 
   [[menu.main]]
   #name       = "Learning Resources"
-  #url        = "https://web.cnrancher.com/learning-resources/"
+  #url        = "https://rancher.com/learning-resources/"
   #parent     = "learn"
 
   [[menu.main]]
-  name       = "活动"
-  url        = "https://web.cnrancher.com/events/"
+  name       = "Events"
+  url        = "https://rancher.com/events/"
   parent     = "learn"
 
 
 [[menu.main]]
 identifier = "about"
-name       = "关于"
-url        = "https://web.cnrancher.com/about/"
+name       = "About"
+url        = "https://rancher.com/about/"
 weight     = "5"
 pre        = "<i class='material-icons'>keyboard_arrow_down</i>"
 
   [[menu.main]]
-  name       = "相关新闻"
-  url        = "https://web.cnrancher.com/news/"
+  name       = "News"
+  url        = "https://rancher.com/news/"
   parent     = "about"
 
   [[menu.main]]
-  name       = "关于我们"
-  url        = "https://web.cnrancher.com/about/"
+  name       = "About Us"
+  url        = "https://rancher.com/about/"
   parent     = "about"
 
   [[menu.main]]
-  name       = "招聘信息"
-  url        = "https://web.cnrancher.com/careers/"
+  name       = "Careers"
+  url        = "https://rancher.com/careers/"
   parent     = "about"
 
   [[menu.main]]
-  name       = "联系我们"
-  url        = "https://web.cnrancher.com/contact/"
+  name       = "Contact Us"
+  url        = "https://rancher.com/contact/"
   parent     = "about"
 
   [[menu.main]]
-  name       = "合作伙伴"
-  url        = "https://web.cnrancher.com/partners/"
+  name       = "Partners"
+  url        = "https://rancher.com/partners/"
   parent     = "about"
 
 

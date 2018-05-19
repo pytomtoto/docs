@@ -1,7 +1,6 @@
 ---
 title: Upgrades
 weight: 1000
-draft: true
 ---
 
 This section includes instructions for upgrading Rancher from previous versions.
@@ -14,7 +13,7 @@ Complete one of the upgrade procedures below based on your Rancher installation:
 
 - [Single Node Upgrade](./single-node-upgrade/)
 - [High Availability Upgrade](./ha-server-upgrade)
-- [Air Gap Upgrade](./air-gap-upgrade)
+<!--- [Air Gap Upgrade](./air-gap-upgrade)-->
 
 ### Migrating from Rancher 1.6.x
 
