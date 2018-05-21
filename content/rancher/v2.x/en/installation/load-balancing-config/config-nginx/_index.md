@@ -1,8 +1,8 @@
 ---
-title: Configure Nginx
+title: Nginx配置
 weight: 315
 ---
-# Configure Nginx
+# Nginx配置
 
 Nginx is a popular application platform that can be used as a load balancer. Rancher 支持s use of Nginx with ngx_http_v2_module enabled, which isn't enabled by default. Use the following parameter when setting up Nginx to enable the module: `--with-http_v2_module`.
 

@@ -1,10 +1,10 @@
 ---
-title: Load Balancing
+title: 负载均衡
 weight: 300
 draft: true
 ---
 
-# Load Balancer Configuration
+# 负载均衡配置
 
 Following {{< product >}} installation, you have the option of configuring an external load balancer to direct cluster traffic.
 

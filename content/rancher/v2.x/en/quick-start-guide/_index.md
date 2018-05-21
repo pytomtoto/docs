@@ -1,6 +1,6 @@
 ---
-title: Quick Start Guide
-short title: Quick Start
+title: 快速入门指南
+short title: 快速入门
 weight: 25
 ---
 >**Note:** This Quick Start Guide will get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/).

@@ -1,5 +1,5 @@
 ---
-title: Single Node Installation
+title: 单节点安装
 weight: 250
 ---
 For development environments, we recommend installing Rancher by running a single Docker container. In this installation scenario, you'll install Docker on a single Linux host, and then install Rancher on your host using a single Docker container.
@@ -7,7 +7,7 @@ For development environments, we recommend installing Rancher by running a singl
 >**Note:**
 > If you want to use an external load balancer, see [Single Node Installation with an External Loadbalancer]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install-external-lb/).
 
-## Overview
+## 预览
 
 Installation of Rancher on a single node involves multiple procedures. Review this overview to learn about each procedure you need to complete.
 
@@ -19,7 +19,7 @@ Installation of Rancher on a single node involves multiple procedures. Review th
 
 	Choose an SSL option for Rancher communication encryption. After choosing an option, run the command that accompanies it to deploy Rancher.
 
-## Part 1—Provision Linux Host
+## Part 1—准备linux主机
 
 Provision a single Linux host to launch your {{< product >}} Server.
 

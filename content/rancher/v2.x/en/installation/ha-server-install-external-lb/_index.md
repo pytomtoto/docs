@@ -1,6 +1,7 @@
 ---
 title: High Availability Installation with External Load Balancer
 weight: 276
+draft: true
 ---
 This set of instructions creates a new Kubernetes cluster that's dedicated to running Rancher in a high-availability (HA) configuration. This procedure walks you through setting up a 3-node cluster using the Rancher Kubernetes Engine (RKE). The cluster's sole purpose is running pods for Rancher. The setup is based on:
 
@@ -151,8 +152,8 @@ RKE uses a `.yml` config file to install and configure your Kubernetes cluster. 
 
 1. Download one of following templates, depending on the SSL certificate you're using.
 
-	- [Template for using Self Signed Certificate (3-node-externalssl-certificate.yml)](https://raw.githubusercontent.com/rancher/rancher/58e695b51096b1f404188379cea6f6a35aea9e4c/rke-templates/3-node-externalssl-certificate.yml)
-	- [Template for using Certificate Signed By A Recognized Certificate Authority (3-node-externalssl-recognizedca.yml)](https://raw.githubusercontent.com/rancher/rancher/58e695b51096b1f404188379cea6f6a35aea9e4c/rke-templates/3-node-externalssl-recognizedca.yml)
+	- [Template for using Self Signed Certificate (3-node-externalssl-certificate.yml)](https://raw.githubusercontent.com/rancher/rancher/e9d29b3f3b9673421961c68adf0516807d1317eb/rke-templates/3-node-certificate.yml)
+	- [Template for using Certificate Signed By A Recognized Certificate Authority (3-node-externalssl-recognizedca.yml)](https://raw.githubusercontent.com/rancher/rancher/e9d29b3f3b9673421961c68adf0516807d1317eb/rke-templates/3-node-certificate-recognizedca.yml)
 2. Rename the file `rancher-cluster.yml`.
 
 ## Part 6-Configure Nodes

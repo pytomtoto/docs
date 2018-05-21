@@ -1,5 +1,5 @@
 ---
-title: Quick Start Guide
+title: 快速入门指南
 weight: 1
 ---
 

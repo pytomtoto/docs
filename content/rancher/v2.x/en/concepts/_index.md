@@ -1,5 +1,5 @@
 ---
-  title: Concepts
+  title: 术语
   weight: 2000
 ---
 This section describes the different features in Rancher, the ideas behind them, and how they work.
