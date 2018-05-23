@@ -6,13 +6,14 @@ To upgrade Rancher 2.x running in a high availablity configuration, run an upgra
 
 >**Prerequisites:**
 >
+>- Take a [one-time etcd snapshot]({{< baseurl >}}/rancher/v2.x/en/installation/after-installation/etcd-backup-and-restoration). This snapshot is a restore point in case something goes wrong during upgrade.
 >- Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) on your workstation.
 >- Confirm that the following path exists on your workstation: `~/.kube/`. If it doesn't, create it yourself.
 >- Copy `kube_config_rancher-cluster.yml`, which is automatically generated after [Rancher Server installation]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install#part-11-backup-kube-config-rancher-cluster-yml), to the `~/.kube/` directory.
 
 1. From your workstation, open **Terminal**.
 
-2. Enter the ng command:
+2. Enter the following command:
 
 	```
 kubectl --kubeconfig=kube_config-rancher-cluster.yml set image deployment/cattle cattle-server=rancher/rancher:<VERSION_TAG> -n cattle-system

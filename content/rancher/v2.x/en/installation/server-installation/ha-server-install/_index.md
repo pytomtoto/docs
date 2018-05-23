@@ -47,7 +47,7 @@ This set of instructions creates a new Kubernetes cluster that's dedicated to ru
 
 	Finally, run RKE to deploy Rancher to your cluster.
 
-11. [Backup kube_config_rancher-cluster.yml](part-11-backup-kube-config-rancher-cluster-yml)
+11. [Backup Config File](#part-11-backup-config-file)
 
 	During installation, RKE generates a config file that you'll use later for upgrades. Back it up to a safe location.
 
@@ -74,7 +74,14 @@ Before you install Rancher, confirm you meet the host requirements. Provision 3 
 
 ## Part 2—Configure DNS
 
-Choose a fully qualified domain name (FQDN) you want to use to access Rancher (something like `rancher.yourdomain.com`).<br/><br/>You need to create a DNS A record, pointing to the IP addresses of your [Linux hosts](#provision-linux-hosts). If the DNS A record is created, you can validate if it's setup correctly by running `nslookup rancher.yourdomain.com`. It should return the 3 IP addresses of your [Linux hosts](#provision-linux-hosts) like in the example below.
+Besides installing NGINX as a package on the operating system, you can also run it as a Docker container. Save the edited **Example NGINX config** as `/etc/nginx.conf` and run the following command to launch the NGINX container:
+
+```
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /etc/nginx.conf:/etc/nginx/nginx.conf \
+  nginx:1.14
+```
 
 >**Note:**
 > Because it is round robin DNS, the order of the returned IPs can be different.
@@ -104,7 +111,7 @@ From your workstation, open a web browser and navigate to our [RKE Releases](htt
 
 Make the RKE binary that you just downloaded executable. Open Terminal, change directory to the location of the RKE binary, and then run the following command:
 
-``` bash
+```
 # MacOS
 $ chmod +x rke_darwin-amd64
 # Linux
@@ -133,7 +140,7 @@ RKE uses a `.yml` config file to install and configure your Kubernetes cluster. 
 
 	- [Template for using Self Signed Certificate (3-node-certificate.yml)](https://raw.githubusercontent.com/rancher/rancher/e9d29b3f3b9673421961c68adf0516807d1317eb/rke-templates/3-node-certificate.yml)
 	- [Template for using Certificate Signed By A Recognized Certificate Authority (3-node-certificate-recognizedca.yml)](https://raw.githubusercontent.com/rancher/rancher/e9d29b3f3b9673421961c68adf0516807d1317eb/rke-templates/3-node-certificate-recognizedca.yml)
-2. Rename the file `rancher-cluster.yml`.
+2. Rename the file to `rancher-cluster.yml`.
 
 ## Part 5—Configure Nodes
 
@@ -178,7 +185,7 @@ Certificates can be configured by using base64 encoded strings in the config fil
 ### Option A—Self Signed Certificate
 
 >**Note:**
-> If you are using Certificate Signed By A Recognized Certificate Authority, [click here](#certificate-signed-by-a-recognized-certificate-authority) to proceed.
+> If you are using Certificate Signed By A Recognized Certificate Authority, [click here](#option-b-certificate-signed-by-a-recognized-certificate-authority) to proceed.
 
 If you are using a Self Signed Certificate, you will need to generate base64 encoded strings for each of your files (Certificate file, Certificate Key file, and CA certificate file).
 
@@ -188,6 +195,9 @@ In the `kind: Secret` with `name: cattle-keys-ingress`:
 * Replace `<BASE64_KEY>` with the base64 encoded string of the Certificate Key file (usually called `key.pem` or `domain.key`)
 
 After replacing the values, the file should look like the example below (the base64 encoded strings should be different):
+
+>**Note:**
+> The base64 encoded string should be on the same line as `tls.crt` or `tls.key`, without any newline at the beginning, in between or at the end.
 
 ```
 ---
@@ -207,6 +217,9 @@ In the `kind: Secret` with `name: cattle-keys-server`:
 * Replace `<BASE64_CA>` with the base64 encoded string of the CA Certificate file (usually called `ca.pem` or `ca.crt`)
 
 After replacing the value, the file should look like the example below (the base64 encoded string should be different):
+
+>**Note:**
+> The base64 encoded string should be on the same line as `cacerts.pem`, without any newline at the beginning, in between or at the end.
 
 ```
 ---
@@ -231,6 +244,9 @@ In the `kind: Secret` with `name: cattle-keys-ingress`:
 
 After replacing the values, the file should look like the example below (the base64 encoded strings should be different):
 
+>**Note:**
+> The base64 encoded string should be on the same line as `tls.crt` or `tls.key`, without any newline at the beginning, in between or at the end.
+
 ```
 ---
 apiVersion: v1
@@ -247,13 +263,13 @@ data:
 
 ## Part 7—Configure FQDN
 
-There are 2 references to `<FQDN>` in the config file. Both need to be replaced with the FQDN chosen in [Configure DNS](#configure-dns).
+There are 2 references to `<FQDN>` in the config file. Both need to be replaced with the FQDN chosen in [Configure DNS](#part-3-configure-dns).
 
 In the `kind: Ingress` with `name: cattle-ingress-http`:
 
-* Replace `<FQDN>` with the FQDN chosen in [Configure DNS](#configure-dns).
+* Replace `<FQDN>` with the FQDN chosen in [Configure DNS](#part-3-configure-dns).
 
-After replacing `<FQDN>` wit the FQDN chosen in [Configure DNS](#configure-dns), the file should look like the example below (`rancher.yourdomain.com` is the FQDN used in this example):
+After replacing `<FQDN>` wit the FQDN chosen in [Configure DNS](#part-3-configure-dns), the file should look like the example below (`rancher.yourdomain.com` is the FQDN used in this example):
 
 ```
  ---
@@ -314,7 +330,7 @@ INFO[0000] [network] Pulling image [alpine:latest] on host [1.1.1.1]
 INFO[0101] Finished building Kubernetes cluster successfully
 ```
 
-## Part 11—Backup kube_config_rancher-cluster.yml
+## Part 11-Backup Config File
 
 During installation, RKE generates a config file named `kube_config_rancher-cluster.yml` in the same directory as the RKE binary. Copy this file and back it up to a safe location. You'll use this file later when upgrading Rancher Server.
 
@@ -322,7 +338,7 @@ During installation, RKE generates a config file named `kube_config_rancher-clus
 
 **For those using a certificate signed by a recognized CA:**
 
->**Note:** If you're using a self-signed certificate, you don't have to complete this part. Continue to [What's Next?](#whats-next).
+>**Note:** If you're using a self-signed certificate, you don't have to complete this part. Continue to [What's Next?](#what-s-next).
 
 By default, Rancher automatically generates self-signed certificates for itself after installation. However, since you've provided your own certificates, you must disable the certificates that Rancher generated for itself.
 
@@ -334,4 +350,5 @@ By default, Rancher automatically generates self-signed certificates for itself 
 
 ## What's Next?
 
-Log in to Rancher to make sure it deployed successfully. Open a web browser and navigate to the FQDN chosen in [Configure DNS](#configure-dns).
+- Log in to Rancher to make sure it deployed successfully. Open a web browser and navigate to the FQDN chosen in [Configure DNS](#part-3-configure-dns).
+- Configure RKE to take snapshots of etcd that you can use as a backup in a disaster scenario. For more information, see [etcd recurring snapshots]({{< baseurl >}}/rancher/v2.x/en/installation/after-installation/etcd-backup-and-restoration/#etcd-recurring-snapshots).
