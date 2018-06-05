@@ -2,6 +2,15 @@
 title: Node Drivers
 weight: 3050
 ---
+
+
+<!--
+
+>**Prerequisites:** Nathan! What permissions are needed to complete these actions?
+
+-->
+
+
 ## Adding Custom Node Drivers
 
 If you 创建集群 using a cloud provider that {{< product >}} doesn't support out-of-the-box, you may need to add the provider's drivers (or create them yourself) so that your nodes function properly.

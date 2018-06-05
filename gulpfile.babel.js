@@ -46,7 +46,7 @@ gulp.task('build-staging', (cb) => {
 });
 
 gulp.task('build-dev', (cb) => {
-  runSequence('pub-delete', 'sass', 'build:vendor', 'build:app', 'fonts', 'img', 'hugo-dev' , 'hugo-search-index', () => {
+  runSequence('pub-delete', 'sass', 'build:vendor', 'build:app', 'fonts', 'img', 'hugo-dev' , /* 'hugo-search-index', */ () => {
     cb();
   });
 });
@@ -83,7 +83,7 @@ gulp.task('init-watch', () => {
   watch([ 'src/sass/**/*.scss', 'node_modules/rancher-website-theme/**/*.scss' ], () => runSequence('sass', 'hugo-dev'));
   watch([ 'src/js/**/*.js', 'node_modules/rancher-website-theme/static/js/base.js' ], () => runSequence('build:app', 'hugo-dev'));
   watch('src/img/**/*', () => runSequence('img', 'hugo-dev'));
-  watch(['archetypes/**/*', 'data/**/*', 'content/**/*', 'layouts/**/*', 'themes/**/*', 'config.toml'], () => gulp.start('hugo-dev'));
+  watch(['archetypes/**/*', 'data/**/*', 'content/**/*', 'layouts/**/*', 'node_modules/rancher-website-theme/layouts/**/*', 'node_modules/rancher-website-theme/archetypes/**/*', 'node_modules/rancher-website-theme/data/**/*', 'node_modules/rancher-website-theme/content/**/*', 'themes/**/*', 'config.toml'], () => gulp.start('hugo-dev'));
 });
 
 
