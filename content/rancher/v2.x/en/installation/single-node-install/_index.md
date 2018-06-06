@@ -28,24 +28,32 @@ Provision a single Linux host to launch your {{< product >}} Server.
 
 ### Requirements
 
+#### Operating System 
+
 {{< requirements_os >}}
+
+#### Hardware 
 
 {{< requirements_hardware >}}
 
+#### Software 
+
 {{< requirements_software >}}
 
-<a id="port-requirements"></a>
-
-{{< requirements_ports >}}
-
 {{< note_server-tags >}}
+
+#### Ports
+
+The following diagram depicts the basic port requirements for Rancher. For a comprehensive list, see [Port Requirements]({{< baseurl >}}/rancher/v2.x/en/installation/references/).
+
+![Basic Port Requirements]({{< baseurl >}}/img/rancher/port-communications.png)
 
 ## 2. Choose an SSL Option and Install Rancher
 
 For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL secures all Rancher network communication, like when you login or interact with a cluster.
 
 >**Attention Air Gap Users:**
-> If you are visiting this page to complete [Air Gap Installation]({{< baseurl >}}/rancher/v2.x/en/installation/air-gap-installation/), you must prepend your private registry URL to the server tag when running the installation command in the option that you choose. Replace `<REGISTRY.DOMAIN.COM:PORT>` with your private registry URL.
+> If you are visiting this page to complete [Air Gap Installation]({{< baseurl >}}/rancher/v2.x/en/installation/air-gap-installation/), you must pre-pend your private registry URL to the server tag when running the installation command in the option that you choose. Replace `<REGISTRY.DOMAIN.COM:PORT>` with your private registry URL.
 >
 > Example:
 ```
@@ -54,17 +62,10 @@ For security purposes, SSL (Secure Sockets Layer) is required when using Rancher
 
 Choose from the following options:
 
-- [Installation Outline](#installation-outline)
-- [1. Provision Linux Host](#1-provision-linux-host)
-	- [Requirements](#requirements)
-- [2. Choose an SSL Option and Install Rancher](#2-choose-an-ssl-option-and-install-rancher)
-	- [Option A—Default Self-Signed Certificate](#option-adefault-self-signed-certificate)
-	- [Option B—Bring Your Own Certificate: Self-Signed](#option-bbring-your-own-certificate--self-signed)
-	- [Option C—Bring Your Own Certificate: Signed by Recognized CA](#option-cbring-your-own-certificate--signed-by-recognized-ca)
-	- [Option D-Let's Encrypt Certificate](#option-d-lets-encrypt-certificate)
-- [What's Next?](#whats-next)
-- [FAQ and Troubleshooting](#faq-and-troubleshooting)
-- [Persistent Data](#persistent-data)
+- [Option A—Default Self-Signed Certificate](#option-adefault-self-signed-certificate)
+- [Option B—Bring Your Own Certificate: Self-Signed](#option-bbring-your-own-certificate--self-signed)
+- [Option C—Bring Your Own Certificate: Signed by Recognized CA](#option-cbring-your-own-certificate--signed-by-recognized-ca)
+- [Option D-Let's Encrypt Certificate](#option-d-lets-encrypt-certificate)
 
 ### Option A—Default Self-Signed Certificate
 
