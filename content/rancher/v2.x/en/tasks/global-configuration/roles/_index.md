@@ -1,16 +1,19 @@
 ---
 title: Roles
-weight: 3100
+weight: 100
 ---
-While _users_ determine who can log into Rancher, _roles_ determine which Kubernetes API endpoints and Rancher roles that a user can access after login. In other words, roles determine the user's _permissions_ when using Rancher.
+Within Rancher, _roles_ determine what actions a user can make within a cluster or project.
+
+Note that _roles_ are different from _permissions_, which determine what clusters and projects you can access.
+
+>**Prerequisites:**
+>
+>To complete the tasks on this page, the following permissions are required:
+>
+>- [Administrator Global Permissions]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#global-permissions).
+>- [Custom Global Permissions]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#custom-global-permissions) with the [Manage Roles]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#global-permissions-reference) role assigned.
 
 ## Adding A Custom Role
-
-<!-- >**Prerequisites:** 
-
-Nathan! List app roles/permissions required to make a custom role here! 
-
--->
 
 While Rancher comes out-of-the-box with a set of default user roles, you can also create custom roles to provide users with very specific permissions within Rancher.
 
@@ -20,31 +23,44 @@ While Rancher comes out-of-the-box with a set of default user roles, you can als
 
 3.	**Name** the role.
 
-4.	Assign the role a **Context**. Context determines the scope of permissions assigned to the user. The contexts are:
+4.	Choose whether to set the role to a status of [locked]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#locked-roles).
+
+	Locked roles cannot be assigned to users.
+
+5.	Assign the role a **Context**. Context determines the scope of role assigned to the user. The contexts are:
 
 	- **All**
 
-		The user can use their assigned permissions regardless of context. The user's permissions are valid in all clusters and projects.
+		The user can use their assigned role regardless of context. This role is valid for assignment when adding/managing members to clusters or projects.
 
 	- **Cluster**
 
-		The user can use their assigned permissions within a selected cluster.
+		This role is valid for assignment when adding/managing members to _only_ clusters.
 
 	- **Project**
 
-		The user can use their assigned permissions within a selected project.
+		This role is valid for assignment when adding/managing members to _only_ projects.
 
-5.	Use the **Grant Resources** options to assign individual [Kubernetes API endpoints](https://kubernetes.io/docs/reference/) to the role.
+6.	Use the **Grant Resources** options to assign individual [Kubernetes API endpoints](https://kubernetes.io/docs/reference/) to the role.
 
 	You can also choose the individual cURL methods (`Create`, `Delete`, `Get`, etc.) available for use with each endpoint you assign.
 
-6.	Use the **Inherit from a Role** options to assign individual Rancher roles to your custom roles.
+7.	Use the **Inherit from a Role** options to assign individual Rancher roles to your custom roles.
 
-7.    Click **Create**.
+8.    Click **Create**.
+
+## Locking/Unlocking Roles
+
+If you want to prevent a role from being assigned to users, you can set it to a status of `locked`. For more information about what this status means, see [Locked Roles]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#locked-roles).
+
+You can lock roles in two contexts:
+
+- When you're [adding a custom role](#adding-a-custom-role).
+- When you editing an existing role (see below).
 
 
-<!-- ## Enabling/Disabling Roles 
+1. From the **Global** view, select **Security** > **Roles**.
 
-Nathan! Fill me in!
+2. From the role that you want to lock (or unlock), select **Vertical Ellipsis (...)** > **Edit**.
 
--->
+3. From the **Locked** option, choose the **Yes** or **No** radio button. Then click **Save**.
