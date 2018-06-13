@@ -6,7 +6,7 @@ To upgrade Rancher Server 2.x to the latest version, you need to enter only a fe
 
 >**Prerequisites:**
 >
-> - Create a backup of your current Rancher installation. For more information, see [Backing Up Your Rancher Server]({{< baseurl >}}/rancher/v2.x/en/installation/after-installation/single-node-backup-and-restoration/#backing-up-your-rancher-server).
+> - Create a backup of your current Rancher installation. For more information, see [Backing Up Your Rancher Server]({{< baseurl >}}/rancher/v2.x/cn/installation/after-installation/single-node-backup-and-restoration/#backing-up-your-rancher-server).
 > - Open Rancher and write down the version number displayed in the lower-left of the browser (example: `v2.0.0`). You'll need this number during the upgrade process.
 
 1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
@@ -34,7 +34,7 @@ docker pull rancher/rancher:latest
 	```
 
 	>**Attention Air Gap Users:**
-	> If you are visiting this page to complete [Air Gap Upgrade]({{< baseurl >}}/rancher/v2.x/en/installation/air-gap-upgrade/), prepend your private registry URL to the image when running the `docker run` command.
+	> If you are visiting this page to complete [Air Gap Upgrade]({{< baseurl >}}/rancher/v2.x/cn/installation/air-gap-upgrade/), prepend your private registry URL to the image when running the `docker run` command.
 	>
 	> Example: `<registry.yourdomain.com:port>/rancher/rancher:latest`
 	>

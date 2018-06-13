@@ -87,7 +87,7 @@ Before you install Rancher, confirm you meet the host requirements. Provision 3 
 
 #### Ports
 
-The following diagram depicts the basic port requirements for Rancher. For a comprehensive list, see [Port Requirements]({{< baseurl >}}/rancher/v2.x/en/installation/references/).
+The following diagram depicts the basic port requirements for Rancher. For a comprehensive list, see [Port Requirements]({{< baseurl >}}/rancher/v2.x/cn/installation/references/).
 
 ![Basic Port Requirements]({{< baseurl >}}/img/rancher/port-communications.png)
 
@@ -112,7 +112,7 @@ Health checks can be executed on the `/healthz` endpoint of the node, this will 
 
 We have example configurations for the following load balancers:
 
-* [Amazon ALB]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install-external-lb/alb)
+* [Amazon ALB]({{< baseurl >}}/rancher/v2.x/cn/installation/ha-server-install-external-lb/alb)
 
 ## 3. Configure DNS
 
@@ -349,8 +349,8 @@ By default, Rancher automatically generates self-signed certificates for itself 
 
 You have a couple of options:
 
-- Create a backup of your Rancher Server in case of a disaster scenario: [High Availablility Back Up and Restoration]({{< baseurl >}}/rancher/v2.x/en/installation/backups-and-restoration/ha-backup-and-restoration).
-- Create a Kubernettes cluster: [Creating a Cluster]({{ <baseurl> }}/rancher/v2.x/en/tasks/clusters/creating-a-cluster/).
+- Create a backup of your Rancher Server in case of a disaster scenario: [High Availablility Back Up and Restoration]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/ha-backup-and-restoration).
+- Create a Kubernettes cluster: [Creating a Cluster]({{ <baseurl> }}/rancher/v2.x/cn/tasks/clusters/creating-a-cluster/).
 
 <br/>
 

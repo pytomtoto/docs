@@ -2,7 +2,7 @@
 title: High Availability Backup and Restoration
 weight: 370
 aliases:
-  - /rancher/v2.x/en/installation/after-installation/ha-backup-and-restoration/
+  - /rancher/v2.x/cn/installation/after-installation/ha-backup-and-restoration/
 ---
 This section describes how to:
 
@@ -41,8 +41,8 @@ Begin by gathering the files that you need to create backups of your Rancher ins
 	You'll need the RKE config file you used for Rancher install, `rancher-cluster.yml`. You created this file during your chosen high-availability installation scenario:
 <br/>
 <br/>
-	- [High Availability Installation]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install)
-	- [High Availability Installation with External Load Balancer]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install-external-lb)
+	- [High Availability Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/ha-server-install)
+	- [High Availability Installation with External Load Balancer]({{< baseurl >}}/rancher/v2.x/cn/installation/ha-server-install-external-lb)
 
 <br/>
 ### 2. Take Snapshots of the `etcd` Database
@@ -147,7 +147,7 @@ If one of your `etcd` nodes go down, you need to replace it with a new node, and
 
 **To Create a New Node and Pull the Latest Snapshot:**
 
-1. Create a new node of your choice—baremetal, on-prem virtual machine, cloud-based virtual machine, and so on. Provision it according to our [requirements]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install/# host-requirements).
+1. Create a new node of your choice—baremetal, on-prem virtual machine, cloud-based virtual machine, and so on. Provision it according to our [requirements]({{< baseurl >}}/rancher/v2.x/cn/installation/ha-server-install/# host-requirements).
 
 2.  Log in to your new node using a remote Terminal connection.
 

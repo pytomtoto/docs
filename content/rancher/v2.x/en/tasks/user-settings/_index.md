@@ -7,7 +7,7 @@ Within Rancher, each user has a number of settings associated with their login: 
 
 The available user settings are:
 
-- [API & Keys]({{< baseurl >}}/rancher/v2.x/en/tasks/user-settings/api-keys/))
+- [API & Keys]({{< baseurl >}}/rancher/v2.x/cn/tasks/user-settings/api-keys/))
 
 - Node Templates
 

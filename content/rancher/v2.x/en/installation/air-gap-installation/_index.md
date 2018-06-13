@@ -34,10 +34,10 @@ We will cover two scenarios:
 
 4. Transfer and run `rancher-load-images.sh` on the host that can access the private registry. It should be run in the same directory as `rancher-images.tar.gz`.
 
-5. Complete installation of Rancher using the instructions in [Single Node Install]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install/).
+5. Complete installation of Rancher using the instructions in [Single Node Install]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/).
 
 	>**Note:**
-	> When completing [Single Node Install]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install/), prepend your private registry URL to the image when running the `docker run` command.
+	> When completing [Single Node Install]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/), prepend your private registry URL to the image when running the `docker run` command.
 	>
 	> Example:
 	> ```
@@ -66,10 +66,10 @@ for IMAGE in $IMAGES; do
 done
 	```
 
-3. Complete installation of Rancher using the instructions in [Single Node Install]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install/).
+3. Complete installation of Rancher using the instructions in [Single Node Install]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/).
 
 	>**Note:**
-	> When completing [Single Node Install]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install/), prepend your private registry URL to the image when running the `docker run` command.
+	> When completing [Single Node Install]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/), prepend your private registry URL to the image when running the `docker run` command.
 	>
 	> Example:
 	> ```

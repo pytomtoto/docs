@@ -3,7 +3,7 @@ title: 快速入门指南
 short title: 快速入门
 weight: 25
 ---
->**Note:** This Quick Start Guide's intent is to get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/en/installation/).
+>**Note:** This Quick Start Guide's intent is to get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/).
 
 Howdy Partner! This tutorial walks you through:
     
@@ -50,7 +50,7 @@ This Quick Start Guide is divided into different tasks for easier consumption.
   >**Note:**
   > When using a cloud-hosted virtual machine you need to allow inbound TCP communication to ports 80 and 443.  Please see your cloud-host's documentation for information regarding port configuration.
   >
-  > For a full list of port requirements, refer to [Single Node Installation]({{< baseurl >}}/rancher/v2.x/en/installation/single-node-install/#port-requirements).
+  > For a full list of port requirements, refer to [Single Node Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/#port-requirements).
 
  Provision the host according to the requirements below.
 

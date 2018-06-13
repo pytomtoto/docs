@@ -3,7 +3,7 @@ title: Users, Global Permissions, and Roles
 weight: 15
 ---
 
-Within Rancher, each user authenticates as a _user_, which is a login that grants you access to Rancher. As mentioned in [Authenitcation]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/authentication), users can either be local or external.
+Within Rancher, each user authenticates as a _user_, which is a login that grants you access to Rancher. As mentioned in [Authenitcation]({{< baseurl >}}/rancher/v2.x/cn/concepts/global-configuration/authentication), users can either be local or external.
 
 After you configure external authentication, the users that display on the **Users** page changes.
 
