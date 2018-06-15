@@ -1,5 +1,5 @@
 ---
-title: High Availability Install
+title: HA安装
 weight: 275
 ---
 This set of instructions creates a new Kubernetes cluster that's dedicated to running Rancher in a high-availability (HA) configuration. This procedure walks you through setting up a 3-node cluster using the Rancher Kubernetes Engine (RKE). The cluster's sole purpose is running pods for Rancher. The setup is based on:
@@ -393,7 +393,7 @@ Save the `.yml` file and close it.
 
 ## 9. Back Up Your RKE Config File
 
-After you close your `.yml` file, back it up to a secure location. You can use this file again when it's time to upgrade Rancher. 
+After you close your `.yml` file, back it up to a secure location. You can use this file again when it's time to upgrade Rancher.
 
 ## 10. Run RKE
 

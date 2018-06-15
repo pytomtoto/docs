@@ -1,5 +1,5 @@
 ---
-title: Adding Pod Security Policies
+title: 添加Pod安全策略
 weight: 3150
 ---
 ## Adding Pod Security Policies

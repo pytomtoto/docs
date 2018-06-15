@@ -1,8 +1,7 @@
 ---
-title: Configure Amazon ALB
+title: Amazon ALB配置
 weight: 305
 ---
-# Configure Amazon ALB
 
 Amazon Elastic Load Balancing offers a couple of different load balancers that we're tested. This procedure provides step-by-step instruction for configuring Amazon Application Load Balancer (ALB) with your Rancher Server.
 

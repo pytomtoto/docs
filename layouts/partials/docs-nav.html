@@ -38,9 +38,7 @@
               {{ range $version := .Sections }}
                 {{ range $language := .Sections }}
                   <li class="m-b-0"><a href="{{ .Permalink }}">{{ .Params.shortTitle }}</a></li>
-                  {{ if .Params.insertonesix }}
-                    <li><a href="https://rancher.com/docs/rancher/latest/zh/" target="blank">Rancher 1.6</a></li>
-                  {{end}}
+                  
                 {{end}}
               {{end}}
             {{end}}
@@ -68,4 +66,3 @@
   </nav>
 </div>
 </nav>
-

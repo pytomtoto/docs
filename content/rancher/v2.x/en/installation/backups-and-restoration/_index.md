@@ -1,5 +1,5 @@
 ---
-title: Backups and Restoration
+title: 备份和恢复
 weight: 345
 aliases:
   - /rancher/v2.x/cn/installation/after-installation/

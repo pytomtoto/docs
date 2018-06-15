@@ -1,5 +1,5 @@
 ---
-title: Configuring GitHub Authentication
+title: 配置GitHub认证
 weight: 3075
 ---
 

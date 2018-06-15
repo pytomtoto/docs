@@ -1,5 +1,5 @@
 ---
-title: Single Node Backup and Restoration
+title: 单节点备份和恢复
 weight: 365
 aliases:
   - /rancher/v2.x/cn/installation/after-installation/single-node-backup-and-restoration/

@@ -1,5 +1,5 @@
 ---
-title: Configuring Active Directory Authentication
+title: 配置Active Directory认证
 weight: 3075
 ---
 
@@ -19,7 +19,7 @@ In environments using Microsoft Active Directory (AD), you can configure Rancher
 4.	Complete the **Configure an Active Directory server** form.
 
 	You may need to log in to your domain controller to find the information requested in the form.
-	
+
 	>**Using TLS?**
  	>Make sure you have an LDAP certificate installed.
 	<br/>

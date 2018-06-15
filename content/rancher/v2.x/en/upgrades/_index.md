@@ -1,5 +1,5 @@
 ---
-title: Upgrades
+title: 升级
 weight: 1000
 ---
 

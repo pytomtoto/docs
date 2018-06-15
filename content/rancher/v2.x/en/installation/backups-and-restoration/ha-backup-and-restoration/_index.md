@@ -1,5 +1,5 @@
 ---
-title: High Availability Backup and Restoration
+title: HA备份和恢复
 weight: 370
 aliases:
   - /rancher/v2.x/cn/installation/after-installation/ha-backup-and-restoration/

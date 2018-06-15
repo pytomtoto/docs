@@ -1,9 +1,7 @@
 ---
 title: SSL Passthrough
 weight: 275
-draft: true
 ---
-# High Availability Install with SSL Passthrough
 
 In this scenario, your High-Availability Rancher Servers handle SSL decryption rather than a Load Balancer.
 

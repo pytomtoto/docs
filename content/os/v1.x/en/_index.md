@@ -1,7 +1,6 @@
 ---
-title: Overview of RancherOS 
-shortTitle: RancherOS
-description: RancherOS is a simplified Linux distribution built from containers, for containers. These documents describe how to install and use RancherOS.
+title: Overview of RancherOS
+shortTitle: RancherOS 
 weight: 1
 ---
 

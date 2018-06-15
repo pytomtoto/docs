@@ -1,9 +1,7 @@
 ---
 title: SSL Termination
 weight: 275
-draft: true
 ---
-# High Availability Install with SSL Temination
 
 In this scenario, your Load Balancer handles all SSL decryption, and then forwards the decrypted communications to your cluster.
 

@@ -1,8 +1,7 @@
 ---
-title: Configure Amazon NLB
+title: Amazon NLB配置
 weight: 310
 ---
-# Configure Amazon NLB
 
 Amazon Elastic Load Balancing offers a couple of different load balancers that we're tested. This procedure provides step-by-step instruction for configuring Amazon Network Load Balancer (NLB) with your Rancher Server.
 

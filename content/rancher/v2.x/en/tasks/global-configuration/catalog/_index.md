@@ -1,7 +1,6 @@
 ---
-title: Catalog
+title: 应用商店
 weight: 1000
-draft: true
 ---
 
 ## Creating Custom Catalogs

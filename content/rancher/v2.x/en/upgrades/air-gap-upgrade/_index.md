@@ -1,5 +1,5 @@
 ---
-title: Air Gap Upgrade
+title: 离线升级
 weight: 1500
 ---
 To upgrade an air gapped Rancher Server, update your private registry with the latest Docker images, and then run the upgrade command.

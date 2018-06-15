@@ -1,5 +1,5 @@
 ---
-title: Pod Security Policies
+title: Pod安全策略
 weight: 125
 ---
 Using Rancher, you can create a Pod Security Policy using our GUI rather than creating a YAML file.

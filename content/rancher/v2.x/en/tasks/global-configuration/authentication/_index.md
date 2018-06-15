@@ -1,11 +1,11 @@
 ---
-title: Authentication
+title: 认证
 weight: 50
 ---
 You have three options for user authentication in Rancher:
 
 -	[Active Directory]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/authentication/active-directory/)
-	
+
 	Enterprises can use Active Directory (AD) for authentication, allowing users to sign in using their corporate credentials.
 
 -	[GitHub]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/authentication/github/)

@@ -1,5 +1,5 @@
 ---
-title: Single Node Upgrade
+title: 单节点升级
 weight: 1010
 ---
 To upgrade Rancher Server 2.x to the latest version, you need to enter only a few commands.

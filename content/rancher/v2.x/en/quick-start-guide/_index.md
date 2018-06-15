@@ -1,12 +1,11 @@
 ---
-title: 快速入门指南
-short title: 快速入门
+title: 快速入门
 weight: 25
 ---
 >**Note:** This Quick Start Guide's intent is to get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/).
 
 Howdy Partner! This tutorial walks you through:
-    
+
 - Installation of {{< product >}} {{< version >}}
 - Creation of your first cluster
 - Deployment of an application, Nginx

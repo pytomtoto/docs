@@ -1,5 +1,5 @@
 ---
-title: Port Requirements
+title: 端口需求
 weight: 355
 aliases:
   - /rancher/v2.x/cn/hosts/amazon/#required-ports-for-rancher-to-work/

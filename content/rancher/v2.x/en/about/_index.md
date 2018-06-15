@@ -1,6 +1,6 @@
 ---
-  title: 关于Rancher
-  weight: 5000
+title: 关于Rancher
+weight: 5000
 ---
 
 ## 贡献 Rancher
