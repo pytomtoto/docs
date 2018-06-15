@@ -26,7 +26,3 @@ The control plane nodes are used to run the Kubernetes API server, scheduler, an
 #### Worker Nodes
 
 Worker nodes are used to run the kubelet and the workload. It also runs the storage and networking drivers and ingress controllers when required. You create as many worker nodes as needed for your workload needs.
-
-<!--### Kubeconfig File
-
-Craig! Fill me in! -->
