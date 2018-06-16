@@ -1,5 +1,5 @@
 ---
-title: Rancher CLI 
+title: Rancher CLI
 weight: 1
 ---
 
@@ -15,8 +15,8 @@ You can download Rancher CLI from [GitHub](https://github.com/rancher/cli/releas
 
 After you download Rancher CLI, you need to make a few configurations. Rancher CLI requires:
 
-- Your [Rancher Server URL]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/server-url), which is used to connect to Rancher Server.
-- An API Bearer Token, which is used to authenticate with Rancher. For more information about obtaining a Bearer Token, see [Creating an API Key]({{< baseurl >}}/rancher/v2.x/en/tasks/user-settings/api-keys/_index.md).
+- Your [Rancher Server URL]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/server-url), which is used to connect to Rancher Server.
+- An API Bearer Token, which is used to authenticate with Rancher. For more information about obtaining a Bearer Token, see [Creating an API Key]({{< baseurl >}}/rancher/v2.x/cn/tasks/user-settings/api-keys/_index.md).
 
 ### CLI Authentication
 
@@ -30,16 +30,16 @@ If Rancher Server uses a self-signed certificate, Rancher CLI prompts you to con
 
 ### Project Selection
 
-Before you can perform any commands using Rancher CLI, you must select a Rancher project to perform those commands against. To select a [project]({{< baseurl >}}/rancher/v2.x/en/concepts/projects/) to work on, use the command `./rancher context switch`. When you enter this command, a list of available projects displays. Enter a number to choose your project.
+Before you can perform any commands using Rancher CLI, you must select a Rancher project to perform those commands against. To select a [project]({{< baseurl >}}/rancher/v2.x/cn/concepts/projects/) to work on, use the command `./rancher context switch`. When you enter this command, a list of available projects displays. Enter a number to choose your project.
 
 **Example: `./rancher context switch` Output**
 ```
 User:rancher-cli-directory user$ ./rancher context switch
-NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME   
-1         cluster-2      c-7q96s:p-h4tmb         project-2      
-2         cluster-2      c-7q96s:project-j6z6d   Default        
-3         cluster-1      c-lchzv:p-xbpdt         project-1      
-4         cluster-1      c-lchzv:project-s2mch   Default       
+NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME
+1         cluster-2      c-7q96s:p-h4tmb         project-2
+2         cluster-2      c-7q96s:project-j6z6d   Default
+3         cluster-1      c-lchzv:p-xbpdt         project-1
+4         cluster-1      c-lchzv:project-s2mch   Default
 Select a Project:
 ```
 
@@ -47,7 +47,7 @@ After you enter a number, the console displays a message that you've changed pro
 
 ```
 INFO[0005] Setting new context to project project-1
-INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json 
+INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 ```
 
 ### Commands
@@ -55,27 +55,27 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 The following commands are available for use in Rancher CLI.
 
 - `apps, [app]`
-              
-    Performs operations on catalog applications (i.e. individual [Helm charts](https://docs.helm.sh/developing_charts/) or [Rancher charts]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs/#rancher-chart-structure).
-  
+
+    Performs operations on catalog applications (i.e. individual [Helm charts](https://docs.helm.sh/developing_charts/) or [Rancher charts]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs/#rancher-chart-structure).
+
 - `catalog`
 
-    Performs operations on [catalogs]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs).
+    Performs operations on [catalogs]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 
 - `clusters, [cluster]`
 
-    Performs operations on your [clusters]({{< baseurl >}}/rancher/v2.x/en/concepts/clusters).
+    Performs operations on your [clusters]({{< baseurl >}}/rancher/v2.x/cn/concepts/clusters).
 
 - `context`
 
-    Switches between Rancher [projects]({{< baseurl >}}/rancher/v2.x/en/concepts/projects).
+    Switches between Rancher [projects]({{< baseurl >}}/rancher/v2.x/cn/concepts/projects).
 
 - `inspect [OPTIONS] [RESOURCEID RESOURCENAME]`
 
-    Displays details about [Kubernetes resources](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#resource-types) or Rancher resources (i.e.: [projects]({{< baseurl >}}/rancher/v2.x/en/concepts/projects) and [workloads]({{< baseurl >}}/rancher/v2.x/en/concepts/workloads)). Specify resources by name or ID.
+    Displays details about [Kubernetes resources](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#resource-types) or Rancher resources (i.e.: [projects]({{< baseurl >}}/rancher/v2.x/cn/concepts/projects) and [workloads]({{< baseurl >}}/rancher/v2.x/cn/concepts/workloads)). Specify resources by name or ID.
 
 - `kubectl`
-  
+
     Runs [kubectl commands](https://kubernetes.io/docs/reference/kubectl/overview/#operations).
 
 - `login, [l]`
@@ -84,19 +84,19 @@ The following commands are available for use in Rancher CLI.
 
 - `namespaces, [namespace]`
 
-    Performs operations on [namespaces]({{< baseurl >}}/rancher/v2.x/en/concepts/projects/#namespaces).
+    Performs operations on [namespaces]({{< baseurl >}}/rancher/v2.x/cn/concepts/projects/#namespaces).
 
 - `nodes, [node]`
 
-    Performs operations on [nodes]({{< baseurl >}}/rancher/v2.x/en/overview/architecture/#kubernetes).
+    Performs operations on [nodes]({{< baseurl >}}/rancher/v2.x/cn/overview/architecture/#kubernetes).
 
 - `projects, [project]`
 
-    Performs operations on [projects]({{< baseurl >}}/rancher/v2.x/en/concepts/projects).
+    Performs operations on [projects]({{< baseurl >}}/rancher/v2.x/cn/concepts/projects).
 
 - `ps`
 
-    Displays [workloads]({{< baseurl >}}/rancher/v2.x/en/concepts/workloads) in a project.
+    Displays [workloads]({{< baseurl >}}/rancher/v2.x/cn/concepts/workloads) in a project.
 
 - `settings, [setting]`
 

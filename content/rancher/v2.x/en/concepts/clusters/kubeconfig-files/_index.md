@@ -11,11 +11,9 @@ When you create a cluster using the Rancher GUI, Rancher automatically creates a
 
 This kubeconfig file and its contents are specific to the cluster you are viewing. You will need a separate kubeconfig file for each cluster that you have access to in Rancher.
 
-For more information, see [Using kubectl to Access a Cluster]({{< baseurl >}}/rancher/v2.x/en/tasks/clusters/using-kubectl-to-access-a-cluster).
+For more information, see [Using kubectl to Access a Cluster]({{< baseurl >}}/rancher/v2.x/cn/tasks/clusters/using-kubectl-to-access-a-cluster).
 
 >**Note:** By default, kubectl checks `~/.kube/config` for kubeconfig files, but you can use any directory you want using the `--kubeconfig` flag. For example:
 >```
 kubectl --kubeconfig /custom/path/kube.config get pods
 ```
-
-

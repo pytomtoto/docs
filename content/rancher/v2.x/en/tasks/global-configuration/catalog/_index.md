@@ -23,7 +23,7 @@ To convert a native Helm chart for use in Rancher, you must add two files for Ra
     # Wordpress ROCKS!
     ```
 
-    [What's an `app-readme.md` file?]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs/#rancher-chart-structure)
+    [What's an `app-readme.md` file?]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs/#rancher-chart-structure)
 
 2. Create a `questions.yml` file that prompts the user for parameters.
 
@@ -57,9 +57,9 @@ To convert a native Helm chart for use in Rancher, you must add two files for Ra
             label: Default StorageClass for WordPress
     </pre>
 
-    [What's a `questions.yml` file?]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs/#rancher-chart-structure)
+    [What's a `questions.yml` file?]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs/#rancher-chart-structure)
 
-    [What variables can I use in question.yml?]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs/#question-variable-reference)
+    [What variables can I use in question.yml?]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs/#question-variable-reference)
 
 ## Adding Custom Catalogs
 
@@ -73,7 +73,7 @@ You can create custom catalogs of Helm charts for use in Rancher. Custom catalog
 
 >**Prerequisites:**
 >
->- Create a custom catalog in GitHub. For more information, see [Catalogs]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs).
+>- Create a custom catalog in GitHub. For more information, see [Catalogs]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 >- Convert the native Helm charts in your custom catalog for use in Rancher. For more information, see [Converting Native Helm Charts for Rancher](#converting-native-helm-charts-for-rancher).
 
 1. From the **Global** view, choose **Catalogs** from the main menu.
