@@ -1,6 +1,6 @@
 ---
 title: HA安装故障排除
-weight: 370
+weight: 800
 ---
 This section contains common errors seen when setting up a High Availability Installation.
 

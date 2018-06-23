@@ -1,6 +1,6 @@
 ---
 title: 负载均衡
-weight: 300
+weight: 600
 ---
 
 Following {{< product >}} installation, you have the option of configuring an external load balancer to direct cluster traffic.

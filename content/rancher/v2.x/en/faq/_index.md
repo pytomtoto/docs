@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 6000
+weight: 7
 ---
 
 This FAQ is a work in progress designed to answers the questions our users most frequently ask about Rancher v2.0.

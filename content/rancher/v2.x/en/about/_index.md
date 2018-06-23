@@ -1,6 +1,6 @@
 ---
 title: 关于
-weight: 8000
+weight: 9
 ---
 
 ## 贡献 Rancher

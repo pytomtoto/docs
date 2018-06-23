@@ -1,6 +1,6 @@
 ---
 title: Rancher HTTP代理配置
-weight: 360
+weight: 500
 ---
 If you operate Rancher behind a proxy and you need to reach the Internet to perform tasks (such as using Helm catalogs), you must provide Rancher information about your proxy.
 

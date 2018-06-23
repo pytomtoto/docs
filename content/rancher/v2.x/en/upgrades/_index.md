@@ -1,6 +1,6 @@
 ---
 title: 升级
-weight: 4000
+weight: 5
 ---
 
 This section includes instructions for upgrading Rancher from previous versions.

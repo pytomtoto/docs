@@ -1,6 +1,6 @@
 ---
 title: SSL配置
-weight: 325
+weight: 400
 ---
 
 For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL encrypts all Rancher communications: login, cluster interaction, and so on.

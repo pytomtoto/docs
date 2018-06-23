@@ -5,17 +5,15 @@ weight: 1
 ---
 
 ## What's Rancher?
+Rancher是一套容器管理平台，它可以帮助组织在生产环境中轻松快捷的部署和管理容器。 Rancher可以轻松地管理各种环境的Kubernetes，满足IT需求并为DevOps团队提供支持。
 
-Rancher is a container management platform built for organizations that deploy containers in production. Rancher makes it easy to run Kubernetes everywhere, 满足IT需求, and empower DevOps teams.
+Kubernetes不仅已经成为的容器编排标准，它也正在迅速成为各类云和虚拟化厂商提供的标准基础架构。Rancher用户可以选择使用Rancher Kubernetes Engine（RKE）创建Kubernetes群集，也可以使用GKE，AKS和EKS等云Kubernetes服务。 Rancher用户还可以导入和管理现有的Kubernetes群集。
 
-Run Kubernetes Everywhere. Kubernetes is not only the de-facto container orchestration standard, it is rapidly becoming a form of standard infrastructure available from all cloud and virtualization vendors. Rancher users have the choice of creating Kubernetes clusters with Rancher Kubernetes Engine (RKE), cloud Kubernetes services like GKE, AKS, and EKS. Rancher users can also import and manage their existing Kubernetes clusters created using any Kubernetes distributions or installers.
+Rancher支持各类集中式身份验证系统来管理Kubernetes群集。例如，大型企业的员工可以使用其公司Active Directory凭证访问GKE中的Kubernetes群集。IT管​​理员可以在用户，组，项目，群集和云中设置访问控制和安全策略。 IT管​​理员可以在单个页面对所有Kubernetes群集的健康状况和容量进行监控。
 
-满足IT需求. Rancher 支持s centralized authentication for all Kubernetes clusters under management. An employee of a large enterprise, for example, can use his corporate Active Directory credential to gain access to Kubernetes clusters in GKE. IT administrators can setup and enforce access control and security policies across all users, groups, projects, clusters, and clouds. IT administrators have a single-pane-of-glass view of the health and capacity of all their Kubernetes clusters.
+Rancher为DevOps工程师提供了一个直观的用户界面来管理他们的服务容器，用户不需要深入了解Kubernetes概念就可以开始使用Rancher。 Rancher包含应用商店，支持一键式部署Helm和Compose模板。Rancher通过各种云、本地生态系统产品认证，其中包括安全工具，监控系统，容器仓库以及存储和网络驱动程序。下图说明了Rancher在IT和DevOps组织中扮演的角色。每个团队都会在他们选择的公共云或私有云上部署应用程序。 
 
-Empower DevOps Teams. Rancher provides an intuitive user interface for DevOps engineers to manage their application workload. The user does not need to have in-depth knowledge of Kubernetes concepts to start using Rancher. Rancher catalog contains a set of useful DevOps tools. Rancher is certified with a wide selection of cloud native ecosystem products, including, for example, security tools, monitoring systems, container registries, and storage and networking drivers.
-The following figure illustrates the role Rancher plays in IT and DevOps organizations. Each team deploys their applications on the public or private clouds they choose. IT administrators gain visibility and enforce policies across all users, clusters, and clouds.
-
-{{< figure src="assets/platform.png" title="Rancher Platform">}}
+{{< figure src="/docs/img/rancher/platform.png" title="Rancher Platform">}}
 
 ## What's New?
 
