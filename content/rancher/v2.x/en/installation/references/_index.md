@@ -5,19 +5,19 @@ weight: 200
 
 要保证Rancher正常运行，需要主机或者安全策略打开以下端口。使用云服务创建集群（如Amazon EC2或DigitalOcean），Rancher会自动打开这些端口。  下图显示了Rancher的基本端口要求。如果需要了解更多，请参阅下表。
 
-![Basic 端口 Requirements]({{< baseurl >}}/img/rancher/端口-communications.png)
+![Basic port Requirements]({{< baseurl >}}/img/rancher/port-communications.png)
 
 **Rancher nodes:**
 运行 `rancher/rancher` 容器的主机
 
-###### Rancher nodes - 入站规则
+#### Rancher nodes - 入站规则
 
 | 协议 | 端口 | 源地址                                                       | 描述                                                 |
 | ---- | ---- | :----------------------------------------------------------- | ---------------------------------------------------- |
 | TCP  | 80   | Load balancer/proxy that does external SSL termination       | Rancher UI/API when external SSL termination is used |
 | TCP  | 443  | etcd nodes  <br />controlplane nodes  <br />worker nodes  <br />Hosted/Imported Kubernetes  <br />any that needs to be able to use UI/API | Rancher agent, Rancher UI/API, kubectl               |
 
-###### Rancher nodes - 出站规则
+#### Rancher nodes - 出站规则
 
 | 协议 | 端口 | 目的地址                                                   | 描述                                        |
 | ---- | ---- | ---------------------------------------------------------- | ------------------------------------------- |
@@ -28,7 +28,7 @@ weight: 200
 **etcd nodes:**
 **etcd**运行的主机
 
-###### etcd nodes - 入站规则
+#### etcd nodes - 入站规则
 
 | 协议 | 端口  | 源地址                                               | 描述                                   |
 | ---- | ----- | ---------------------------------------------------- | -------------------------------------- |
@@ -37,7 +37,7 @@ weight: 200
 | UDP  | 8472  | etcd nodes<br />controlplane nodes<br />worker nodes | Canal/Flannel VXLAN overlay networking |
 | TCP  | 10250 | controlplane nodes                                   | kubelet                                |
 
-###### etcd nodes - 出站规则
+#### etcd nodes - 出站规则
 
 | 协议 | 端口 | 目的地址                                             | 描述                                   |
 | ---- | ---- | ---------------------------------------------------- | -------------------------------------- |
@@ -50,7 +50,7 @@ weight: 200
 **controlplane nodes:**
 Nodes with the role **controlplane**
 
-###### controlplane nodes - 入站规则
+#### controlplane nodes - 入站规则
 
 | 协议    | 端口        | 源地址                                               | 描述                                   |
 | ------- | ----------- | ---------------------------------------------------- | -------------------------------------- |
@@ -61,7 +61,7 @@ Nodes with the role **controlplane**
 | TCP     | 10250       | controlplane nodes                                   | kubelet                                |
 | TCP/UDP | 30000-32767 | Any source that consumes NodePort services           | Nodeport 端口范围                      |
 
-###### controlplane nodes - 出站规则
+#### controlplane nodes - 出站规则
 
 | 协议 | 端口  | 目的地址                                             | 描述                                   |
 | ---- | ----- | ---------------------------------------------------- | -------------------------------------- |
@@ -74,7 +74,7 @@ Nodes with the role **controlplane**
 **worker nodes:**
 **worker**
 
-###### worker nodes - 入站规则
+#### worker nodes - 入站规则
 
 | 协议    | 端口        | 源地址                                               | 描述                                   |
 | ------- | ----------- | ---------------------------------------------------- | -------------------------------------- |
@@ -84,7 +84,7 @@ Nodes with the role **controlplane**
 | TCP     | 10250       | controlplane nodes                                   | kubelet                                |
 | TCP/UDP | 30000-32767 | Any source that consumes NodePort services           | Nodeport 端口范围                      |
 
-###### worker nodes - 出站规则
+#### worker nodes - 出站规则
 
 | 协议 | 端口 | 目的地址                                             | 描述                                   |
 | ---- | ---- | ---------------------------------------------------- | -------------------------------------- |
