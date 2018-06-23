@@ -2,9 +2,10 @@
 title: Rancher HTTP代理配置
 weight: 500
 ---
-If you operate Rancher behind a proxy and you need to reach the Internet to perform tasks (such as using Helm catalogs), you must provide Rancher information about your proxy.
 
-### Setting the `http_proxy` Environment Variable
+如果你的环境需要通过代理才可以连接互联网，那么需要配置
+
+### 设置主机`http_proxy` 变量
 
 #### Ubuntu
 
@@ -26,5 +27,14 @@ echo "export http_proxy=http://<username>:<password>@<proxy url>:<proxy port>/" 
 Ensure that your `http_proxy` environment variable is visible inside of Rancher's Docker container:
 
 ```
-sudo docker run -d --restart=unless-stopped --volumes-from rancher-data -p 80:80 -p 443:443 -e HTTP_PROXY=$http_proxy -e HTTPS_PROXY=$http_proxy -e http_proxy=$http_proxy -e https_proxy=$http_proxy -e NO_PROXY="localhost,127.0.0.1" -e no_proxy="localhost,127.0.0.1" rancher/rancher
+sudo docker run -d --restart=unless-stopped \
+--volumes-from rancher-data -p 80:80 -p 443:443 \
+-e HTTP_PROXY=$http_proxy \
+-e HTTPS_PROXY=$http_proxy \
+-e http_proxy=$http_proxy \
+-e https_proxy=$http_proxy \
+-e NO_PROXY="localhost,127.0.0.1" \
+-e no_proxy="localhost,127.0.0.1" \
+rancher/rancher
+
 ```
