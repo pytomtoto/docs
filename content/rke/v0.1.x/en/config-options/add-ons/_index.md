@@ -1,62 +1,38 @@
 ---
 title: Add-Ons
-weight: 3000
-draft: true
+weight: 250
 ---
 
+RKE supports pluggable add-ons. Add-ons are used to deploy several cluster components including:
 
-RKE supports pluggable addons. Addons are used to deploy several cluster components including:
-- Network plugin
-- KubeDNS
-- Ingress controller
+* [Network plug-ins]({{< baseurl >}}/rke/v0.1.x/en/config-options/add-ons/network-plugins/)
+* [Ingress controller]({{< baseurl >}}/rke/v0.1.x/en/config-options/add-ons/ingress-controllers/)
+* KubeDNS
 
-In addition, a user can specify the addon yaml in the cluster.yml file, and when running
+The images used for these add-ons under the [`system_images` directive]({< baseurl >}}/rke/v0.1.x/en/config-options/system-images/). For each Kubernetes version, there are default images associated with each add-on, but these can be overridden by changing the image tag in `system_images`.
 
-```yaml
-rke up --config cluster.yml
-```
+In addition to these pluggable add-ons, you can specify an add-on that you want deployed after the cluster deployment is complete.
 
-RKE will deploy the addons yaml after the cluster starts, RKE first uploads this yaml file as a configmap in kubernetes cluster and then run a kubernetes job that mounts this config map and deploy the addons.
+RKE only adds additional add-ons when using `rke up` multiple times. RKE does **not** support removing of cluster add-ons when doing `rke up` with a different list of add-ons.
 
-> Note that RKE doesn't support yet removal or update of the addons, so once they are deployed the first time you can't change them using rke
+As of v0.1.8, RKE will update an add-on if it is the same name.
 
-To start using addons use `addons:` option in the `cluster.yml` file for example:
+Prior to v0.1.8, update any add-ons by by using `kubectl edit`.
 
-```yaml
-addons: |-
-    ---
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: my-nginx
-      namespace: default
-    spec:
-      containers:
-      - name: my-nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-```
 
-Note that we are using `|-` because the addons option is a multi line string option, where you can specify multiple yaml files and separate them with `---`
+## Critical and Non-Critical Add-ons
 
-For `addons_include:` you may pass either http/https urls or file paths, for example:
-```yaml
-addons_include:
-    - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/rook-operator.yaml
-    - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/rook-cluster.yaml
-    - /opt/manifests/example.yaml
-    - ./nginx.yaml
-```
+As of version v0.1.7, add-ons are split into two categories:
 
-#### Addon deployment jobs
+- **Critical add-ons:** If these add-ons fail to deploy for any reason, RKE will error out.
+- **Non-critical add-ons:** If these add-ons fail to deploy, RKE will only log a warning and continue deploying any other add-ons.
 
-RKE uses kubernetes Jobs to deploy addons. In some cases, addons deployment takes longer than expected. Starting with version `0.1.7-rc1`, RKE provides an option to controle the job check timeout in seconds:
+Currently, only the [network plug-in]({{< baseurl >}}/rke/v0.1.x/en/config-options/network-plugins/) is considered critical. KubeDNS, [ingress controllers]({{< baseurl >}}/rke/v0.1.x/en/config-options/ingress-controllers/) and [user-defined add-ons]({{< baseurl >}}/rke/v0.1.x/en/config-options/user-defined-add-ons/) are considered non-critical.
+
+## Add-on deployment jobs
+
+RKE uses Kubernetes jobs to deploy add-ons. In some cases, add-ons deployment takes longer than expected. As of with version v0.1.7, RKE provides an option to control the job check timeout in seconds. This timeout is set at the cluster level.
+
 ```yaml
 addon_job_timeout: 30
 ```
-
-#### Critical and noncritical addons
-As of version `0.1.7-rc1`, addons are split into two categories: critical and noncritical.
-
-Critical addons will cause RKE to error out if they fail to deploy for any reason. While noncritical addons will just log a warning and continue with the deployment. Currently only the network plugin is considered critical.

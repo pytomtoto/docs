@@ -1,7 +1,6 @@
 ---
 title: Cloud Providers
-weight: 3000
-draft: true
+weight: 245
 ---
 
 RKE supports the ability to set your specific [cloud provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/) for your Kubernetes cluster. There are specific cloud configurations  for these cloud providers:
@@ -21,7 +20,7 @@ To enable the AWS cloud provider, there are no configuration options. You only n
 
 ```yaml
 cloud_provider:
-  name: aws
+    name: aws
 ```
 
 #### IAM Requirements
@@ -74,17 +73,17 @@ To enable the Azure cloud provider, besides setting the name as `azure`, there a
 
 ```yaml
 cloud_provider:
-  name: azure
-  azureCloudProvider:
-    aadClientId: xxxxxxxxx
-    aadClientSecret: xxxxxxxxx
-    location: xxxxxxxxx
-    resourceGroup: xxxxxxxxx
-    subnetName: xxxxxxxxx
-    subscriptionId: xxxxxxxxx
-    vnetName: xxxxxxxxx
-    tenantId: xxxxxxxxx
-    securityGroupName: xxxxxxxxx
+    name: azure
+    azureCloudProvider:
+      aadClientId: xxxxxxxxx
+      aadClientSecret: xxxxxxxxx
+      location: xxxxxxxxx
+      resourceGroup: xxxxxxxxx
+      subnetName: xxxxxxxxx
+      subscriptionId: xxxxxxxxx
+      vnetName: xxxxxxxxx
+      tenantId: xxxxxxxxx
+      securityGroupName: xxxxxxxxx
 ```
 
 #### Overriding the hostname
@@ -93,13 +92,13 @@ Since the Azure node name must match the Kubernetes node name, you override the 
 
 ```yaml
 nodes:
-  - address: x.x.x.x
-    hostname_override: azure-rke1
-    user: ubuntu
-    role:
-    - controlplane
-    - etcd
-    - worker
+    - address: x.x.x.x
+      hostname_override: azure-rke1
+      user: ubuntu
+      role:
+        - controlplane
+        - etcd
+        - worker
 ```
 
 #### Azure Configuration Options
@@ -108,9 +107,11 @@ Besides the minimum set of options, there are many other options that are suppor
 
 |   Azure Configuration Options |  Type  	| Required  |
 |:----------------------------:	|:------:	|:---------:|
-|             cloud            	| string 	|      |
 |           tenantId           	| string 	|   *    |
 |        subscriptionId        	| string 	|   *    |
+|          aadClientId         	| string 	|   *    |
+|        aadClientSecret       	| string 	|   *    |
+|             cloud            	| string 	|      |
 |         resourceGroup        	| string 	|      |
 |           location           	| string 	|      |
 |           vnetName           	| string 	|      |
@@ -121,8 +122,6 @@ Besides the minimum set of options, there are many other options that are suppor
 |  primaryAvailabilitySetName  	| string 	|      |
 |            vmType            	| string 	|      |
 |      primaryScaleSetName     	| string 	|      |
-|          aadClientId         	| string 	|   *    |
-|        aadClientSecret       	| string 	|   *    |
 |       aadClientCertPath      	| string 	|      |
 |     aadClientCertPassword    	| string 	|      |
 |     cloudProviderBackoff     	|  bool  	|      |
@@ -143,22 +142,22 @@ To enable the Openstack cloud provider, besides setting the name as `openstack`,
 
 ```yaml
 cloud_provider:
-  name: openstack
-  openstackCloudProvider:
-    global:
-      username: xxxxxxxxxxxxxx
-      password: xxxxxxxxxxxxxx
-      auth-url: https://1.2.3.4/identity/v3
-      tenant-id: xxxxxxxxxxxxxx
-      domain-id: xxxxxxxxxxxxxx
-    load_balancer:
-      subnet-id: xxxxxxxxxxxxxx
-    block_storage:
-      ignore-volume-az: true
-    router:
-      router-id: xxxxxxxxxxxxxx
-    metadata:
-      search-order: xxxxxxxxxxxxxx
+    name: openstack
+    openstackCloudProvider:
+      global:
+        username: xxxxxxxxxxxxxx
+        password: xxxxxxxxxxxxxx
+        auth-url: https://1.2.3.4/identity/v3
+        tenant-id: xxxxxxxxxxxxxx
+        domain-id: xxxxxxxxxxxxxx
+      load_balancer:
+        subnet-id: xxxxxxxxxxxxxx
+      block_storage:
+        ignore-volume-az: true
+      route:
+        router-id: xxxxxxxxxxxxxx
+      metadata:
+        search-order: xxxxxxxxxxxxxx
 ```
 
 #### Overriding the hostname
@@ -172,7 +171,7 @@ The Openstack configuration options are divided into 5 groups.
 * Global
 * Load Balancer
 * Block Storage
-* Router
+* Route
 * Metadata
 
 ##### Global
@@ -205,11 +204,12 @@ These are the options that are available under the `load_balancer` directive.
 |   floating-network-id  	| string 	|      |
 |        lb-method       	| string 	|      |
 |       lb-provider      	| string 	|      |
+| manage-security-groups 	|  bool  	|      |
 |     create-monitor     	|  bool  	|      |
 |      monitor-delay     	|   int  	|   * if `create-monitor` is true   |
 |     monitor-timeout    	|   int  	|   * if `create-monitor` is true    |
 |   monitor-max-retries  	|   int  	|   * if `create-monitor` is true   |
-| manage-security-groups 	|  bool  	|      |
+
 
 ##### Block Storage
 
@@ -221,11 +221,11 @@ These are the options that are available under the `block_storage` directive.
 |   trust-device-path  	|  bool  	|      |
 |   ignore-volume-az   	|  bool  	|      |
 
-##### Router
+##### Route
 
-This is the option that is available under the `router` directive.
+This is the option that is available under the `route` directive.
 
-| OpenStack's Router Configuration Option 	|  Type  	| Required |
+| OpenStack's Route Configuration Option 	|  Type  	| Required |
 |:--------------------:	|:------:	|:---------:|
 |       router-id      	| string 	|      |
 
@@ -246,32 +246,32 @@ To enable the vSphere cloud provider, besides setting the name as `vsphere`, the
 
 ```yaml
 cloud_provider:
-  name: vsphere
-  vsphereCloudProvider:
-    global:
-      user: user
-      password: pass
-      server: 1.2.3.4
-      port: 22
-    virtual_center:
-      1.2.3.4:
-        user: test
-        password: test
-        port: test
-      5.6.7.8:
-        user: test
-        password: test
-        port: test
-    workspace:
-      server: test.test.com
-      datacenter: test
-      folder: test
-      default-datastore: test
-      resourcepool-path: test
-    network:
-      public-network: xxxxxxxxxxxxxx
-    disk:
-      scsicontrollertype: xxxxxxxxxxxxxx
+    name: vsphere
+    vsphereCloudProvider:
+      global:
+        user: user
+        password: pass
+        server: 1.2.3.4
+        port: 22
+      virtual_center:
+        1.2.3.4:
+          user: test
+          password: test
+          port: test
+        5.6.7.8:
+          user: test
+          password: test
+          port: test
+      workspace:
+        server: test.test.com
+        datacenter: test
+        folder: test
+        default-datastore: test
+        resourcepool-path: test
+      network:
+        public-network: xxxxxxxxxxxxxx
+      disk:
+        scsicontrollertype: xxxxxxxxxxxxxx
 ```
 
 #### vSphere Configuration Options
@@ -310,14 +310,14 @@ These are the options that are available under `virtual_center`, which is a dict
 
 ```yaml
 virtual_center:
-  <vcenter1-ip>:
-    user: test
-    password: test
-    port: test
-  <vcenter2-ip>:
-    user: test
-    password: test
-    port: test
+    <vcenter1-ip>:
+      user: test
+      password: test
+      port: test
+    <vcenter2-ip>:
+      user: test
+      password: test
+      port: test
 ```
 
 For each `virtual_center`, these are the available configuration options to be used under the each virtual center. The virtual center's are separated from each other based on their IP.
@@ -364,7 +364,7 @@ If you want to enable a different cloud provider, RKE allows for custom cloud pr
 
 For example, in order to use the oVirt cloud provider with Kubernetes, here's the following cloud provider information:
 
-```bash
+```
 [connection]
 uri = https://localhost:8443/ovirt-engine/api
 username = admin@internal
@@ -375,11 +375,11 @@ To add this cloud config file to RKE, the `cloud_provider` would be need to be s
 
 ```yaml
 cloud_provider:
-  name: ovirt
-  # Note the pipe as this is what indicates a multiline string
-  customCloudProvider: |-
-    [connection]
-    uri = https://localhost:8443/ovirt-engine/api
-    username = admin@internal
-    password = admin
+    name: ovirt
+    # Note the pipe as this is what indicates a multiline string
+    customCloudProvider: |-
+      [connection]
+      uri = https://localhost:8443/ovirt-engine/api
+      username = admin@internal
+      password = admin
 ```
