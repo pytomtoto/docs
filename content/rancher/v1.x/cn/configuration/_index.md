@@ -1,4 +1,4 @@
 ---
-title: 配置管理
+title: 配置
 weight: 600
 ---

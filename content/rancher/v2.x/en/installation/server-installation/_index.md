@@ -1,9 +1,9 @@
 ---
-title: Rancher Server安装
+title: Rancher安装
 weight: 225
 ---
 
-This section contains instructions for setting up Rancher Server in development and production environments. The section also contains supplementary documentation for configuring load balancers and SSL certificates to work with Rancher.
+本章节包含在开发和生产环境中安装Rancher的配置说明。该部分还包含配置负载均衡和SSL证书以配合Rancher使用的补充文档。
 
 从下面的选项中进行选择：
 

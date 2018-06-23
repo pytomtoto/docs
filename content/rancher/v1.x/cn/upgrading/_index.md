@@ -1,5 +1,5 @@
 ---
-title: 升级Rancher
+title: 升级
 weight: 300
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 快速安装指南
+title: 入门
 weight: 100
 ---
 

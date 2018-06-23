@@ -1,4 +1,4 @@
 ---
-title: 安装Rancher
+title: 安装
 weight: 200
 ---
