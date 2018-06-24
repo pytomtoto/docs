@@ -2,199 +2,241 @@
 title: 单节点安装
 weight: 250
 ---
-For development environments, we recommend installing Rancher by running a single Docker container. In this installation scenario, you'll install Docker on a single Linux host, and then install Rancher on your host using a single Docker container.
+对于开发环境，我们推荐通过运行一个Docker容器来安装Rancher。在这种安装方案中，您将在单个Linux主机上安装Docker，然后使用单个Docker容器在您的主机上安装Rancher。
 
+> **想要使用外部负载平衡器？**请参阅[使用外部负载平衡器进行单一节点安装](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install-external-lb/)。
 
->**Want to use an external load balancer?**
-> See [Single Node Installation with an External Load Balancer]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/single-node-install-external-lb) instead.
+## 1.配置Linux主机
 
-## Installation Outline
+配置一台Linux主机来运行Rancher server。
 
-Installation of Rancher on a single node involves multiple procedures. Review this outline to learn about each procedure you need to complete.
+### 要求
 
-1. [Provision Linux Host](#1-provision-linux-host)
+#### 操作系统
 
-	Provision a single Linux host to launch your {{< product >}} Server.
+- Ubuntu 16.04（64位）
+- 红帽企业Linux 7.5（64位）
+- RancherOS 1.3.0（64位）
 
-2. [Choose an SSL Option and Install Rancher](#2-choose-an-ssl-option-and-install-rancher)
+#### 硬件
 
-	Choose an SSL option for Rancher communication encryption. After choosing an option, run the command that accompanies it to deploy Rancher.
+硬件需求根据Rancher部署的规模进行扩展。根据需求配置每个节点。
 
-## 1. Provision Linux Host
+| 部署大小 | 集群(个)  | 节点(个) | vCPU                                        | 内存 |
+| -------- | --------- | -------- | ------------------------------------------- | ---- |
+| 小       | 不超过10  | 最多50   | 2C                                          | 4GB  |
+| 中       | 不超过100 | 最多500  | 8C                                          | 32GB |
+| 大       | 超过100   | 超过500  | [联系Rancher](https://rancher.com/contact/) |      |
 
-Provision a single Linux host to launch your {{< product >}} Server.
+#### 软件
 
-### Requirements
+- Docker
 
-#### Operating System
+  > **注意：**如果您使用的是RancherOS，请确保您将Docker引擎切换为受支持的版本`sudo ros engine switch docker-17.03.2-ce`
 
-{{< requirements_os >}}
+  **支持的版本**
 
-#### Hardware
+  - `1.12.6`
+  - `1.13.1`
+  - `17.03.2`
 
-{{< requirements_hardware >}}
+  [Docker文档：安装说明](https://docs.docker.com/install/)
 
-#### Software
-
-{{< requirements_software >}}
-
-{{< note_server-tags >}}
-
-#### Ports
-
-The following diagram depicts the basic port requirements for Rancher. For a comprehensive list, see [Port Requirements]({{< baseurl >}}/rancher/v2.x/cn/installation/references/).
-
-![Basic Port Requirements]({{< baseurl >}}/img/rancher/port-communications.png)
-
-## 2. Choose an SSL Option and Install Rancher
-
-For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL secures all Rancher network communication, like when you login or interact with a cluster.
-
->**Attention Air Gap Users:**
-> If you are visiting this page to complete [Air Gap Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/air-gap-installation/), you must pre-pend your private registry URL to the server tag when running the installation command in the option that you choose. Replace `<REGISTRY.DOMAIN.COM:PORT>` with your private registry URL.
+> **注意：**该`rancher/rancher`镜像托管在[DockerHub上](https://hub.docker.com/r/rancher/rancher/tags/)。如果您无法访问DockerHub，或者离线环境下安装Rancher，请参阅[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)。
 >
-> Example:
+> 有关可用的其他Rancher服务器标记的列表，请参阅[Rancher server tags](/docs/rancher/v2.x/cn/installation/server-tags/)。
+
+#### 端口
+
+下图描述了Rancher的基本端口要求。有关全面列表，请参阅[端口要求](/docs/rancher/v2.x/cn/installation/references/)。
+
+![基本端口要求](/docs/img/rancher/port-communications.png)
+
+## 2.选择一个SSL选项并安装Rancher
+
+出于安全考虑，使用Rancher时需要SSL。SSL可以保护所有Rancher网络通信，例如登录或与群集交互。
+
+> **注意Air Gap用户：**如果您正在访问此页面以完成[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)，在运行安装命令时，必须在Rancher镜像前面加上你私有仓库的地址，替换`<REGISTRY.DOMAIN.COM:PORT>`为你的私有仓库地址。
+
+例：
+
 ```
 <REGISTRY.DOMAIN.COM:PORT>/rancher/rancher:latest
 ```
 
-Choose from the following options:
+### 选项A-使用默认自签名证书
 
-- [Option A—Default Self-Signed Certificate](#option-adefault-self-signed-certificate)
-- [Option B—Bring Your Own Certificate: Self-Signed](#option-bbring-your-own-certificate--self-signed)
-- [Option C—Bring Your Own Certificate: Signed by Recognized CA](#option-cbring-your-own-certificate--signed-by-recognized-ca)
-- [Option D-Let's Encrypt Certificate](#option-d-lets-encrypt-certificate)
+如果您不使用自己的证书的情况下安装Rancher，Rancher会生成一个用于加密的自签名证书。
 
-### Option A—Default Self-Signed Certificate
+**使用默认证书安装Rancher：**
 
-If you install Rancher without using your own certificate, Rancher generates a self-signed certificate that's used for encryption. If you're satisfied with this certificate, there's no need to obtain your own.
+1. 从您的Linux主机运行Docker命令来安装Rancher，而不需要任何其他参数：
 
-**To Install Rancher Using the Default Certificate:**
+   ```bash
+   docker run -d --restart=unless-stopped \
+   -p 80:80 -p 443:443 \
+   rancher/rancher:latest
+   ```
 
-1. From your Linux host, run the Docker command to install Rancher without any additional parameters:
+### 选项B-使用您自己的自签名证书
 
-	```
-	docker run -d --restart=unless-stopped \
-	  -p 80:80 -p 443:443 \
-	  rancher/rancher:latest
-	```
+Rancher安装可以使用您提供的自签名证书来加密通信。
 
-
-
-### Option B—Bring Your Own Certificate: Self-Signed
-
-Your Rancher install can use a self-signed certificate that you provide to encrypt communications.
-
->**Prerequisites:**
->Create a self-signed certificate.
+> **先决条件：**创建一个自签名证书。
 >
->- The certificate files must be in [PEM format](#pem).
->- In your certificate file, include all intermediate certificates in the chain. Order your certificates with your certificate first, followed by the intermediates. For an example, see [SSL FAQ / Troubleshooting](#cert-order).
+> - 证书文件必须是[PEM](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install/#我如何知道我的证书是否为pem格式)格式;
+> - 在您的证书文件中，包含链中的所有中间证书。有关示例，请参阅[SSL常见问题/故障排除](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install/#如果我想添加我的中间证书-证书的顺序是什么)。
 
+**使用自签名证书安装Rancher：**
 
-**To Install Rancher Using a Self-Signed Cert:**
+您的Rancher安装可以使用您提供的自签名证书来加密通信。
 
-Your Rancher install can use a self-signed certificate that you provide to encrypt communications.
+1. 创建证书后，运行Docker命令安装Rancher，指向您的证书文件。
 
-1. After creating your certificate, run the Docker command to install Rancher, pointing toward your certificate files.
+   ```bash
+   docker run -d --restart=unless-stopped \
+     -p 80:80 -p 443:443 \
+     -v /etc/<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
+     -v /etc/<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
+     -v /etc/<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
+     rancher/rancher:latest
+   ```
 
-	```
-	docker run -d --restart=unless-stopped \
-	  -p 80:80 -p 443:443 \
-	  -v /etc/<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
-	  -v /etc/<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
-	  -v /etc/<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
-	  rancher/rancher:latest
-	```
+### 选项C-使用权威CA机构颁发的证书
 
+如果您公开发布您的应用，理想情况下应该使用由权威CA机构颁发的证书。
 
-### Option C—Bring Your Own Certificate: Signed by Recognized CA
-
-If you're publishing your app publicly, you should ideally be using a certificate signed by a recognized CA.
-
->**Prerequisites:**
+> **先决条件：**
 >
->- The certificate files must be in [PEM format](#pem).
->- Make sure that the container includes your certificate file and the key file. Because your certificate is signed by a recognized CA, mounting an additional CA certificate file is unnecessary.
+> - 证书文件必须是[PEM格式](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install/#我如何知道我的证书是否为pem格式)。
+> - 确保容器包含您的证书文件和密钥文件。由于您的证书是由认可的CA签署的，因此不需要安装额外的CA证书文件。
 
-**To Install Rancher Using a Certificate Signed by a Recognized CA:**
+**安装Rancher：**
 
-1. After obtaining your certificate, run the Docker command to deploy Rancher while pointing toward your certificate files.
+1. 获取证书后，运行Docker命令以部署Rancher，同时指向证书文件。
 
-	```
-	docker run -d --restart=unless-stopped \
-	  -p 80:80 -p 443:443 \
-	  -v /etc/your_certificate_directory/fullchain.pem:/etc/rancher/ssl/cert.pem \
-	  -v /etc/your_certificate_directory/privkey.pem:/etc/rancher/ssl/key.pem \
-	  rancher/rancher:latest
-	```
+   ```bash
+   docker run -d --restart=unless-stopped \
+     -p 80:80 -p 443:443 \
+     -v /etc/your_certificate_directory/fullchain.pem:/etc/rancher/ssl/cert.pem \
+     -v /etc/your_certificate_directory/privkey.pem:/etc/rancher/ssl/key.pem \
+     rancher/rancher:latest
+   ```
 
-By default, Rancher automatically generates self-signed certificates for itself after installation. However, since you've provided your own certificates, you must disable the certificates that Rancher generated for itself.
+默认情况下，Rancher会在安装后自动为自己生成自签名CA证书。但是，由于您提供了自己的证书，因此必须禁用Rancher自动生成的CA证书。
 
-**To Remove the Default Certificates:**
+**删除默认证书：**
 
-1. Log into Rancher.
-2. Select  **Settings** > **cacerts**.
-3. Choose `Edit` and remove the contents. Then click `Save`.
+1. 登录Rancher。
+2. 选择 **设置** > **cacerts**。
+3. 选择`Edit`并删除内容。然后点击`Save`。
 
-### Option D-Let's Encrypt Certificate
+### 选项D-Let’s Encrypt 证书
 
-Rancher supports Let's Encrypt certificates. Let's Encrypt uses an `http-01 challenge` to verify that you have control over your domain. You can confirm that you control the domain by pointing the hostname that you want to use for Rancher access (for example, `rancher.mydomain.com`) to the IP of the machine it is running on. You can bind the hostname to the IP address by creating an A record in DNS.
+Rancher支持Let’s Encrypt 证书。Let’s Encrypt 使用一个`http-01 challenge`来验证您是否是该域名的所有者。您可以通过将想要用于Rancher访问的主机名（例如，`rancher.mydomain.com`）指向正Rancher server主机IP，以此来确认您是否是该域名的所有者。您可以通过在DNS中创建A记录来将主机名绑定到IP地址。
 
->**Prerequisites:**
+> **先决条件：**
 >
->- Let's Encrypt is an Internet service. Therefore, this option cannot be used in an internal/air gapped network.
->- Create a record in your DNS that binds your Linux host IP address to the hostname that you want to use for Rancher access (`rancher.mydomain.com` for example).
->- Open port `TCP/80` on your Linux host. The Let's Encrypt http-01 challenge can come from any source IP address, so port `TCP/80` must be open to all IP addresses.
+> - Let's Encrypt是一项互联网服务，不能用于内部/离线网络。
+> - 在您的DNS中创建一条记录，将您的Linux主机IP地址绑定到您想要用于Rancher访问的主机名（例如：`rancher.mydomain.com`）。
+> - 在您的Linux主机上打开`TCP/80`端口。Let's Encrypt http-01检查可能来自任意的源IP地址，因此端口`TCP/80`必须对所有IP地址开放。
 
+**使用Let's Encrypt证书安装Rancher：**
 
-**To Install Rancher Using a Let's Encrypt Certificate:**
+从您的Linux主机运行以下命令。
 
-Run the following commands from your Linux host.
+1. 运行Docker命令。
 
-1. Run the Docker command.
+   ```bash
+   docker run -d --restart=unless-stopped \
+   -p 80:80 -p 443:443 \
+   rancher/rancher:latest \
+   --acme-domain rancher.mydomain.com
+   ```
 
-	```
-	docker run -d --restart=unless-stopped \
-	  -p 80:80 -p 443:443 \
-	  rancher/rancher:latest \
-	  --acme-domain rancher.mydomain.com
-	```
+> **注意：Let’s Encrypt 平台对证书的申请和销毁有一定频率限制。有关更多信息，请参阅[Let’s Encrypt documentation on rate limits](https://letsencrypt.org/docs/rate-limits/)。
 
+## 下一步？
 
->
->**Remember:** Let's Encrypt provides rate limits for requesting new certificates. Therefore, limit how often you create or destroy the container. For more information, see [Let's Encrypt documentation on rate limits](https://letsencrypt.org/docs/rate-limits/).
+你有几个选择：
 
-## What's Next?
+- 创建Rancher server的备份：[单节点备份和恢复](/docs/rancher/v2.x/cn/installation/backups-and-restoration/single-node-backup-and-restoration/)。
+- 创建一个Kubernetes集群：[创建一个集群](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install/%7B%7B%20%3Cbaseurl%3E%20%7D%7D/rancher/v2.x/en/tasks/clusters/creating-a-cluster/)。
 
-You have a couple of options:
+## FAQ和故障排除
 
-- Create a backup of your Rancher Server in case of a disaster scenario: [Single Node Backup and Restoration]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/single-node-backup-and-restoration/).
-- Create a Kubernetes cluster: [Creating a Cluster]({{ <baseurl> }}/rancher/v2.x/cn/tasks/clusters/creating-a-cluster/).
+### 我如何知道我的证书是否为PEM格式？
 
-<br/>
+您可以通过以下特征识别PEM格式：
 
-## FAQ and Troubleshooting
+- 该文件以下列标题开头：
+  `-----BEGIN CERTIFICATE-----`
+- 标题后面跟着一串长字符
+- 该文件以页脚结尾：
+  `-----END CERTIFICATE-----`
 
-{{< ssl_faq_single >}}
+**PEM证书示例：**
 
-## Persistent Data
-
-{{< persistentdata >}}
-
-## Running `rancher/rancher` and `rancher/rancher-agent` on the same node
-
-In the situation where you want to use a single node to run Rancher and to be able to add the same node to a cluster, you have to adjust the host ports mapped for the `rancher/rancher` container.
-
-If a node is added to a cluster, it deploys the nginx ingress controller which will use port 80 and 443. This will conflict with the default ports we advice to expose for the `rancher/rancher` container. 
-
-Please note that this setup is not recommended for production use, but can be convenient for development/demo purposes.
-
-To change the host ports mapping, replace the following part `-p 80:80 -p 443:443` with `-p 8080:80 -p 8443:443`:
-
+```bash
+----BEGIN CERTIFICATE-----
+MIIGVDCCBDygAwIBAgIJAMiIrEm29kRLMA0GCSqGSIb3DQEBCwUAMHkxCzAJBgNV
+... more lines
+VWQqljhfacYPgp8KJUJENQ9h5hZ2nSCrI+W00Jcw4QcEdCI8HL5wmg==
+-----END CERTIFICATE-----
 ```
+
+### 如果我想添加我的中间证书，证书的顺序是什么？
+
+添加证书的顺序如下：
+
+```bash
+-----BEGIN CERTIFICATE-----
+%YOUR_CERTIFICATE%
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+%YOUR_INTERMEDIATE_CERTIFICATE%
+-----END CERTIFICATE-----
+```
+
+### 我如何验证我的证书链？
+
+您可以使用`openssl`二进制验证证书链。如果该命令的输出（参见下面的命令示例）结束`Verify return code: 0 (ok)`，那么证书链是有效的。该`ca.pem`文件必须与您添加到`rancher/rancher`容器中的文件相同。当使用由认可的认证机构签署的证书时，可以省略该`-CAfile`参数。
+
+**命令**
+
+```bash
+openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
+...
+Verify return code: 0 (ok)
+```
+
+## 持久数据
+
+Rancher `etcd`用作数据存储，使用单节点安装时，将使用内置`etcd`。持久数据位于容器中的以下路径中： `/var/lib/rancher`。您可以将主机卷挂载到此位置以保留其运行的数据。
+
+**命令**:
+
+```bash
+# 指定主机路径
+HOST_PATH=xxxx
 docker run -d --restart=unless-stopped \
-  -p 8080:80 -p 8443:443 \
-  rancher/rancher:latest
+-p 80:80 -p 443:443 \
+-v $HOST_PATH:/var/lib/rancher \
+rancher/rancher:latest
 ```
 
+## 在同一个主机上运行`Rancher/Rancher`和`Rancher/Rancher-Agent`
+
+在您想要使用单个节点运行Rancher并且能够将相同节点添加到群集的情况下，您必须调整为`rancher/rancher`容器映射的主机端口。
+
+如果一个节点被添加到集群，它将部署使用端口80和443的ingress控制器。这与`rancher/rancher`容器默认映射的端口冲突。
+
+> 注意，不建议在生产中把Rancher/Rancher和Rancher/Rancher-Agent运行在一台主机上，但可用于开发/演示。
+
+要更改主机端口映射，替换`-p 80:80 -p 443:443`为`-p 8080:80 -p 8443:443`：
+
+```bash
+docker run -d --restart=unless-stopped \
+-p 8080:80 -p 8443:443 \
+rancher/rancher:latest
+```

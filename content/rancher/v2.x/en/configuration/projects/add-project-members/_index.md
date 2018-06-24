@@ -5,11 +5,11 @@ weight:
 
 If you want to provide a user with access and permissions to _specific_ projects and resources within a cluster, assign the user a project membership.
 
->**Tip:** Want to provide a user with access to _all_ projects within a cluster? See [Adding Cluster Members]({{< baseurl >}}/rancher/v2.x/en/tasks/clusters/adding-managing-cluster-members) instead.
+>**Tip:** Want to provide a user with access to _all_ projects within a cluster? See [Adding Cluster Members]({{< baseurl >}}/rancher/v2.x/cn/tasks/clusters/adding-managing-cluster-members) instead.
 
 There are two contexts where you can add project members:
 
-- [Adding Members to a New Project]({{< baseurl >}}/rancher/v2.x/en/tasks/projects/create-project)
+- [Adding Members to a New Project]({{< baseurl >}}/rancher/v2.x/cn/tasks/projects/create-project)
 
     You can add members to a project as you create it (recommended if possible).
 
@@ -37,12 +37,12 @@ Following project creation, you can add users as project members so that they ca
 
 1. Assign the user or group **Project** roles.  
 
-	[What are Project Roles?]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/users-permissions-roles/#cluster-roles)
+	[What are Project Roles?]({{< baseurl >}}/rancher/v2.x/cn/concepts/global-configuration/users-permissions-roles/#cluster-roles)
 
 	>**Tip:** For Custom Roles, you can modify the list of individual roles available for assignment.
 	>
-	> - To add roles to the list, [Add a Custom Role]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/roles/#adding-a-custom-role).
-	> - To remove roles from the list, [Lock/Unlock Roles]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/roles/#locking-unlocking-roles).
+	> - To add roles to the list, [Add a Custom Role]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/roles/#adding-a-custom-role).
+	> - To remove roles from the list, [Lock/Unlock Roles]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/roles/#locking-unlocking-roles).
 
 **Result:** The chosen users are added to the project.
 

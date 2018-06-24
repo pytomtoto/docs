@@ -7,17 +7,18 @@ weight: 200
 
 ![Basic port Requirements]({{< baseurl >}}/img/rancher/port-communications.png)
 
-**Rancher nodes:**
+### Rancher nodes:
+
 运行 `rancher/rancher` 容器的主机
 
-#### Rancher nodes - 入站规则
+#### Rancher nodes-入站规则
 
 | 协议 | 端口 | 源地址                                                       | 描述                                                 |
 | ---- | ---- | :----------------------------------------------------------- | ---------------------------------------------------- |
 | TCP  | 80   | Load balancer/proxy that does external SSL termination       | Rancher UI/API when external SSL termination is used |
 | TCP  | 443  | etcd nodes  <br />controlplane nodes  <br />worker nodes  <br />Hosted/Imported Kubernetes  <br />any that needs to be able to use UI/API | Rancher agent, Rancher UI/API, kubectl               |
 
-#### Rancher nodes - 出站规则
+#### Rancher nodes-出站规则
 
 | 协议 | 端口 | 目的地址                                                   | 描述                                        |
 | ---- | ---- | ---------------------------------------------------------- | ------------------------------------------- |
@@ -25,10 +26,11 @@ weight: 200
 | TCP  | 443  | 35.160.43.145/32<br />35.167.242.46/32<br />52.33.59.17/32 | git.rancher.io (catalogs)                   |
 | TCP  | 6443 | Hosted/Imported Kubernetes API                             | Kubernetes apiserver                        |
 
-**etcd nodes:**
-**etcd**运行的主机
+### etcd nodes:
 
-#### etcd nodes - 入站规则
+etcd角色的主机
+
+#### etcd nodes-入站规则
 
 | 协议 | 端口  | 源地址                                               | 描述                                   |
 | ---- | ----- | ---------------------------------------------------- | -------------------------------------- |
@@ -37,7 +39,7 @@ weight: 200
 | UDP  | 8472  | etcd nodes<br />controlplane nodes<br />worker nodes | Canal/Flannel VXLAN overlay networking |
 | TCP  | 10250 | controlplane nodes                                   | kubelet                                |
 
-#### etcd nodes - 出站规则
+#### etcd nodes-出站规则
 
 | 协议 | 端口 | 目的地址                                             | 描述                                   |
 | ---- | ---- | ---------------------------------------------------- | -------------------------------------- |
@@ -47,10 +49,11 @@ weight: 200
 | TCP  | 6443 | controlplane nodes                                   | Kubernetes apiserver                   |
 | UDP  | 8472 | etcd nodes<br />controlplane nodes<br />worker nodes | Canal/Flannel VXLAN overlay networking |
 
-**controlplane nodes:**
-Nodes with the role **controlplane**
+### controlplane nodes:
 
-#### controlplane nodes - 入站规则
+controlplane角色的主机
+
+#### controlplane nodes-入站规则
 
 | 协议    | 端口        | 源地址                                               | 描述                                   |
 | ------- | ----------- | ---------------------------------------------------- | -------------------------------------- |
@@ -61,7 +64,7 @@ Nodes with the role **controlplane**
 | TCP     | 10250       | controlplane nodes                                   | kubelet                                |
 | TCP/UDP | 30000-32767 | Any source that consumes NodePort services           | Nodeport 端口范围                      |
 
-#### controlplane nodes - 出站规则
+#### controlplane nodes-出站规则
 
 | 协议 | 端口  | 目的地址                                             | 描述                                   |
 | ---- | ----- | ---------------------------------------------------- | -------------------------------------- |
@@ -71,10 +74,11 @@ Nodes with the role **controlplane**
 | UDP  | 8472  | etcd nodes<br />controlplane nodes<br />worker nodes | Canal/Flannel VXLAN overlay networking |
 | TCP  | 10250 | etcd nodes<br />controlplane nodes<br />worker nodes | kubelet                                |
 
-**worker nodes:**
-**worker**
+### worker nodes:
 
-#### worker nodes - 入站规则
+worker角色的主机
+
+#### worker nodes-入站规则
 
 | 协议    | 端口        | 源地址                                               | 描述                                   |
 | ------- | ----------- | ---------------------------------------------------- | -------------------------------------- |
@@ -84,7 +88,7 @@ Nodes with the role **controlplane**
 | TCP     | 10250       | controlplane nodes                                   | kubelet                                |
 | TCP/UDP | 30000-32767 | Any source that consumes NodePort services           | Nodeport 端口范围                      |
 
-#### worker nodes - 出站规则
+#### worker nodes-出站规则
 
 | 协议 | 端口 | 目的地址                                             | 描述                                   |
 | ---- | ---- | ---------------------------------------------------- | -------------------------------------- |

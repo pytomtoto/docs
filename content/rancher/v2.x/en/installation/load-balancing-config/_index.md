@@ -3,8 +3,8 @@ title: 负载均衡
 weight: 600
 ---
 
-Following {{< product >}} installation, you have the option of configuring an external load balancer to direct cluster traffic.
+在{{< product >}} server安装之后，您可以选择配置外部负载均衡器来代理集群通信。
 
-Rancher has tested a few load balancer configurations. Choose from the options available. There is no "best" configuration. Choose the load balancer that best suits your needs.
+Rancher测试了一些负载均衡器配置，从可用选项中进行选择。没有“最佳”配置。请根据实际场景选择最适合您需求的负载均衡器。
 
-When configuring an external load balancer, the steps for setting up a load balancer vary based on your install: single-node or high-availability.
+配置外部负载平衡器时，设置负载平衡器的步骤因安装而异：单节点或高可用性。

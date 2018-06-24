@@ -16,15 +16,15 @@ weight: 4
 
 -  [HA安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/ha-server-install/)
 
- 	此安装方案将创建一个专用于Rancher服务以HA配置运行的新Kubernetes集群；
+		此安装方案将创建一个专用于Rancher服务以HA配置运行的新Kubernetes集群；
 
 -  [HA安装+外部负载均衡器]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/ha-server-install-external-lb/)
 
- 	此安装方案将创建一个专用于Rancher服务以HA配置运行的新Kubernetes集群，并把负载平衡器位于HA配置之前；
+		此安装方案将创建一个专用于Rancher服务以HA配置运行的新Kubernetes集群，并把负载平衡器位于HA配置之前；
 
 -  [离线安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)
 
- 	在没有Internet连接的环境中安装Rancher服务器；
+		在没有Internet连接的环境中安装Rancher服务器；
 
 本节还包括Rancher配置和维护的帮助内容：
 
@@ -34,4 +34,4 @@ weight: 4
 
 -  [Rancher HTTP代理配置]({{< baseurl >}}/rancher/v2.x/cn/installation/proxy-configuration/)
 
-	如果您的Rancher运行在代理之后，则此页面提供有关如何为您的Rancher配置代理；
+	如果您的环境需要代理访问互联网，此页面提供有关如何为您的Rancher配置代理；

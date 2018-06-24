@@ -15,7 +15,7 @@ You can create custom catalogs of charts for use in Rancher. Custom catalogs are
 
 >**Prerequisites:**
 >
->- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs).
+>- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 >- Create a GitHub repository to serve as your custom catalog.
 
 
@@ -27,4 +27,4 @@ You can create custom catalogs of charts for use in Rancher. Custom catalogs are
 
 ## What's Next?
 
-Add native Helm charts, Rancher charts, or both to your repository. For more information, see [Customizing Charts]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/catalog/customizing-charts/).
+Add native Helm charts, Rancher charts, or both to your repository. For more information, see [Customizing Charts]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/catalog/customizing-charts/).

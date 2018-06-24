@@ -1,4 +1,4 @@
-baseURL = "https://www2.cnrancher.com"
+baseURL = ""
 languageCode = "en-us"
 title = "Rancher Labs"
 theme = "rancher-website-theme"

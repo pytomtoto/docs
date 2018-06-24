@@ -9,13 +9,13 @@ The custom catalog can contain native Helm charts, Rancher charts, or a combinat
 
 >**Prerequisites:**
 
->- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs).
+>- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 >- Create a GitHub repository to serve as your custom catalog.
->- Complete [Adding Custom Catalogs]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/catalog/adding-custom-catalogs).
+>- Complete [Adding Custom Catalogs]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/catalog/adding-custom-catalogs).
 
 >**Note:** Customization of Helm charts takes place outside of the Rancher UI.
 
-1. Within the GitHub repo that you're using as your custom catalog, create a directory structure that mirrors the structure listed in [Chart Directory Structure]({{< baseurl >}}/rancher/v2.x/en/concepts/catalogs/#chart-directory-structure).
+1. Within the GitHub repo that you're using as your custom catalog, create a directory structure that mirrors the structure listed in [Chart Directory Structure]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs/#chart-directory-structure).
 
     Rancher requires this directory structure, although `app-readme.md` and `questions.yml` are optional.
 
@@ -79,7 +79,7 @@ The custom catalog can contain native Helm charts, Rancher charts, or a combinat
 
 ## What's Next?
 
-Launch your custom catalog app. For more information, see [Launching a Catalog App]({{< baseurl >}}/rancher/v2.x/en/tasks/projects/launch-a-catalog-app).
+Launch your custom catalog app. For more information, see [Launching a Catalog App]({{< baseurl >}}/rancher/v2.x/cn/tasks/projects/launch-a-catalog-app).
 
 ## Question Variable Reference
 

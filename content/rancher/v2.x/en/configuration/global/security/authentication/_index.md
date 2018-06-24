@@ -17,7 +17,7 @@ You have three options for user authentication in Rancher:
 - **OpenLDAP**:-->
 
 
-- [Azure AD]({{< baseurl >}}/rancher/v2.x/en/tasks/global-configuration/authentication/azure-ad/)
+- [Azure AD]({{< baseurl >}}/rancher/v2.x/cn/tasks/global-configuration/authentication/azure-ad/)
 
 	If you have an instance of Active Directory (AD) hosted in Azure, you can configure Rancher to allow your users to log in using their AD accounts. Configuration of Azure AD external authentication requires you to make configurations in both Azure and Rancher.
 
