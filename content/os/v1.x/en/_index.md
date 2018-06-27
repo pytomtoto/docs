@@ -1,6 +1,6 @@
 ---
 title: Overview of RancherOS
-shortTitle: RancherOS 
+shortTitle: Rancher OS 
 weight: 1
 ---
 
