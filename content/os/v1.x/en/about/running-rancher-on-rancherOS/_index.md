@@ -1,5 +1,5 @@
 ---
-title: Tips on using Rancher v1.x with RancherOS
+title: 在RancherOS中运行Rancher v1.x的相关注意
 weight: 302
 ---
 

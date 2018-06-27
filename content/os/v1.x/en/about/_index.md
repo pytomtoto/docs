@@ -1,5 +1,5 @@
 ---
-title: Contributing to RancherOS
+title: 关于
 weight: 4
 ---
 
