@@ -15,14 +15,16 @@
 @import
 '../../node_modules/rancher-website-theme/static/scss/vendor/normalize',
 '../../node_modules/rancher-website-theme/static/scss/vendor/loryslider',
-'../../node_modules/rancher-website-theme/static/scss/vendor/flexboxgrid_docs';
+//'../../node_modules/rancher-website-theme/static/scss/vendor/flexboxgrid_docs';
+'../../node_modules/rancher-website-theme/static/scss/vendor/flexboxgrid';
 
 
 // 3. Base stuff
 @import
 '../../node_modules/rancher-website-theme/static/scss/base/base',
 '../../node_modules/rancher-website-theme/static/scss/base/fonts',
-'../../node_modules/rancher-website-theme/static/scss/base/typography_docs',
+//'../../node_modules/rancher-website-theme/static/scss/base/typography_docs',
+'../../node_modules/rancher-website-theme/static/scss/base/typography',
 '../../node_modules/rancher-website-theme/static/scss/base/colors',
 '../../node_modules/rancher-website-theme/static/scss/base/helpers';
 
