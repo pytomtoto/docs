@@ -74,7 +74,7 @@ Please do not use releases with a `rc{n}` suffix. These `rc` builds are meant fo
 
   Users can create namespaces and assign them to projects.  Projects are a new Rancher concepts that allows you to group a set of namespaces and assign a set of user permissions on those namespaces.
 
-- **Workload Management** 
+- **Workload Management**
   
   Rancher is introducing a new Workload UX to create and manage their k8s workloads.  Supported workload features:
   
@@ -86,7 +86,7 @@ Please do not use releases with a `rc{n}` suffix. These `rc` builds are meant fo
   - Ability to manage your SSL certificates for Ingress.
   - Ability to generate a public endpoint based on ports exposed by NodePort Services, LoadBalancer Services, Ingress, and HostPorts.
 
-- **Rancher CLI** 
+- **Rancher CLI**
   
   CLI support for all Rancher 2.0 feature set.
 
