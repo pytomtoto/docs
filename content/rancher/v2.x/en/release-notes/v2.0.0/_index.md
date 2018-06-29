@@ -13,7 +13,7 @@ After many months of development, we are finally able to make Rancher 2.0 availa
 - Rancher Kubernetes Engine (RKE)
 - Integration with cloud Kubernetes services, such as GKE, EKS, and AKS.
 
-> **NOTE** - Upgrades from previous preview versions are not supported.  All upgrades from this version will be supported.
+> **NOTE** Upgrades from previous preview versions are not supported.  All upgrades from this version will be supported.
 
 ## Helpful Links
 
@@ -22,7 +22,7 @@ After many months of development, we are finally able to make Rancher 2.0 availa
 
 ## Versions
 
-> **NOTE** - Image Name Changes: Please note that as of v2.0.0, our images will be `rancher/rancher` and `rancher/rancher-agent`. If you are using v1.6, please continue to use `rancher/server` and `rancher/agent`.
+> **NOTE** Image Name Changes: Please note that as of v2.0.0, our images will be `rancher/rancher` and `rancher/rancher-agent`. If you are using v1.6, please continue to use `rancher/server` and `rancher/agent`.
 
 - rancher/rancher:v2.0.0
 - rancher/rancher-agent:v2.0.0
@@ -31,8 +31,8 @@ After many months of development, we are finally able to make Rancher 2.0 availa
 
 Rancher server has 2 different tags. For each major release tag, we will provide documentation for the specific version.
 
-* `rancher/rancher:latest` tag will be our latest development builds. These builds will have been validated through our CI automation framework. These releases are not meant for deployment in production.
-* `rancher/rancher:stable` tag will be our latest stable release builds. This tag is the version that we recommend for production.  
+- `rancher/rancher:latest` tag will be our latest development builds. These builds will have been validated through our CI automation framework. These releases are not meant for deployment in production.
+- `rancher/rancher:stable` tag will be our latest stable release builds. This tag is the version that we recommend for production.  
 
 Please do not use releases with a `rc{n}` suffix. These `rc` builds are meant for the Rancher team to test builds.
 
@@ -42,7 +42,7 @@ Please do not use releases with a `rc{n}` suffix. These `rc` builds are meant fo
 
 ## New Enhancements
 
-- **Clusters and Node Management** 
+- **Clusters and Node Management**
   
   Rancher supports the ability to add your k8s cluster hosted by a cloud provider, create one using Rancher Kubernetes Engine (RKE), or simply by importing an existing cluster of your own.
   - Cloud Providers - Full integrated experience of creating and managing your nodes of your k8s cluster from one of the major cloud providers
@@ -90,11 +90,11 @@ Please do not use releases with a `rc{n}` suffix. These `rc` builds are meant fo
   
   CLI support for all Rancher 2.0 feature set.
 
-- **Pod Security Policies** 
+- **Pod Security Policies**
   
   Allow users to create their own pod security policy or policies that can be applied to roles.
 
-- **Catalog Support for Helm** 
+- **Catalog Support for Helm**
   
   Helm charts will be supported in the updated 2.0 catalog.
 
