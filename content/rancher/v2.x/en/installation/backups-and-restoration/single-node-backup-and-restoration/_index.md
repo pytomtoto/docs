@@ -1,52 +1,54 @@
 ---
 title: 单节点备份和恢复
 weight: 365
-aliases:
-  - /rancher/v2.x/cn/installation/after-installation/single-node-backup-and-restoration/
 ---
+#
 
-After completing your single node installation of Rancher, or before your upgrade to a newer version of Rancher, create a backup of your current installation. Use this backup as a restoration point for your Rancher install if you encounter issues when upgrading.
+在完成Rancher的单节点安装后，或者在升级到更新版本的Rancher之前，请创建当前安装的备份。如果您在升级时遇到问题，请将此备份用作Rancher安装的恢复点。
 
-## Backing Up Your Rancher Server
+## 备份Rancher server数据
 
->**Prerequisite:** Open Rancher and write down the version number displayed in the lower-left of the browser (example: `v2.0.0`). You'll need this number during the backup process.
+>**Prerequisite:** 打开Rancher并记下浏览器左下角显示的版本号（例如：v2.0.0）,在备份过程中需要这个号码。
 
-1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
+1.停止当前运行的Rancher服务器容器；
 
-	```
+```bash
 docker stop <RANCHER_CONTAINER_ID>
-	```
+```
 
-	>**Tip:** You can obtain the ID for your Rancher container by entering the following command: `docker ps`.
+>**Tip:** 您可以通过输入命令`docker ps`获取Rancher容器ID
 
-2. Create a backup container. This container backs up the data from your current Rancher Server, which you can use as a recovery point.
+2.创建一个备份容器，此容器备份当前Rancher服务器中的数据，您可以将其用作恢复点;
 
-	- Replace `<RANCHER_CONTAINER_ID>` with the same ID from the previous step.
-	- Replace `<RANCHER_CONTAINER_TAG>` and `<RANCHER_VERSION>` with the version of Rancher that you are currently running, as mentioned in the  **Prerequisite** above.
+```bash
+docker create \
+--volumes-from <RANCHER_CONTAINER_ID> \
+--name rancher-backup-<RANCHER_VERSION> \
+rancher/rancher:<RANCHER_CONTAINER_TAG>
+```
 
-	```
-docker create --volumes-from <RANCHER_CONTAINER_ID>
---name rancher-backup-<RANCHER_VERSION> rancher/rancher:<RANCHER_CONTAINER_TAG>
-	```
+- 替换 `<RANCHER_CONTAINER_ID>`为上一步获取到的Rancher容器ID;
+- 如上面的 **先决条件** 中所述，替换 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_VERSION>`为Rancher的版本号；
 
-3. Restart Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
+3.重启Rancher server
 
-	```
+```bash
 docker start <RANCHER_CONTAINER_ID>
-	```
+```
 
+## 恢复 Rancher Server
 
-## Restoring Your Rancher Server
+1.停止当前运行的Rancher容器
 
-1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
-
-	```
+```bash
 docker stop <RANCHER_CONTAINER_ID>
-	```
+```
 
-2. Launch a new Rancher Server container using the most recent `rancher-backup-<RANCHER_VERSION>` container.
+2.通过备份的容器卷来重新运行Rancher server容器；
 
-	```
-docker run -d --volumes-from rancher-backup-<RANCHER_VERSION> --restart=unless-stopped \
--p 80:80 -p 443:443 rancher/rancher:<CURRENT_RANCHER_VERSION>
-	```
+```bash
+docker run -d --restart=unless-stopped \
+-p 80:80 -p 443:443 \
+--volumes-from rancher-backup-<RANCHER_VERSION> \
+rancher/rancher:<CURRENT_RANCHER_VERSION>
+```

@@ -1,5 +1,6 @@
 ---
-title: 项目
-weight: 3650
+title: 项目配置
+weight: 3000
 ---
-_Projects_ are a new feature in Rancher that allows you to group namespaces. Users can be added as members to the project, and the project owner can assign roles to each member to control their project access.
+
+项目是Rancher中的一项新功能，可让您对命名空间进行分组，用户可以作为成员添加到项目中，项目所有者可以为每个成员分配角色来控制他们对项目访问权限。

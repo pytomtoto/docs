@@ -3,8 +3,6 @@ title: Release v2.0.4
 weight: 5
 ---
 
-# Release v2.0.4
-
 ## Versions
 
 > **NOTE** Image Name Changes: Please note that as of v2.0.0, our images will be `rancher/rancher` and `rancher/rancher-agent`. If you are using v1.6, please continue to use `rancher/server` and `rancher/agent`.

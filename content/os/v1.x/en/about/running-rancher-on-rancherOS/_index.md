@@ -5,7 +5,7 @@ weight: 302
 
 RancherOS can be used to launch [Rancher](/rancher/) and be used as the OS to add nodes to Rancher.
 
-### Launching Agents using Cloud-Config
+## Launching Agents using Cloud-Config
 
 You can easily add hosts into Rancher by using [cloud-config]({{< baseurl >}}/os/v1.x/en/installation/configuration/#cloud-config) to launch the rancher/agent container.
 
@@ -35,6 +35,7 @@ rancher:
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
 ```
+
 <br>
 
 > **Note:** You can not name the service `rancher-agent` as this will not allow the rancher/agent container to be launched correctly. Please 了解更多 about why [you can't name your container as `rancher-agent`](https://rancher.com/docs/rancher/latest/zh/faqs/agents/#adding-in-name-rancher-agent).
