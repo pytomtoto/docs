@@ -1,9 +1,10 @@
 ---
 title: 备份和恢复
 weight: 700
+aliases:
+  - /rancher/v2.x/cn/installation/after-installation/
 ---
+This section contains information about how to create backups of your Rancher data and how to restore them in a disaster scenario.
 
-本节包含有关如何创建Rancher数据的备份以及如何在灾难情况下进行数据恢复
-
-- [单节点安装备份和恢复]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/single-node-backup-and-restoration/)
-- [HA安装备份和恢复]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/ha-backup-and-restoration/)
+- [Single Node Install Backup and Restoration]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/single-node-backup-and-restoration/)
+- [High Availability Install Backup and Restoration]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/ha-backup-and-restoration/)

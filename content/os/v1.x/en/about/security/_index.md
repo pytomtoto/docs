@@ -20,7 +20,7 @@ weight: 303
 </tr>
 </table>
 
-## RancherOS Vulnerabilities
+### RancherOS Vulnerabilities
 
 | ID | Description | Date | Resolution |
 |----|-------------|------|------------|
