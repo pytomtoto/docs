@@ -7,7 +7,7 @@ weight: 300
 
 从下面的选项中进行选择：
 
-- [单节点安装]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/)
+- [单节点安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/single-node-install/)
 - [单节点+外部LB安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/single-node-install-external-lb/)
 - [HA安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/ha-server-install/)
 - [HA+外部LB安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/ha-server-install-external-lb)
