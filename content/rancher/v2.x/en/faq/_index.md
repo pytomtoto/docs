@@ -3,7 +3,7 @@ title: FAQ
 weight: 7
 ---
 
-This FAQ is a work in progress designed to answers the questions our users most frequently ask about Rancher v2.0.
+常见问题记录了Rancher2使用过程中最常见的问题。
 
 ### Kubernetes
 
@@ -33,21 +33,21 @@ Cattle will not supported in v2.0 as Rancher has been re-architected to be based
 
 Yes. In the upcoming Rancher v2.1 release we will provide a tool to help translate existing Cattle workloads in Compose format to Kubernetes YAML format.  You will then be able to deploy those workloads on the v2.0 platform.
 
-### Environments & Clusters
+### 环境和集群
 
-#### Can I still create templates for environments and clusters?
+#### 我还可以为环境和群集创建模板吗？
 
-No.  Starting with 2.0, the concept of an environment has now been changed to a Kubernetes cluster as going forward, only the Kubernetes orchestration engine is supported.
+不可以. 从2.0开始，环境的概念已经改为Kubernetes集群，并且只支持Kubernetes调度引擎。
 
 #### Can you still add an existing host to an environment? (i.e. not provisioned directly from Rancher)
 
 Yes. We still provide you with the same way of executing our Rancher agents directly on hosts.
 
-### Upgrading/Migrating
+### 升级和迁移
 
-#### How would the migration from v1.x to v2.0 work?
+#### 如何从v1.x迁移到v2.0？
 
-Due to the technical difficulty in transforming a Docker container into a pod running Kubernetes, upgrading will require users to "replay" those workloads from v1.x into new v2.0 environments. We plan to ship with a tool in v2.1 to translate existing Rancher Compose files into Kubernetes YAML files.  You will then be able to deploy those workloads on the v2.0 platform.
+由于将Docker容器转换为Kubernetes pod的技术难度，升级将要求用户将这些工作负载从v1.x迁移到新的v2.0环境中。我们计划在v2.1中增加一个工具，将现有的Rancher Compose文件转换为Kubernetes YAML文件。然后，您将能够在v2.0平台上部署这些工作负载。
 
 #### Is it possible to upgrade from Rancher v1.0 to v2.0 without any disruption to Cattle and Kubernetes clusters?
 
