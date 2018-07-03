@@ -2,32 +2,35 @@
 title: 架构设计
 weight: 1
 ---
+#
 
-This section explains how Rancher interacts with the two fundamental technologies Rancher is built on: Docker and Kubernetes.
+本节介绍Rancher如何与Docker和Kubernetes两种j技术进行交互。
 
 ## Docker
 
-Docker is the container packaging and runtime standard. Developers build container images from Dockerfiles and distribute container images from Docker registries. [Docker Hub](http://hub.docker.com) is the most popular public registry. Many organizations also setup private Docker registries. Docker is primarily used to manage containers on individual nodes.
+Docker是容器打包和runtime标准。开发人员从Dockerfiles构建容器镜像，并从Docker镜像仓库中分发容器镜像。[Docker Hub](http://hub.docker.com)是最受欢迎的公共镜像仓库，许多组织还设置私有Docker镜像仓库。Docker主要用于管理各个节点上的容器。
 
->**Note:** Although Rancher 1.6 supported Docker Swarm clustering technology, it is no longer supported in Rancher 2.0 due to the success of Kubernetes.
+>**Note:** 虽然Rancher 1.6支持Docker Swarm集群技术，但由于Rancher 2.0基于Kubernetes调度引擎，所以Rancher 2.0不再支持Docker Swarm。
 
 ## Kubernetes
 
-Kubernetes is the container cluster management standard. YAML files specify containers and other resources that form an application. Kubernetes performs functions such as scheduling, scaling, service discovery, health check, secret management, and configuration management.
+Kubernetes已成为容器集群管理标准，通过YAML文件来管理配置应用程序容器和其他资源。Kubernetes执行诸如调度，扩展，服务发现，健康检查，密文管理和配置管理等功能。
 
-A Kubernetes cluster consists of multiple nodes.
+一个Kubernetes集群由多个节点组成:
 
--   **etcd database**
+- **etcd database**
 
- 	Although you can run etcd on just one node, it typically takes 3, 5 or more nodes to create an HA configuration.
+  通常在一个节点上运行一个etcd实例服务，但生产环境上，建议通过3个或5个(奇数)以上的节点来创建ETCD HA配置。
 
--   **Master nodes**
+- **Master nodes**
 
- 	Master nodes are stateless and are used to run the API server, scheduler, and controllers.
+  主节点是无状态的，用于运行API Server，调度服务和控制器服务。
 
--   **Worker nodes**
+- **Worker nodes**
 
- 	The application workload runs on worker nodes.
+  工作负载在工作节点上运行。
+  
+  默认情况下Master节点也会有工作负载调度上去， 
 
 ## Rancher
 
@@ -39,48 +42,38 @@ The figure below illustrates the high-level architecture of Rancher 2.0. The fig
 
 In this section we describe the functionalities of each Rancher server components.
 
-#### Rancher API Server
+### Rancher API服务器
 
 Rancher API server is built on top of an embedded Kubernetes API server and etcd database. It implements the following functionalities:
 
--  **User Management**
+- **Rancher API服务器**
 
-	Rancher API server manages user identities that correspond to external authentication providers like Active Directory or GitHub.
+  Rancher API server manages user identities that correspond to external authentication providers like Active Directory or GitHub.
+- **认证授权**
 
--	**Authorization**
+  Rancher API server manages access control and security policies.
+- **项目**
 
- 	Rancher API server manages access control and security policies.
+  A _project_ is a group of multiple namespaces and access control policies within a cluster.
+- **节点**
 
--	**Projects**
+  Rancher API server tracks identities of all the nodes in all clusters.
 
- 	A _project_ is a group of multiple namespaces and access control policies within a cluster.
-
--  **Nodes**
-
-	Rancher API server tracks identities of all the nodes in all clusters.
-
-#### Cluster Controller and Agents
+### 集群控制和Agent
 
 The cluster controller and cluster agents implement the business logic required to manage Kubernetes clusters.
 
 - The _cluster controller_ implements the logic required for the global Rancher install. It performs the following actions:
 
-	-  Configuration of access control policies to clusters and projects.
-
-	-  Provisioning of clusters by calling:
-
-		- The required Docker machine drivers.
-		- Kubernetes engines like RKE and GKE.
-
-
+- Configuration of access control policies to clusters and projects.
+- Provisioning of clusters by calling:
+- The required Docker machine drivers.
+- Kubernetes engines like RKE and GKE.
 - A separate _cluster agent_ instance implements the logic required for the corresponding cluster. It performs the following activities:
+- Workload Management, such as pod creation and deployment within each cluster.
+- Application of the roles and bindings defined in each cluster's global policies.
+- Communication between clusters and Rancher Server: events, stats, node info, and health.
 
-	-  Workload Management, such as pod creation and deployment within each cluster.
-
-	-  Application of the roles and bindings defined in each cluster's global policies.
-
-	-  Communication between clusters and Rancher Server: events, stats, node info, and health.
-
-#### Authentication Proxy
+### 认证代理
 
 The _authentication proxy_ forwards all Kubernetes API calls. It integrates with authentication services like local authentication, Active Directory, and GitHub. On every Kubernetes API call, the authentication proxy authenticates the caller and sets the proper Kubernetes impersonation headers before forwarding the call to Kubernetes masters. Rancher communicates with Kubernetes clusters using a service account.
