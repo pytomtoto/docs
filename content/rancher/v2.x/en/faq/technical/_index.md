@@ -2,7 +2,6 @@
 title: Technical
 weight: 5000
 ---
-#
 
 ## 如何重置管理员密码？
 

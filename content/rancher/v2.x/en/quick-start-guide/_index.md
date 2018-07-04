@@ -2,220 +2,151 @@
 title: 入门
 weight: 3
 ---
->**Note:** This Quick Start Guide's intent is to get you up and running in a sandbox environment. It is not intended for a production environment. For more comprehensive instructions, see [Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/).
 
-Howdy Partner! This tutorial walks you through:
+>**注意:** 本快速入门指南的目的是让您在沙箱环境中快速的拉取一个环境，它不适用于生产。有关更全面的说明，请参阅[安装](/docs/rancher/v2.x/cn/installation/server-installation/).
 
-- Installation of {{< product >}} {{< version >}}
-- Creation of your first cluster
-- Deployment of an application, Nginx
+本教程将指导您完成:
 
-## Quick Start Outline
+- 安装{{< product >}} {{< version >}}
+- 本教程将指导您完成：
+- 部署一个应用程序，Nginx
 
-This Quick Start Guide is divided into different tasks for easier consumption.
+## 配置Linux主机
 
-1.  [Provision a Linux Host](#provision-a-linux-host)
+通过配置Linux主机开始创建自定义集群。您的主机可以是：
 
-    Begin by provisioning a Linux host.
+- 云虚拟主机
+- 本地虚拟机
+- 本地物理机
 
-2.  [Install Rancher](#install-rancher)
+  >**注意:** 在使用云虚拟主机时，您需要允许入站TCP通信端口80和443连接.请参阅您的云主机文档以获取有关端口配置的信息。有关端口要求的完整列表，请参阅[Single Node Installation](/docs/rancher/v2.x/cn/installation/references/).
 
-    From your Linux host, run the Docker command for installing Rancher.
+根据以下要求配置主机:
 
-3.  [Log In](#log-in)
+- Ubuntu 16.04 +（64位）
+- 红帽企业Linux 7.5+（64位）
+- RancherOS 1.3.0+（64位）
 
-    Browse to your Linux host to access the Rancher UI.
+**硬件需求**:
 
-4.  [Create the Cluster](#create-the-cluster)
+- 内存: 4GB
 
-    Use the versatile **Custom** option to clone your Linux host into a new Kubernetes cluster.
+**软件需求**:
 
-5.  [Deploy a Workload](#deploy-a-workload)
+- 软件: Docker
 
-    Create a workload so that Kubernetes can distribute Nginx among your cluster nodes.
-
-6.  [View Your Application](#view-your-application)
-
-    When your workload finishes deployment, browse to your node IP to make sure Nginx is running.
-
-### Provision a Linux Host
-
- Begin creation of a custom cluster by provisioning a Linux host. Your host can be:
-
-- A cloud-host virtual machine (VM)
-- An on-premise VM
-- A bare-metal server
-
-  >**Note:**
-  > When using a cloud-hosted virtual machine you need to allow inbound TCP communication to ports 80 and 443.  Please see your cloud-host's documentation for information regarding port configuration.
-  >
-  > For a full list of port requirements, refer to [Single Node Installation]({{< baseurl >}}/rancher/v2.x/cn/installation/single-node-install/#port-requirements).
-
- Provision the host according to the requirements below.
-
-{{< requirements_os >}}
-
-**Hardware Requirements**
-
-- Memory: 4GB
-
-**Software Requirements**
-
-- Software: Docker
-
-  <a name="node-requirements"></a>**Supported Docker versions:**
+- 支持的Docker版本:
 
   - `1.12.6`
   - `1.13.1`
   - `17.03.2`
 
-  >**Notes:**
-  >
-  > - For Docker installation instructions, visit their [documentation](https://docs.docker.com/install/).
-  > - Docker requirements apply to both your Linux host and your cluster nodes.
+  >**注意:** 有关Docker安装说明,请访问其[文档](https://docs.docker.com/install/)。软件需求要应用于所有节点。
 
-### Install Rancher
+## 安装Rancher
 
-To install Rancher on your host, connect to it and then use a shell to install.
+要想在主机上安装Rancher,需要先登录到主机上，接着进行以下步骤:
 
-1.  Log in to your Linux host using your preferred shell, such as PuTTy or a remote Terminal connection.
+  1. 通过shell工具(例如PuTTy或远程终端连接)登录到主机
 
-2.  From your shell, enter the following command:
+  2. 在shell中执行以下命令:
 
-	```
-	$ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
-	```
+      ```bash
+      sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
+      ```
 
-**Result:** Rancher is installed.
+## 登录
 
-### Log In
+登录并开始使用Rancher。登录后，您将进行一些一次性配置。
 
-Log in to Rancher to begin using the application. After you log in, you'll make some one-time configurations.
+  1. 打开浏览器，输入`https://<server_ip>`,`server_ip`替换为运行Rancher容器主机的ip;
 
-1.  Open a web browser and enter the IP address of your host: `https://<SERVER_IP>`.<br/><br/>
-    Replace `<SERVER_IP>` with your host IP address.
+  2. 因为是自动使用的自签名证书，在第一次登录会提示安全授信问题，信任即可；
 
-2.  When prompted, create a password for the default `admin` account there cowpoke!
+      ![image-20180703152812587](_index.assets/image-20180703152812587.png)
 
-3. Set the **Rancher Server URL**. The URL can either be an IP address or a host name. However, each node added to your cluster must be able to connect to this URL.<br/><br/>If you use a hostname in the URL, this hostname must be resolvable by DNS on the nodes you want to add to you cluster.
+  3. 设置管理员密码
 
-### Create the Cluster
+      第一次登录会要求设置管理员密码，默认管理员账号为: admin
 
-Welcome to Rancher! You are now able to create your first Kubernetes cluster.
+      ![image-20180703152943118](_index.assets/image-20180703152943118.png)
 
-In this task, you can use the versatile **Custom** option. This option lets you add _any_ Linux host (cloud-hosted VM, on-premise VM, or bare-metal) to be used in a cluster.
+  4. 设置Rancher Server URL. 
 
-1. From the **Clusters** page, click **Add Cluster**.
+      这个Rancher Server URL是agent节点注册的地址，需要保证这个地址能够被其他主机访问
 
-2. Choose **Custom**.
+## 创建集群
 
-3. Enter a **Cluster Name**.
+现在创建第一个Kubernetes集群，可以使用**自定义**选项。您可以添加云虚拟主机、内部虚拟机或物理主机作为集群节点，节点可以运行任何一种或多种主流Linux发行版:
 
-4. Skip **Member Roles** and **Cluster Options**. We'll tell you about them later.
+  1. 页面右下角可以切换语言；
 
-5. Click **Next**.
+      ![image-20180703155306568](_index.assets/image-20180703155306568.png)
 
-6. From **Node Role**, select _all_ the roles: **etcd**, **Control**, and **Worker**.
+  2. 在全局视图下，点击菜单中的集群 , 并点击添加集群；
 
-7. **Optional**: Rancher auto-detects the IP addresses used for Rancher communication and cluster communication. You can override these using `Public Address` and `Internal Address` in the **Node Address** section.
+      ![image-20180703155455417](_index.assets/image-20180703155455417.png)
 
-8. Skip the **Labels** stuff. It's not important for now.
+  3. 选择 **Custom**，并设置集群名称,其他参数可不用修改，点击下一步；
 
-9. Copy the command displayed on screen to your clipboard.
+      ![image-20180703155616051](_index.assets/image-20180703155616051.png)
 
-10. Log in to your Linux host using your preferred shell, such as PuTTy or a remote Terminal connection. Run the command copied to your clipboard.
+  4. 选择节点运行的角色 
+  
+      默认会勾选**Worker**角色，根据需要可以一次勾选多种角色。比如，假设我只有一个节点，那就需要把所有角色都选择上，选择后上面的命令行会自动添加相应的命令参数；
 
-11. When you finish running the command on your Linux host, click **Done**.
+      ![image-20180703160014756](_index.assets/image-20180703160014756.png)
 
-{{< result_create-cluster >}}
+  5. 如果是云虚拟主机，需要添加主机的内网地址和对应的公网地址，如果是没有公网的云主机，可以跳过这步；
 
-### Deploy a Workload
+  6. 其他参数保持默认，点击命令行右侧的复制按钮，复制命令参数
 
-You're ready to create your first _workload_. A workload is an object that includes pods along with other files and info needed to deploy your application.
+      ![image-20180703160307674](_index.assets/image-20180703160307674.png)
 
-For this workload, you'll be deploying the application Nginx.
+      > 如果是多台主机，根据角色的不同，需要复制多次
 
-1.  From the **Clusters** page, open the cluster that you just created.
+  7. 登录预添加集群的主机，执行以上复制的命令；
 
-2.  From the main menu of the **Dashboard**, select **Projects**.
+      ![image-20180703160635845](_index.assets/image-20180703160635845.png)
 
-3.  Open the **Default** project.
+  8. 在主机上执行完命令后，最后点击完成；
 
-4.  Click **+ Deploy**.
+  9. 回到全局视图，可以查看集群的部署状态；
 
-	**Step Result:** The **Deploy Workload** page opens.
+      ![image-20180703160909299](_index.assets/image-20180703160909299.png)
 
-5.  Enter a **Name** for your workload.
+  10. 点击集群名称，进入集群视图
 
-6.  From the **Docker Image** field, enter `nginx`. This field is case-sensitive.
+      ![image-20180703161000127](_index.assets/image-20180703161000127.png)
 
-7.  From **Port Mapping**, click **Add Port**.
+      ![image-20180703161032371](_index.assets/image-20180703161032371.png)
 
-8.  From the **As a** drop-down, make sure that **NodePort (On every node)** is selected.
+  11. 点击菜单栏**主机**按钮
 
-	![As a dropdown, NodePort (On every node selected)]({{< baseurl >}}/img/rancher/nodeport-dropdown.png)
+      ![image-20180703161122349](_index.assets/image-20180703161122349.png)
 
-9.  From the **On Listening Port** field, leave the **Random** value in place.
+  12. 集群创建完成
 
-	![On Listening Port, Random selected]({{< baseurl >}}/img/rancher/listening-port-field.png)
+      ![image-20180703161220346](_index.assets/image-20180703161220346.png)
 
-10. From the **Publish the container port** field, enter port `80`.
+  13. 集群创建完成后，默认会生成Default项目，点击Default切换到项目视图；
 
-	![Publish the container port, 80 entered]({{< baseurl >}}/img/rancher/container-port-field.png)
+      ![image-20180703161314995](_index.assets/image-20180703161314995.png)
 
-11. Leave the remaining options on their default setting. We'll tell you about them later.
+## 部署工作负载
 
-12. Click **Launch**.
+工作负载是一个对象，包括pod以及部署应用程序所需的其他文件和信息。我们以nginx作为示例：
 
-**Result:**
+  1. 在Default视图下，点击工作负载—部署服务
 
-* Your workload is deployed. This process might take a few minutes to complete.
-* When your workload completes deployment, it's assigned a state of **Active**. You can view this status from the project's **Workloads** page.
+      ![image-20180703161702320](_index.assets/image-20180703161702320.png)
 
-### View Your Application
+  2. 在部署工作负载页面，设置工作负载名称、副本数量、镜像名称、命名空间、端口映射，其他参数保持默认，最后点击启动；
 
-When your workload completes deployment, browse to its IP to confirm that your application is working.
+      ![image-20180703162317366](_index.assets/image-20180703162317366.png)
 
-From the **Workloads** page, click the link underneath your workload. If your deployment succeeded, your application opens.
+  3. 部署完成
 
->**Note**
-> When using a cloud-hosted virtual machine, you may not have access to the port running the container. In this event, you can test Nginx in an ssh session on the local machine. Use the port number after the `:` in the link under your workload, which is 31568 in this example.
->
->```sh
+      ![image-20180703162503157](_index.assets/image-20180703162503157.png)
 
-gettingstarted@rancher:~$ curl http://localhost:31568
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to Nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to Nginx!</h1>
-<p>If you see this page, the Nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://Nginx.org/">Nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using Nginx.</em></p>
-</body>
-</html>
-gettingstarted@rancher:~$
-
-```
-
-## Finished
-
-Congratulations! You have:
-
-- Created your first cluster.
-- Deployed Nginx to your cluster using a workload.
+  4. 通过31174端口去访问nginx服务。

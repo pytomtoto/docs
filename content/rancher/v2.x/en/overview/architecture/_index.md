@@ -2,7 +2,6 @@
 title: 架构设计
 weight: 1
 ---
-#
 
 本节介绍Rancher如何与Docker和Kubernetes两种j技术进行交互。
 
@@ -30,50 +29,59 @@ Kubernetes已成为容器集群管理标准，通过YAML文件来管理配置应
 
   工作负载在工作节点上运行。
   
-  默认情况下Master节点也会有工作负载调度上去， 
+  默认情况下Master节点也会有工作负载调度上去， 可通过命令设置其不加入调度[了解详情](/docs/rancher/v2.x/cn/configuration/clusters/creating-a-cluster/create-cluster-custom/)
 
 ## Rancher
 
-The majority of Rancher 2.0 software runs on the Rancher Server.  Rancher Server includes all the software components used to manage the entire Rancher deployment.
+大多数Rancher 2.0软件运行在Rancher Server节点上,Rancher Server包括用于管理整个Rancher部署的所有组件。
 
-The figure below illustrates the high-level architecture of Rancher 2.0. The figure depicts a Rancher Server installation that manages two Kubernetes clusters: one created by RKE and another created by GKE.
+下图说明了Rancher 2.0的运行架构。该图描绘了管理两个Kubernetes集群的Rancher server安装：一个由RKE创建，另一个由GKE创建。
 
 ![Architecture]({{< baseurl >}}/img/rancher/rancher-architecture.png)
 
-In this section we describe the functionalities of each Rancher server components.
+在本节中，我们将介绍每个Rancher server组件的功能:
 
 ### Rancher API服务器
 
-Rancher API server is built on top of an embedded Kubernetes API server and etcd database. It implements the following functionalities:
+Rancher API server建立在嵌入式Kubernetes API服务器和etcd数据库之上。它实现了以下功能：
 
 - **Rancher API服务器**
 
-  Rancher API server manages user identities that correspond to external authentication providers like Active Directory or GitHub.
+  Rancher API server管理与外部身份验证提供程序（如Active Directory或GitHub）对应的用户身份
+
 - **认证授权**
 
-  Rancher API server manages access control and security policies.
+  Rancher API server管理访问控制和安全策略
+
 - **项目**
 
-  A _project_ is a group of multiple namespaces and access control policies within a cluster.
+  项目是集群中的一组多个命名空间和访问控制策略的集合
+
 - **节点**
 
-  Rancher API server tracks identities of all the nodes in all clusters.
+  Rancher API server跟踪所有集群中所有节点的标识。
 
 ### 集群控制和Agent
 
-The cluster controller and cluster agents implement the business logic required to manage Kubernetes clusters.
+集群控制器和集群代理实现管理Kubernetes集群所需的业务逻辑:
 
-- The _cluster controller_ implements the logic required for the global Rancher install. It performs the following actions:
+- 集群控制器实现Rancher安装所需的全局逻辑。它执行以下操作：
 
-- Configuration of access control policies to clusters and projects.
-- Provisioning of clusters by calling:
-- The required Docker machine drivers.
-- Kubernetes engines like RKE and GKE.
-- A separate _cluster agent_ instance implements the logic required for the corresponding cluster. It performs the following activities:
-- Workload Management, such as pod creation and deployment within each cluster.
-- Application of the roles and bindings defined in each cluster's global policies.
-- Communication between clusters and Rancher Server: events, stats, node info, and health.
+  - 为集群和项目配置访问控制策略
+
+  - 通过调用以下方式配置集群:
+
+        - 所需的Docker machine驱动程序
+        - 像RKE和GKE这样的Kubernetes引擎
+
+- 单独的集群代理实例实现相应集群所需的逻辑。它执行以下活动:
+
+  - 工作负载管理，例如每个集群中的pod创建和部署
+
+  - 绑定并应用每个集群全局策略中定义的角色
+
+  - 集群与Rancher Server之间的通信：事件，统计信息，节点信息和运行状况
 
 ### 认证代理
 
-The _authentication proxy_ forwards all Kubernetes API calls. It integrates with authentication services like local authentication, Active Directory, and GitHub. On every Kubernetes API call, the authentication proxy authenticates the caller and sets the proper Kubernetes impersonation headers before forwarding the call to Kubernetes masters. Rancher communicates with Kubernetes clusters using a service account.
+该认证代理转发所有Kubernetes API调用。它集成了身份验证服务，如本地身份验证，Active Directory和GitHub。在每个Kubernetes API调用中，身份验证代理会对调用方进行身份验证，并在将调用转发给Kubernetes主服务器之前设置正确的Kubernetes模拟标头。Rancher使用服务帐户与Kubernetes集群通信。
