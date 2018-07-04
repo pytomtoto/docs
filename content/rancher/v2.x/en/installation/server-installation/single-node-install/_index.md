@@ -160,7 +160,7 @@ Rancher支持Let’s Encrypt 证书。Let’s Encrypt 使用一个`http-01 chall
 
 你有几个选择：
 
-- 创建Rancher server的备份：[单节点备份和恢复](/docs/rancher/v2.x/cn/installation/backups-and-restoration/single-node-backup-and-restoration/)。
+- 创建Rancher server的备份：[单节点备份和恢复](/docs/rancher/v2.x/cn/backups-and-restoration/single-node-backup-and-restoration/)。
 - 创建一个Kubernetes集群：[创建一个集群](/docs/rancher/v2.x/cn/installation/server-installation/single-node-install/%7B%7B%20%3Cbaseurl%3E%20%7D%7D/rancher/v2.x/en/tasks/clusters/creating-a-cluster/)。
 
 ## FAQ和故障排除

@@ -45,7 +45,7 @@ weight: 1010
 5. 使用rancher-data容器启动新的Rancher Server 容器。
 
 docker run -d --volumes-from rancher-data --restart = unless-stopped \
--p 80:80 -p 443：443牧场主/牧场主：最新
+-p 80:80 -p 443：443rancher/rancher：最新
 注意：
 即使升级过程看起来比预期的要长，也不要在启动升级后停止升级。停止升级可能会在将来的升级过程中导致数据库迁移错误。 
 
@@ -56,7 +56,7 @@ docker run -d --volumes-from rancher-data --restart = unless-stopped \
 
 如果您只停止以前的Rancher Server容器（并且不删除它），则容器可能会在下次服务器重新启动后重新启动。
 
-登录牧场主。通过检查浏览器窗口左下角显示的版本，确认升级成功。
+登录rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功。
 
 结果： Rancher Server已升级到最新版本。
 

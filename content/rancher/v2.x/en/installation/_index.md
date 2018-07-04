@@ -28,7 +28,7 @@ weight: 4
 
 本节还包括Rancher配置和维护的帮助内容：
 
--  [备份和恢复]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/)
+-  [备份和恢复]({{< baseurl >}}/rancher/v2.x/cn/backups-and-restoration/)
 
 -  [端口需求]({{< baseurl >}}/rancher/v2.x/cn/installation/references/)
 

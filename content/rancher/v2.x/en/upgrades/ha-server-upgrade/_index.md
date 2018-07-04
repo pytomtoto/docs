@@ -5,7 +5,7 @@ weight: 1020
 
 >**先决条件:**
 >
->- 创建[一次性etcd快照]({{< baseurl >}}/rancher/v2.x/cn/installation/backups-and-restoration/ha-backup-and-restoration). 如果在升级期间出现问题，此快照是一个还原点。
+>- 创建[一次性etcd快照]({{< baseurl >}}/rancher/v2.x/cn/backups-and-restoration/ha-backup-and-restoration). 如果在升级期间出现问题，此快照是一个还原点。
 >- 在主机或者远程访问的笔记本上安装[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)命令行工具
 >- 确认系统存在以下路径：~/.kube/。如果没有，请自行创建。
 >- 复制[Rancher Server安装]({{< baseurl >}}/rancher/v2.x/cn/installation/ha-server-install#part-11-backup-kube-config-rancher-cluster-yml)后自动生成的配置文件(`kube_config_rancher-cluster.yml`)副本到`~/.kube/` 目录.
