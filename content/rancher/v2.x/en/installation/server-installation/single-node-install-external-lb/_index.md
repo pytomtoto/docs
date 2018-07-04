@@ -48,7 +48,7 @@ weight: 260
 >
 > **注意：**
 >
-> 有关可用的其他Rancher服务器标记的列表，请参阅[Rancher server tags](/docs/rancher/v2.x/cn/installation/server-tags/)。
+> 有关可用的其他Rancher server标记的列表，请参阅[Rancher server tags](/docs/rancher/v2.x/cn/installation/server-tags/)。
 
 #### 端口
 
@@ -58,7 +58,7 @@ weight: 260
 
 ## 2.选择一个SSL选项并安装Rancher
 
-出于安全考虑，使用Rancher时需要SSL。SSL可以保护所有Rancher网络通信，例如登录或与群集交互。
+出于安全考虑，使用Rancher时需要SSL。SSL可以保护所有Rancher网络通信，例如登录或与集群交互。
 
 > **注意Air Gap用户：**如果您正在访问此页面以完成[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)，在运行安装命令时，必须在Rancher镜像前面加上你私有仓库的地址，替换`<REGISTRY.DOMAIN.COM:PORT>`为你的私有仓库地址。
 

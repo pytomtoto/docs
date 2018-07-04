@@ -24,7 +24,7 @@ weight: 4
 
 -  [离线安装]({{< baseurl >}}/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)
 
-		在没有Internet连接的环境中安装Rancher服务器；
+		在没有Internet连接的环境中安装Rancher server；
 
 本节还包括Rancher配置和维护的帮助内容：
 

@@ -35,7 +35,7 @@ Yes. In the upcoming Rancher v2.1 release we will provide a tool to help transla
 
 ### 环境和集群
 
-#### 我还可以为环境和群集创建模板吗？
+#### 我还可以为环境和集群创建模板吗？
 
 不可以. 从2.0开始，环境的概念已经改为Kubernetes集群，并且只支持Kubernetes调度引擎。
 

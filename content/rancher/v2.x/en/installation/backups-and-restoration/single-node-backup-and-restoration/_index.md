@@ -10,7 +10,7 @@ weight: 365
 
 >**Prerequisite:** 打开Rancher并记下浏览器左下角显示的版本号（例如：v2.0.0）,在备份过程中需要这个号码。
 
-1.停止当前运行的Rancher服务器容器；
+1.停止当前运行的Rancher server容器；
 
 ```bash
 docker stop <RANCHER_CONTAINER_ID>
@@ -18,7 +18,7 @@ docker stop <RANCHER_CONTAINER_ID>
 
 >**Tip:** 您可以通过输入命令`docker ps`获取Rancher容器ID
 
-2.创建一个备份容器，此容器备份当前Rancher服务器中的数据，您可以将其用作恢复点;
+2.创建一个备份容器，此容器备份当前Rancher server中的数据，您可以将其用作恢复点;
 
 ```bash
 docker create \

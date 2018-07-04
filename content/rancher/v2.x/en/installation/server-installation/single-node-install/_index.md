@@ -44,7 +44,7 @@ weight: 250
 
 > **注意：**该`rancher/rancher`镜像托管在[DockerHub上](https://hub.docker.com/r/rancher/rancher/tags/)。如果您无法访问DockerHub，或者离线环境下安装Rancher，请参阅[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)。
 >
-> 有关可用的其他Rancher服务器标记的列表，请参阅[Rancher server tags](/docs/rancher/v2.x/cn/installation/server-tags/)。
+> 有关可用的其他Rancher server标记的列表，请参阅[Rancher server tags](/docs/rancher/v2.x/cn/installation/server-tags/)。
 
 #### 端口
 
@@ -54,7 +54,7 @@ weight: 250
 
 ## 2.选择一个SSL选项并安装Rancher
 
-出于安全考虑，使用Rancher时需要SSL。SSL可以保护所有Rancher网络通信，例如登录或与群集交互。
+出于安全考虑，使用Rancher时需要SSL。SSL可以保护所有Rancher网络通信，例如登录或与集群交互。
 
 > **注意Air Gap用户：**如果您正在访问此页面以完成[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)，在运行安装命令时，必须在Rancher镜像前面加上你私有仓库的地址，替换`<REGISTRY.DOMAIN.COM:PORT>`为你的私有仓库地址。
 
@@ -227,7 +227,7 @@ rancher/rancher:latest
 
 ## 在同一个主机上运行`Rancher/Rancher`和`Rancher/Rancher-Agent`
 
-在您想要使用单个节点运行Rancher并且能够将相同节点添加到群集的情况下，您必须调整为`rancher/rancher`容器映射的主机端口。
+在您想要使用单个节点运行Rancher并且能够将相同节点添加到集群的情况下，您必须调整为`rancher/rancher`容器映射的主机端口。
 
 如果一个节点被添加到集群，它将部署使用端口80和443的ingress控制器。这与`rancher/rancher`容器默认映射的端口冲突。
 
