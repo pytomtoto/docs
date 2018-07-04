@@ -18,19 +18,19 @@ pygmentsCodeFencesGuessSyntax=true
   ### Edit content repo (set to automatically enter "edit" mode; this is good for "improve this page" links)
   ghdocsrepo = "https://github.com/rancher/docs"
 
-[outputFormats.Algolia]
-baseName = "algolia"
+[outputFormats.Search]
+baseName = "search"
 isPlaintext = true
 mediaType = "application/json"
 notAlternative = true
 
 [outputs]
-home = ["HTML", "RSS", "Algolia"]
-# page = ["HTML", "Algolia"]
+home = ["HTML", "RSS", "Search"]
+page = ["HTML", "Search"]
 
-[params.algolia]
-vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
-params = ["categories", "tags"]
+[params.search]
+vars = ["title","summary","date","publishdate","expirydate","permalink"]
+params = ["categories","tags"]
 
 [[menu.main]]
 identifier = "what-is-rancher"
