@@ -1,6 +1,6 @@
 ---
 title: HA升级
-weight: 1020
+weight: 5
 ---
 
 >**先决条件:**

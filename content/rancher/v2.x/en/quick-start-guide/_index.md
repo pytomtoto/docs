@@ -1,6 +1,6 @@
 ---
 title: 入门
-weight: 3
+weight: 2
 ---
 
 >**注意:** 本快速入门指南的目的是让您在沙箱环境中快速的拉取一个环境，它不适用于生产。有关更全面的说明，请参阅[安装](/docs/rancher/v2.x/cn/installation/server-installation/).

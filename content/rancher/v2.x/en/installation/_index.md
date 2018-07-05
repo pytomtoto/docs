@@ -1,6 +1,6 @@
 ---
 title: 安装
-weight: 4
+weight: 3
 ---
 本章节包含在开发和生产环境中安装Rancher的说明
 

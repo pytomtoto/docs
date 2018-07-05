@@ -3,187 +3,86 @@ title: SSL配置
 weight: 400
 ---
 
-For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL encrypts all Rancher communications: login, cluster interaction, and so on.
+出于安全考虑，使用Rancher时需要配置SSL，SSL将加密所有Rancher通信：登录，群集交互等。
 
-By default, Rancher generates a self-signed certificate that's used to encrypt communication over port 443 (HTTPS). Any traffic directed to port 80 (HTTP) is automatically forwarded to 443.
+默认情况下，Rancher会生成一个自签名证书，用于加密端口443(HTTPS)上的通信.通过80端口(http)的所有流量都会自动转发到443端口(https)。
 
-If you want to use your own certificate that's self-signed or signed by a commercial certificate authority (CA), refer to the documentation below.
+## 选择证书主机
 
-## Before You Start: Choose a Certificate Host
+有两个地方可以设置SSL证书:
 
-There are two locations that can host your own certificates. Choose one.
+- 在Rancher容器内部设置.
+- 在外部负载均衡或者代理上设置.
 
-- Inside the Rancher container.
-- Using an external load balancer or proxy.
+## 在Rancher容器内部配置SSL证书
 
-## Certificate Host: Inside the Rancher Container
+### 自动生成默认自签名证书
 
-### Automatically Generated Default Self-Signed Certificate
+在没有任何参数的情况下运行`rancher/rancher` 容器，将在启动容器时自动创建自签名证书。
 
-By running the `rancher/rancher` container without any additional parameters or configuration, a self-signed certificate is automatically created on startup.
+**例如**:
 
-**Example**
-
-```
-docker run -d -p 80:80 -p 443:443 rancher/rancher:v2.0.0
+```bash
+docker run -d -p 80:80 -p 443:443 rancher/rancher:v2.0.4
 ```
 
-### Self-Signed Certificate
+### 手动生成自签名证书
 
-You can use your own certificates and let Rancher use them to provide SSL. You can provide them by mounting the certificate files when running the container. The certificate files should be in `.pem` format. Make sure that your certificate file includes all the intermediate certificates in the chain.
+您可以使用自己的证书，让Rancherl使用它们来提供SSL加密。您可以通过在运行容器时挂载证书文件到容器中，证书文件应采用`.pem`格式, 确保您的证书文件包含链中的所有中间证书。
+
+| 文件类型                         |               容器路径 |
+| ---------------------------- | ---------------------------: |
+| Certificate file             |    /etc/rancher/ssl/cert.pem |
+| Certificate key file         |     /etc/rancher/ssl/key.pem |
+| CA certificates file         | /etc/rancher/ssl/cacerts.pem |
+
+**例如**:
+
+```bash
+docker run -d -p 80:80 -p 443:443 \
+  -v /etc/your_certificate_directory/fullchain.pem:/etc/rancher/ssl/cert.pem \
+  -v /etc/your_certificate_directory/privkey.pem:/etc/rancher/ssl/key.pem \
+  -v /etc/your_certificate_directory/cacerts.pem:/etc/rancher/ssl/cacerts.pem \
+  rancher/rancher:v2.0.4
+```
+
+### 使用权威的CA机构提供的证书
+
+如果使用权威CA机构提供的证书，则只需将证书文件和证书密钥文件映射到容器。在这种情况下，不需要安装其他CA证书文件。
 
 | Type                         |        Location in container |
 | ---------------------------- | ---------------------------: |
 | Certificate file             |    /etc/rancher/ssl/cert.pem |
 | Certificate key file         |     /etc/rancher/ssl/key.pem |
-| CA certificates file         | /etc/rancher/ssl/cacerts.pem |
-<br/>
 
-**Example**
-```
+**例如:**
+
+```bash
 docker run -d -p 80:80 -p 443:443 \
   -v /etc/your_certificate_directory/fullchain.pem:/etc/rancher/ssl/cert.pem \
   -v /etc/your_certificate_directory/privkey.pem:/etc/rancher/ssl/key.pem \
-  -v /etc/your_certificate_directory/cacerts.pem:/etc/rancher/ssl/cacerts.pem \
-  rancher/rancher:v2.0.0
+  rancher/rancher:v2.0.4
 ```
 
-### Providing your own certificates from a recognized CA to the container
+## 在外部负载均衡器或代理上配置SSL证书
 
-If the certificates you want to use are signed by a recognized CA, you only have to provide the certificate file and the certificate key file to the container. In this case, mounting an additional CA certificate file is not needed as it is signed by a recognized CA.
+**使用自签证书:**
 
-| Type                         |        Location in container |
-| ---------------------------- | ---------------------------: |
-| Certificate file             |    /etc/rancher/ssl/cert.pem |
-| Certificate key file         |     /etc/rancher/ssl/key.pem |
-<br/>
-**Example**
-
-```
-docker run -d -p 80:80 -p 443:443 \
-  -v /etc/your_certificate_directory/fullchain.pem:/etc/rancher/ssl/cert.pem \
-  -v /etc/your_certificate_directory/privkey.pem:/etc/rancher/ssl/key.pem \
-  rancher/rancher:v2.0.0
-```
-
-### Using Automatically Requested Let's Encrypt Certificates
-
-Rancher 支持s requesting Let's Encrypt certificates out-of-the-box. This request uses **HTTP-01 challenge**, which means that the hostname you choose for accessing Rancher (for example, `rancher.mydomain.com`) must point to the IP address of the host that Rancher runs on. Therefore, you must bind your hostname to the Rancher host IP address on your DNS.
-
-Because the Let's Encrypt challenge can originate from any source IP address, port **TCP/80** must be open for every source IP address. You enable the Let's Encrypt functionality by passing the parameter `--acme-domain rancher.mydomain.com` when running the `rancher/rancher` container.
-
-**Example**
-
-```
-docker run -d -p 80:80 -p 443:443 rancher/rancher:v2.0.0 --acme-domain rancher.mydomain.com
-```
-
->**Note:** Let's Encrypt provides rate limits for requesting new certificates, keep this in mind when creating and destroying the container multiple times. 了解更多 on this in the [Let's Encrypt documentation on rate limits](https://letsencrypt.org/docs/rate-limits/).
-
-## Options When Using an External Load Balancer or Proxy
-
-### Terminating SSL at Load Balancer or Proxy
-
-#### Instructions for the `rancher/rancher` Container
-
-**Self-Signed Certificates**
-
-When using self-signed certificates, you must add the CA certificate to the `rancher/rancher` container. This cerrtificate is used to validate connections to Rancher.
+使用自签名证书时，必须将CA证书添加到rancher/rancher容器中。
 
 | Type                         |        Location in container |
 | ---------------------------- | ---------------------------: |
 | CA certificates file         | /etc/rancher/ssl/cacerts.pem |
 
-**Example**
+**例如:**
 
-```
+```bash
 docker run -d -p 80:80 -p 443:443 \
   -v /etc/your_certificate_directory/cacerts.pem:/etc/rancher/ssl/cacerts.pem \
   rancher/rancher:v2.0.0
 ```
 
-**Certificates from a Commercial CA**
+**使用权威的CA机构提供的证书:**
 
-If the certificates you want to use are signed by a commercial CA (like GoDaddy or digicert), you must remove the certificate information that the CA generates by default. You can remove this information by selecting **Settings** in the Rancher UI. From the **cacerts** section, select **...** > **Edit**, remove the contents, and then click **Save**.
-
-#### Instructions for the Load Balancer or Proxy
-
-When using a load balancer or proxy in front of the `rancher/rancher` container, there is no need for the `rancher/rancher` container to redirect port **TCP/80** (HTTP) to port **TCP/443** (HTTPS). By passing the `X-Forwarded-Proto: https` header, this redirect is disabled.
-
-You must configure the load balancer or proxy has to support:
-
-- **WebSocket** connections
-
-- **SPDY** / **HTTP/2**
-
-- passing/setting the following headers:
-
-| Header              | Value                                     | Description                                                                                                                                                             |
-|---------------------|-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Host`              | Domain name used to reach Rancher | To identify the server requested by the client.                                                                                                                          |
-| `X-Forwarded-Proto` | `https`                                   | To identify the protocol that a client used to connect to the load balancer or proxy.<br /><br/>**Note**: If this header is present, `rancher/rancher` cannot redirect HTTP to HTTPS. |
-| `X-Forwarded-Port`  | Port used to reach Rancher                | To identify the protocol that a client used to connect to the load balancer or proxy.                                                                                       |
-| `X-Forwarded-For`   | IP of the client connection               | To identify the originating IP address of a client.                                                                                                                      |
-<br/>
-
-**Example Configuration: Nginx 1.12 / 1.13**
-
-	```
-	upstream rancher {
-	    server rancher-server:80;
-	}
-
-	map $http_upgrade $connection_upgrade {
-	    default Upgrade;
-	    ''      close;
-	}
-
-	server {
-	    listen 443 ssl http2;
-	    server_name rancher.yourdomain.com;
-	    ssl_certificate /etc/your_certificate_directory/fullchain.pem;
-	    ssl_certificate_key /etc/your_certificate_directory/privkey.pem;
-
-	    location / {
-	        proxy_set_header Host $host;
-	        proxy_set_header X-Forwarded-Proto $scheme;
-	        proxy_set_header X-Forwarded-Port $server_port;
-	        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	        proxy_pass http://rancher;
-	        proxy_http_version 1.1;
-	        proxy_set_header Upgrade $http_upgrade;
-	        proxy_set_header Connection $connection_upgrade;
-	        # This allows the ability for the execute shell window to remain open for up to 15 minutes. Without this parameter, the default is 1 minute and will automatically close.
-	        proxy_read_timeout 900s;
-	    }
-	}
-
-	server {
-	    listen 80;
-	    server_name rancher.yourdomain.com;
-	    return 301 https://$server_name$request_uri;
-	}
-	```
-
-## FAQ / Troubleshooting
-
-#### How do I validate my certificate chain?
-
-You can validate the certificate chain by using the `openssl` binary. If the output ends with `Verify return code: 0 (ok)`, your certificate chain is valid. The `ca.pem` file should be the same as you supplied to the `rancher/rancher` container. When using a certificate signed by a well known CA, you can omit the `-CAfile` parameter.
-
-**Example**
-```
-openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
-...
-    Verify return code: 0 (ok)
-```
-
-#### How do I know if my certificates are in **PEM** format?
-
-You can recognize the **PEM** format by the header:
-
-```-----BEGIN CERTIFICATE-----```
-
-And the footer:
-
-```-----END CERTIFICATE-----```
+如果使用的是权威的CA机构提供的证书，那么需要删除Rancher中默认自动生成的CA证书。通过在Rancher UI中选择`系统设置`,找到`cacerts`设置，选择... > 编辑，
+![image-20180704175645245](_index.assets/image-20180704175645245.png)然后清空内容，最后单击保存。
