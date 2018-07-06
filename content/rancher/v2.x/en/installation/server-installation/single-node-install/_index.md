@@ -58,9 +58,9 @@ weight: 250
 
 > **注意Air Gap用户：**如果您正在访问此页面以完成[Air Gap安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)，在运行安装命令时，必须在Rancher镜像前面加上你私有仓库的地址，替换`<REGISTRY.DOMAIN.COM:PORT>`为你的私有仓库地址。
 
-例：
+例如：
 
-```
+```bash
 <REGISTRY.DOMAIN.COM:PORT>/rancher/rancher:latest
 ```
 
@@ -175,7 +175,7 @@ Rancher支持Let’s Encrypt 证书。Let’s Encrypt 使用一个`http-01 chall
 - 该文件以页脚结尾：
   `-----END CERTIFICATE-----`
 
-**PEM证书示例：**
+**PEM证书例如: **
 
 ```bash
 ----BEGIN CERTIFICATE-----

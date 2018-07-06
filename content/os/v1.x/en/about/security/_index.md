@@ -15,7 +15,7 @@ weight: 303
 </td>
 <td width="30%" style="border: none;">
 <h4>Announcments</h4>
-<p style="padding: 8px">Subscribe to the <a href="https://forums.rancher.com/c/announcements">Rancher announcements forum</a> for release updates.</p>
+<p style="padding: 8px">Subscribe to the <a href="https://forums.cnrancher.com/c/announcements">Rancher announcements forum</a> for release updates.</p>
 </td>
 </tr>
 </table>
