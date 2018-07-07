@@ -1,6 +1,6 @@
 ---
 title: Rancher RKE概述
-shortTitle: Rancher RKE
+shortTitle: Rancher RKE-CN
 weight: 1
 ---
 

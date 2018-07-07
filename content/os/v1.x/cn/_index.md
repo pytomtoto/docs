@@ -1,6 +1,6 @@
 ---
 title: 概述
-shortTitle: Rancher OS
+shortTitle: Rancher OS-CN
 description: RancherOS is a simplified Linux distribution built from containers, for containers. These documents describe how to install and use RancherOS.
 weight: 1
 ---
