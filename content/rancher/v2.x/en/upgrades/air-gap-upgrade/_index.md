@@ -1,16 +1,16 @@
 ---
-title: 离线升级
+title: Air Gap Upgrade
 weight: 1500
 ---
+To upgrade an air gapped Rancher Server, update your private registry with the latest Docker images, and then run the upgrade command.
 
-要离线升级Rancher Server，需要先把最新稳定版本的Rancher Server镜像以及其他系统组件镜像同步到私有镜像仓库，然后运行upgrade命令。
+## Upgrading An Air Gapped Rancher Server
 
-## 离线升级Rancher Server
+1. Follow the directions in Air Gap Installation to [pull the Docker images]({{< baseurl >}}/rancher/v2.x/en/installation/air-gap-installation/#release-files) required for the new version of Rancher.
 
-  1. 按照[离线安装](/docs/rancher/v2.x/cn/installation/server-installation/air-gap-installation/)需求，拉取最新稳定版本镜像并同步到私有镜像仓库；
+2. Follow the directions in [Single Node Upgrade]({{< baseurl >}}/rancher/v2.x/en/upgrades/single-node-upgrade/) to complete upgrade of your air gapped Rancher Server.
 
-  2. 按照[单节点安装升级](/docs/rancher/v2.x/cn/upgrades/single-node-upgrade/)的操作步骤完成升级
-
-      >**注意：** 在单节点升级时，请在运行docker run命令时将私有镜像仓库地址添加到镜像名中。
-      >
-      >例如: docker run -d <registry.yourdomain.com:port>/rancher/rancher:latest
+	>**Note:**
+	> While completing [Single Node Upgrade]({{< baseurl >}}/rancher/v2.x/en/upgrades/single-node-upgrade/), prepend your private registry URL to the image when running the `docker run` command.
+	>
+	> Example: `<registry.yourdomain.com:port>/rancher/rancher:latest`

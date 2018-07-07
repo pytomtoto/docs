@@ -1,12 +1,13 @@
 ---
-title: 版本标签
-weight: 100
+title: Server Tags
+weight: 200
 ---
-{{< product >}}服务是作为一个Docker镜像分发的，它带有tag标签。标签用于表示镜像中包含的{{< product >}}版本。 如果您需要使用特定标签版本的镜像，需要先拉取该标签版本的镜像。否则，如果本地有该版本的镜像，Docker将优先使用本地镜像。
+{{< product >}} Server is distributed as a Docker image, which have _tags_ attached to them. Tags are used to identify what version is included in the image. Rancher includes additional tags that point to a specific version. Remember that if you use the additional tags, you must explicitly pull a new version of that image tag. Otherwise it will use the cached image on the host.
 
-你可以在 [DockerHub](https://hub.docker.com/r/rancher/rancher/tags/)找到Rancher 镜像：
+You can find Rancher images at [DockerHub](https://hub.docker.com/r/rancher/rancher/tags/).
 
--	`rancher/rancher:latest`：最新的开发版本，通过我们的CI自动化框架进行构建。该版本不推荐用于生产环境。
--	`rancher/rancher:stable`：最新的稳定版本，该版本被推荐用于生产。
+-	`rancher/rancher:latest`: Our latest development release. These builds are validated through our CI automation framework. These releases are not recommended for production environments.
 
-master或-rc或其他后缀的标签都是供{{< product >}}测试团队验证的。不要使用这些标签，这些版本不提供官方的支持。
+-	`rancher/rancher:stable`: Our newest stable release. This tag is recommended for production.
+
+The `master` tag or any tag with a `-rc` or another suffix is meant for the {{< product >}} testing team to validate.  You should not use these tags, as these builds are not officially supported.

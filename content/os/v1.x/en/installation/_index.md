@@ -1,4 +1,4 @@
 ---
-title: 安装
-weight: 3
+title: Installation
+weight: 2
 ---

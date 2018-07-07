@@ -1,58 +1,70 @@
 ---
-title: 单节点升级
+title: Single Node Upgrade
 weight: 1010
 ---
+To upgrade Rancher Server 2.x after a new version is released, create a backup of your server and then run the upgrade command.
+<a id="prereq"></a>
 
->**先决条件:** 打开Rancher web并记下浏览器左下方显示的版本号（例如:`v2.0.0`) ，在升级过程中您需要此号码。
+>**Prerequisites:** Open Rancher and write down the version number displayed in the lower-left of the browser (example: `v2.0.0`). You'll need this number during the upgrade process.
 
-1. 运行以下命令，停止当前运行Rancher Server的容器。
+1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
 
-      ```bash
-      docker stop <RANCHER_CONTAINER_ID>
-      ```
-      >**提示：** 您可以输入以下命令获取Rancher容器的ID : `docker ps`
-
-2. 创建当前Rancher Server容器的数据卷容器，以便在升级Rancher Server中使用，命名为rancher-data容器。
-
-    - 替换<RANCHER_CONTAINER_ID>为上一步中的相同容器ID。
-    - 替换<RANCHER_CONTAINER_TAG>为您当前正在运行的Rancher版本，如上面的先决条件中所述。
-
-    ```bash
-    docker create --volumes-from <RANCHER_CONTAINER_ID> \
-    --name rancher-data rancher/rancher:<RANCHER_CONTAINER_TAG>
+    ```
+docker stop <RANCHER_CONTAINER_ID>
     ```
 
-3. 创建当前Rancher数据的另一个容器。但是，如果升级失败，此容器是用于还原Rancher Server的备份。命名容器rancher-data-snapshot-<CURRENT_VERSION>。
+    >**Tip:** You can obtain the ID for your Rancher container by entering the following command: `docker ps`.
 
-    - 替换<RANCHER_CONTAINER_ID>为上一步中的相同ID。
-    - 替换<CURRENT_VERSION>为当前安装的Rancher版本的标记。
-    - 替换<RANCHER_CONTAINER_TAG>为当前正在运行的Rancher版本，如先决条件中所述 。
+1. Create a container of your current Rancher data for use in your upgraded Rancher Server. Name the container `rancher-data`.
 
-    ```bash
-    docker create --volumes-from <RANCHER_CONTAINER_ID> \
-    --name rancher-data-snapshot-<CURRENT_VERSION> rancher/rancher:<RANCHER_CONTAINER_TAG>
+    - Replace `<RANCHER_CONTAINER_ID>` with the same ID from the previous step.
+    - Replace `<RANCHER_CONTAINER_TAG>` with the version of Rancher that you are currently running, as mentioned in the  **Prerequisite** above.
+
     ```
-4. 拉取Rancher的最新镜像。
+docker create --volumes-from <RANCHER_CONTAINER_ID> \
+--name rancher-data rancher/rancher:<RANCHER_CONTAINER_TAG>
+    ```
 
-      ```bash
-      docker pull rancher/rancher:latest
-      ```
-    >**注意**: Air Gap用户：如果您访问[离线升级]({{< baseurl >}}/rancher/v2.x/cn/upgrades/air-gap-upgrade/)，请在运行docker run命令时将您的私有镜像仓库URL添加到镜像名中
+1. <a id="backup"></a>Create another container of your current Rancher data. However, this container is a backup for restoring your Rancher Server if your upgrade is unsuccessful. Name the container `rancher-data-snapshot-<CURRENT_VERSION>`.
+
+    - Replace `<RANCHER_CONTAINER_ID>` with the same ID from the previous step.
+    - Replace `<CURRENT_VERSION>` with the tag for the version of Rancher currently installed.
+    - Replace `<RANCHER_CONTAINER_TAG>` with the version of Rancher that you are currently running, as mentioned in the  [prerequisite](#prereq).
+
+    ```
+docker create --volumes-from <RANCHER_CONTAINER_ID> \
+--name rancher-data-snapshot-<CURRENT_VERSION> rancher/rancher:<RANCHER_CONTAINER_TAG>
+    ```
+
+1. Pull the most recent image of Rancher.
+
+    ```
+docker pull rancher/rancher:latest
+    ```
+
+    >**Attention Air Gap Users:**
+    > If you are visiting this page to complete [Air Gap Upgrade]({{< baseurl >}}/rancher/v2.x/en/upgrades/upgrade-scenarios/air-gap-upgrade/), prepend your private registry URL to the image when running the `docker run` command.
     >
-    >例如： <registry.yourdomain.com:port>/rancher/rancher:latest
-
-5. 使用rancher-data容器启动新的Rancher Server 容器。
-
-    ```bash
-    docker run -d --volumes-from rancher-data --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest
-    ```
-
-    >**注意:** 即使升级过程看起来比预期的要长，不要在启动升级后停止升级。停止升级可能会导致数据库迁移错误。
+    > Example: `<registry.yourdomain.com:port>/rancher/rancher:latest`
     >
-    >升级Rancher Server后，升级后的服务器中的数据现在会保存到rancher-data容器中，以便将来升级。
 
-6. 删除以前的Rancher Server容器。
+1. Launch a new Rancher Server container using the `rancher-data` container.
 
-    如果您只停止以前的Rancher Server容器（并且不删除它）,则容器可能会在下次服务器重新启动后重新启动。登录rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功。
+    ```
+docker run -d --volumes-from rancher-data --restart=unless-stopped \
+-p 80:80 -p 443:443 rancher/rancher:latest
+    ```
+    >**Note:** _Do not_ stop the upgrade after initiating it, even if the upgrade process seems longer than expected. Stopping the upgrade may result in database migration errors during future upgrades.
+    ><br/>
+    ><br/>
+    >**Note:** After upgrading Rancher Server, data from your upgraded server is now saved to the `rancher-data` container for use in future upgrades.
 
-    >**注意:** 如果升级未成功完成，则可以将Rancher Server及其数据回滚到上一个健康状态。有关更多信息，请参阅还原备份-单节点安装。
+1. Remove the previous Rancher Server container.
+
+    If you only stop the previous Rancher Server container (and don't remove it), the container may restart after the next server reboot.
+
+1. Log into Rancher. Confirm that the upgrade succeeded by checking the version displayed in the bottom-left corner of the browser window.
+
+**Result:** Rancher Server is upgraded to the latest version.
+
+>**Note:** If your upgrade does not complete successfully, you can roll Rancher Server and its data back to its last healthy state. For more information, see [Restoring Backups—Single Node Installs]({{< baseurl >}}/rancher/v2.x/en/upgrades/restorations/single-node-restoration/).

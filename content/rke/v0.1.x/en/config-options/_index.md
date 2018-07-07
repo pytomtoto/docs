@@ -1,5 +1,5 @@
 ---
-title: 配置
+title: Config Options
 weight: 200
 ---
 

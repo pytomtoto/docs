@@ -1,5 +1,5 @@
 ---
-title: 无法为主机设置SSH隧道
+title: Failed to set up SSH tunneling for host
 weight: 10
 ---
 

@@ -1,99 +1,88 @@
 ---
-title: Technical
-weight: 5000
+  title: Technical
+  weight: 5000
 ---
 
-## 如何重置管理员密码？
+#### How can I reset the admin password?
 
-- 单节点安装
+Single node install:
+```
+$ docker exec -ti <container_id> reset-password
+New password for default admin user (user-xxxxx):
+<new_password>
+```
 
-  ```bash
-  docker exec -ti <container_id> reset-password
-  New password for default admin user (user-xxxxx):
-  <new_password>
-  ```
+High Availability install:
+```
+$ KUBECONFIG=./kube_config_rancher-cluster.yml
+$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- reset-password
+New password for default admin user (user-xxxxx):
+<new_password>
+```
 
-- HA安装
+#### How can I enable debug logging?
 
-  ```bash
-  KUBECONFIG=./kube_config_rancher-cluster.yml
-  kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl   --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items  [] | select(.spec.containers[].name=="cattle-server") | .metadata.name')   -- reset-password
-  New password for default admin user (user-xxxxx):
-  <new_password>
-  ```
+* Single node install
+ * Enable
+```
+$ docker exec -ti <container_id> loglevel --set debug
+OK
+$ docker logs -f <container_id>
+```
 
-## 怎么样开启debug模式？
+ * Disable
+```
+$ docker exec -ti <container_id> loglevel --set info
+OK
+```
 
-### 单节点安装
 
-- Enable
+* High Availability install
+ * Enable
+```
+$ KUBECONFIG=./kube_config_rancher-cluster.yml
+$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set debug
+OK
+$ kubectl --kubeconfig $KUBECONFIG logs -n cattle-system -f $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name="cattle-server") | .metadata.name')
+```
 
-  ```bash
-  docker exec -ti <container_id> loglevel --set debug
-  OK
-  docker logs -f <container_id>
-  ```
+ * Disable
+```
+$ KUBECONFIG=./kube_config_rancher-cluster.yml
+$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set info
+OK
+```
 
-- 禁用
 
-  ```bash
-  docker exec -ti <container_id> loglevel --set info
-  OK
-  ```
+#### My ClusterIP does not respond to ping
 
-### HA安装
+ClusterIP is a virtual IP, which will not respond to ping. Best way to test if the ClusterIP is configured correctly, is by using `curl` to access the IP and port to see if it responds.
 
-- 启用
+#### Where can I manage Node Templates?
 
-  ```bash
-  KUBECONFIG=./kube_config_rancher-cluster.yml
-  kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl   --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items  [] | select(.spec.containers[].name=="cattle-server") | .metadata.name')   -- loglevel --set debug
-  OK
-  kubectl --kubeconfig $KUBECONFIG logs -n cattle-system -f $(kubectl   --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items  [] | select(.spec.containers[].name="cattle-server") | .metadata.name')
-  ```
+Node Templates can be accessed by opening your account menu (top right) and selecting `Node Templates`.
 
-- 禁用
+#### Why is my Layer-4 Load Balancer in `Pending` state?
 
-  ```bash
-  KUBECONFIG=./kube_config_rancher-cluster.yml
-  kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl   --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items  [] | select(.spec.containers[].name=="cattle-server") | .metadata.name')   -- loglevel --set info
-  OK
-  ```
+The Layer-4 Load Balancer is created as `type: LoadBalancer`. In Kubernetes, this needs a cloud provider or controller that can satisfy these requests, otherwise these will be in `Pending` state forever. More information can be found on [Cloud Providers]({{< baseurl >}}/rancher/v2.x/en/concepts/clusters/cloud-providers/) or [Create External Load Balancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)
 
-## ClusterIP无法ping通？
+#### Where is the state of Rancher stored?
 
-ClusterIP是一个虚拟IP，不会响应ping。测试ClusterIP配置是否正确的最好方法是使用`curl`来访问IP和端口以查看它是否响应。
+- Single node install: in the embedded etcd of the `rancher/rancher` container, located at `/var/lib/rancher`.
+- High Availability install: in the etcd of the RKE cluster created to run Rancher.
 
-## 我在哪里可以管理主机模板？
+#### How are the supported Docker versions determined?
 
-打开您的帐户菜单（右上角），并选择`主机模板`。
+We follow the validated Docker versions for upstream Kubernetes releases. The validated versions can be found under [External Dependencies](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies) in the Kubernetes release CHANGELOG.md.
 
-## 为什么我的L4层负载均衡服务处于“挂起”状态？
+#### How can I access nodes created by Rancher?
 
-L4层负载均衡器创建为`type：LoadBalancer`，在Kubernetes中，这需要云提供商或控制器能够满足这些请求，否则这些将永远处于“挂起”状态。 了解更多[云提供商]({{< baseurl >}}/rancher/v2.x/cn/concepts/clusters/cloud-providers/) 或者 [Create External Load Balancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)
+SSH keys to access the nodes created by Rancher can be downloaded via the **Nodes** view. Choose the node which you want to access and click on the vertical ellipsis button at the end of the row, and choose **Download Keys** as shown in the picture below.
 
-## Rancher的状态存储在什么地方？
+![Download Keys]({{< baseurl >}}/img/rancher/downloadsshkeys.png)
 
-- 单节点安装
+Unzip the downloaded zip file, and use the file `id_rsa` to connect to you host. Be sure to use the correct username (`rancher` for RancherOS, `ubuntu` for Ubuntu, `ec2-user` for Amazon Linux)
 
-  在rancher/rancher容器的内置etcd中，映射与宿主机的`/var/lib/rancher`目录下。
-
-- HA安装
-
-  RKE部署集群指定的ETCD中，默认与Kubernetes共有一套ETCD服务。
-
-## 如何确定支持的Docker版本？
-
-我们遵循经过Kubernetes官方验证过的Docker版本，已验证的Docker版本可以在Kubernetes的[发版记录](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies)中找到。
-
-## 我如何访问Rancher创建的节点？
-
-可以通过**节点**视图下载用于访问节点的SSH密钥。选择要访问的节点，然后单击行末的垂直省略号按钮，然后选择**下载密钥**，如下图所示:
-
-![下载Keys]({{< baseurl >}}/img/rancher/downloadsshkeys.png)
-
-解压缩下载的zip文件，并使用文件`id_rsa`连接到您的主机。一定要使用正确的用户名(`rancher` for RancherOS, `ubuntu` for Ubuntu, `ec2-user` for Amazon Linux)
-
-```bash
-ssh -i id_rsa user@ip_of_node
+```
+$ ssh -i id_rsa user@ip_of_node
 ```

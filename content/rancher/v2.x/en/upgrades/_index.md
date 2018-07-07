@@ -1,19 +1,22 @@
 ---
-title: 升级
-weight: 5
+title: Upgrades
+weight: 150
 ---
 
-## 从Rancher 2.x.x升级
+### Upgrading from Rancher 2.x.x
 
-Rancher 2.x.x的每个新版本都支持从上一个进行升级。
-根据Rancher安装方案，选择以下升级方案:
+Each new version of Rancher 2.x.x supports upgrades from previous versions of Rancher 2.x.x.  This section will be updated as soon as the first release post 2.0 is available.
 
-- [单节点安装升级](./single-node-upgrade/)
-- [HA安装升级](./ha-server-upgrade/)
-- [离线升级](./air-gap-upgrade/)
+Complete one of the upgrade procedures below based on your Rancher installation:
 
-## 从Rancher 1.6.x迁移
+- [Single Node Upgrade](./single-node-upgrade/)
+- [High Availability Upgrade](./ha-server-upgrade/)
+- [Air Gap Upgrade](./air-gap-upgrade/)
 
-在Rancher 2.1发布之前，由于主要的代码重写，所以不支持从Rancher 1.6.x直接升级到Rancher2.x.x。
-对于2.1版本，我们计划发布一个将Rancher Compose转换为Kubernetes YAML的工具。这个工具将帮助Cattle用户从Rancher 1.6.x迁移到2.x.x。
-在2.1版本发布后至少一年，我们将继续支持Rancher 1.6.x，以便1.6.x用户可以计划并完成迁移。
+### Migrating from Rancher 1.6.x
+
+Until Rancher 2.1 is released, migrating to from Rancher 1.6.x to 2.x.x is not supported due to major code rewrites.
+
+For the 2.1 release, we plan to release a tool that converts Rancher Compose to Kubernetes YAML.  This tool will help our Cattle users migrate from Rancher 1.6.x to 2.x.x.  However, we understand that there is a learning curve switching from Cattle to Kubernetes as you deploy new workloads. Therefore, this release will include a cheatsheet for those that enjoy Cattle's simplicity but want to quickly create those workloads in Kubernetes.
+
+We will continue support for Rancher 1.6.x for a minimum of one year after the 2.1 release so that 1.6.x users can plan and complete migration.
