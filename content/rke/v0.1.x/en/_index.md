@@ -1,6 +1,6 @@
 ---
 title: Overview of RKE
-shortTitle: RKE
+shortTitle: Rancher RKE-EN
 weight: 1
 ---
 

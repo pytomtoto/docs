@@ -5,7 +5,7 @@ weight: 3075
 
 In environments using Microsoft Active Directory (AD), you can configure Rancher to allow sign on using AD credentials.
 
->**Prerequisites:**
+>**先决条件:**
 >
 >- Create a service account in Active Directory with `read-only` access. {{< product >}} uses this account to verify group membership when a user makes a request using an API key.
 >- Read [External Authentication Configuration and Principal Users]({{< baseurl >}}/rancher/v2.x/en/concepts/global-configuration/authentication/#external-authentication-configuration-and-principal-users).

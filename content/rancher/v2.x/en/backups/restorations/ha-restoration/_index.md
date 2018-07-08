@@ -58,7 +58,7 @@ To restore the most recent `etcd` snapshot on your new node, run RKE the command
 
 >**Warning:** Restoring an `etcd` snapshot deletes your current `etcd` cluster and replaces it with a new one. Before you run the `rke etcd snapshot-restore` command, backup any important data in your current cluster.
 >
->**Prerequisites:** {{< requirements_rollback >}}
+>**先决条件:** {{< requirements_rollback >}}
 
 
 1. From your workstation, open `rancher-cluster.yml` in your favorite text editor.

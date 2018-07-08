@@ -13,7 +13,7 @@ If you upgrade Rancher, but the upgrade does not complete successfully, you may 
 > Rolling back to a previous version of Rancher destroys any changes made to Rancher following the upgrade. Unrecoverable data loss may occur.
 
 >
->**Prerequisites:** {{< requirements_rollback >}}
+>**先决条件:** {{< requirements_rollback >}}
 
 1. Open **Terminal** and change directory to the location of the RKE binary that you used during upgrade.
 

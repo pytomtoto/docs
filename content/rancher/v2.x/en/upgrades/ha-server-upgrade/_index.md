@@ -4,7 +4,7 @@ weight: 1020
 ---
 To upgrade Rancher 2.x running in a high availability configuration, run an upgrade command that points to your upgrade config file.
 
->**Prerequisites:**
+>**先决条件:**
 {{< requirements_rollback >}}
 
 >- Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) on your workstation.

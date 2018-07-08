@@ -87,7 +87,7 @@ If you install Rancher without using your own certificate, Rancher generates a s
 
 Your Rancher install can use a self-signed certificate that you provide to encrypt communications.
 
->**Prerequisites:**
+>**先决条件:**
 >Create a self-signed certificate.
 >
 >- The certificate files must be in [PEM format](#pem).
@@ -114,7 +114,7 @@ Your Rancher install can use a self-signed certificate that you provide to encry
 
 If you're publishing your app publicly, you should ideally be using a certificate signed by a recognized CA.
 
->**Prerequisites:**
+>**先决条件:**
 >
 >- The certificate files must be in [PEM format](#pem).
 >- Make sure that the container includes your certificate file and the key file. Because your certificate is signed by a recognized CA, mounting an additional CA certificate file is unnecessary.
@@ -143,7 +143,7 @@ By default, Rancher automatically generates self-signed certificates for itself 
 
 Rancher supports Let's Encrypt certificates. Let's Encrypt uses an `http-01 challenge` to verify that you have control over your domain. You can confirm that you control the domain by pointing the hostname that you want to use for Rancher access (for example, `rancher.mydomain.com`) to the IP of the machine it is running on. You can bind the hostname to the IP address by creating an A record in DNS.
 
->**Prerequisites:**
+>**先决条件:**
 >
 >- Let's Encrypt is an Internet service. Therefore, this option cannot be used in an internal/air gapped network.
 >- Create a record in your DNS that binds your Linux host IP address to the hostname that you want to use for Rancher access (`rancher.mydomain.com` for example).

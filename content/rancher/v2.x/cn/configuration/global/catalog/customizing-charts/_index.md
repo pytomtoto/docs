@@ -7,7 +7,7 @@ Before you can deploy customized catalog apps using Rancher, you must add charts
 
 The custom catalog can contain native Helm charts, Rancher charts, or a combination of both (although we recommend using Rancher charts).
 
->**Prerequisites:**
+>**先决条件:**
 
 >- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 >- Create a GitHub repository to serve as your custom catalog.

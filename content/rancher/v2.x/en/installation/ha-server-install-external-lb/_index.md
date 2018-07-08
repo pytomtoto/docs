@@ -220,7 +220,7 @@ Choose from the following options:
 
 ### Option A—Bring Your Own Certificate: Self-Signed
 
->**Prerequisites:**
+>**先决条件:**
 >Create a self-signed certificate.
 >
 >- The certificate files must be in [PEM format](#pem).

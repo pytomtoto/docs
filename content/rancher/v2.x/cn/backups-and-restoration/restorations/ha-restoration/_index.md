@@ -1,87 +1,91 @@
 ---
 title: 集群恢复
 weight: 370
-aliases:
-  - /rancher/v2.x/en/installation/after-installation/ha-backup-and-restoration/
 ---
-This procedure describes how to restore your a snapshot of  `etcd` if you lose your Rancher data in a disaster scenario.
 
-## Restoration Outline
+# 此文档有待最终验证，请谨慎参考
 
-Following a disaster scenario, restoration of your HA Rancher installation requires you to pull your snapshot from your chosen external location and then restore it.
+此节描述了如何在灾难情形下丢失Rancher数据时恢复etcd快照。
 
-1. [Create New Node and Pull Snapshot](#1-create-new-node-and-pull-snapshot)
+## 1. ETCD集群容错表
 
-	If one of your `etcd` nodes goes down, create a new node, and then pull the most recent `etcd` snapshot to that node.
+建议在ETCD群集中使用奇数个成员。通过添加额外成员可以获得更高的失败容错。在比较偶数和奇数大小的集群时，您可以在实践中看到这一点：
 
-2. [Restore etcd Database](#2-restore-etcd-database)
+| 集群大小 | MAJORITY | 失败容错 |
+| ------------ | -------- | ----------------- |
+| 1            | 1        | 0                 |
+| 2            | 2        | 0                 |
+| 3            | 2        | **1**             |
+| 4            | 3        | 1                 |
+| 5            | 3        | **2**             |
+| 6            | 4        | 2                 |
+| 7            | 4        | **3**             |
+| 8            | 5        | 3                 |
+| 9            | 5        | **4**             |
 
-	After you pull the snapshot, run the RKE command to restore the `etcd` database.
+## 2. 创建新节点并获取最新快照
 
-<br/>
-### 1. Create New Node and Pull Snapshot
+假设集群中一个或者多个etcd节点发生故障，导致ectd集群挂掉， 则需要进行etcd集群恢复。然后将最新的etcd快照拷贝到该节点。
 
-If one of your `etcd` nodes go down, you need to replace it with a new node, and then pull the most recent working `etcd` snapshot to that node.
+**创建新节点并获取最新快照:**
 
-**To Create a New Node and Pull the Latest Snapshot:**
+1. 创建您选择的新节点，可以是物理主机、本地虚拟机、云主机等；
 
-1. Create a new node of your choice—baremetal, on-prem virtual machine, cloud-based virtual machine, and so on. Provision it according to our [requirements]({{< baseurl >}}/rancher/v2.x/en/installation/ha-server-install/#host-requirements).
+2. 通过远程终端登录新主机；
 
-2.  Log in to your new node using a remote Terminal connection.
+3. 创建快照目录:
 
+    ```bash
+    root@newnode:~# mkdir -p /opt/rke/etcd-snapshots/
+    ```
 
-3.  Create a directory that mirrors your other nodes' snapshot directories:
+4. 复制备份的最新快照到`/opt/rke/etcd-snapshots/`目录下：
 
-	```
-	root@newnode:~# mkdir -p /opt/rke/etcd-snapshots
-	```
+    ```bash
+    root@newnode:~# s3cmd get s3://rke-etcd-snapshots/<SNAPSHOT.db> /opt/rke/etcd-snapshots/<SNAPSHOT.db>
+    ```
 
-4. Pull your most recent snapshot onto the node. Replace `<SNAPSHOT.db>` with the name of the snapshot you're restoring to.
+## 3. 恢复 `etcd` 数据
 
-	```
-	root@newnode:~# s3cmd get s3://rke-etcd-snapshots/<SNAPSHOT.db> /opt/rke/etcd-snapshots/<SNAPSHOT.db>
-	```
+要还原`etcd`节点上的最新快照，请运行RKE命令`rke etcd snapshot-restore`。此命令将恢复`/opt/rke/etcd-snapshots`明确定义的快照。当您运行时`rke etcd snapshot-restore`，RKE会删除旧`etcd`容器（如果它仍然存在）。
 
-	>**Remember:** Our use of Amazon S3 is an example used for this documentation. The command for pulling your snapshot may vary.
-
-
-After restoring the cluster you have to restart the kubernetes components on all nodes, otherwise there will be some conflicts with resource versions of objects stored in `etcd`, this will include restart to kubernetes components and the network components, for more information please refer to [kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#etcd-upgrade-requirements), to do that you can run the following on each node:
-```
-docker restart kube-apiserver kubelet kube-controller-manager kube-scheduler kube-proxy
-docker ps | grep flannel | cut -f 1 -d " " | xargs docker restart
-docker ps | grep calico | cut -f 1 -d " " | xargs docker restart
-```
-
-### 2. Restore `etcd` Database
-
-To restore the most recent `etcd` snapshot on your new node, run RKE the command `rke etcd snapshot-restore`. This command reverts to any snapshot stored in `/opt/rke/etcd-snapshots` that you explicitly define. When you run `rke etcd snapshot-restore`, RKE removes the old `etcd` container if it still exists. To restore operations, RKE creates a new `etcd` cluster using the snapshot you choose.
-
->**Important:** When restoring the etcd database, you must restore each `etcd` to the _same_ snapshot, this means the exact same copy, so to restore you have to copy the snapshot from one of the nodes to the others before doing the `etcd snapshot-restore`.
-
->**Warning:** Restoring an `etcd` snapshot deletes your current `etcd` cluster and replaces it with a new one. Before you run the `rke etcd snapshot-restore` command, backup any important data in your current cluster.
-
+>**警告:** 还原`etcd`快照会删除当前`etcd`群集并将其替换为新群集。在运行该`rke etcd snapshot-restore`命令之前，请备份当前群集中的所有重要数据。
+>
+>**先决条件：**
+>
+>- Rancher Kubernetes Engine 等于v0.1.7或更高版本
+>
+>    RKE v0.1.7及更高版本才支持创建etcd快照功能。
+>
+>- rancher-cluster.yml
+>
+>    您需要把用于Rancher安装的RKE配置文件`rancher-cluster.yml`，放在与RKE二进制文件相同的目录中。
+>
+>- 您必须将每个`etcd`节点还原到*同一*快照版本。在运行`etcd snapshot-restore`命令之前，将最新的快照从一个节点复制到其他节点。
 
 1. From your workstation, open `rancher-cluster.yml` in your favorite text editor.
 
 2. Replace the unresponsive node (`3.3.3.3` in this example) with your new one (`4.4.4.4`). You IP addresses will be different obviously:
 
-		nodes:
-			- address: 1.1.1.1
-			  user: root
-			  role: [controlplane,etcd,worker]
-			  ssh_key_path: ~/.ssh/id_rsa
-			- address: 2.2.2.2
-			  user: root
-			  role: [controlplane,etcd,worker]
-			  ssh_key_path: ~/.ssh/id_rsa
-		#	- address: 3.3.3.3  # UNRESPONSIVE NODE
-		#	  user: root
-		#	  role: [controlplane,etcd,worker]
-		#	  ssh_key_path: ~/.ssh/id_rsa
-			- address: 4.4.4.4  # NEW NODE
-			  user: root
-			  role: [controlplane,etcd,worker]
-			  ssh_key_path: ~/.ssh/id_rsa
+        ```yaml
+        nodes:
+          - address: 1.1.1.1
+            user: root
+            role: [controlplane,etcd,worker]
+            ssh_key_path: ~/.ssh/id_rsa
+          - address: 2.2.2.2
+            user: root
+            role: [controlplane,etcd,worker]
+            ssh_key_path: ~/.ssh/id_rsa
+          #- address: 3.3.3.3  # UNRESPONSIVE NODE
+          #  user: root
+          #  role: [controlplane,etcd,worker]
+          #  ssh_key_path: ~/.ssh/id_rsa
+          - address: 4.4.4.4  # NEW NODE
+            user: root
+            role: [controlplane,etcd,worker]
+            ssh_key_path: ~/.ssh/id_rsa
+        ```
 
 3. Save and close `rancher-cluster.yml`.
 
@@ -89,27 +93,26 @@ To restore the most recent `etcd` snapshot on your new node, run RKE the command
 
 5. Run one of the following commands to restore the `etcd` database:
 
-	```
-	# MacOS
-	./rke_darwin-amd64 etcd snapshot-restore --name <SNAPSHOT.db> --config rancher-cluster.yml
-	# Linux
-	./rke_linux-amd64 etcd snapshot-restore --name <SNAPSHOT.db> --config rancher-cluster.yml
-	```
-
+    ```bash
+    # MacOS
+    ./rke_darwin-amd64 etcd snapshot-restore --name <SNAPSHOT.db> --config rancher-cluster.yml
+    # Linux
+    ./rke_linux-amd64 etcd snapshot-restore --name <SNAPSHOT.db> --config rancher-cluster.yml
+    ```
 
 6. Run one of the following commands to bring your cluster back up:
 
-	```
-	# MacOS
-	./rke_darwin-amd64 up --config rancher-cluster.yml
-	# Linux
-	./rke_linux-amd64 up --config rancher-cluster.yml
-	```
+    ```bash
+    # MacOS
+    ./rke_darwin-amd64 up --config rancher-cluster.yml
+    # Linux
+    ./rke_linux-amd64 up --config rancher-cluster.yml
+    ```
 
 7. Lastly, restart the Kubernetes components on all cluster nodes to prevent potential `etcd` conflicts. Run this command on each of your nodes.
 
-    ```
-    docker restart kube-apiserver kubelet kube-controller-manager kube-scheduler kube-proxy
+    ```bash
+    docker restart kube-apiserver kubelet kube-controller-manager kube-scheduler   kube-proxy
     docker ps | grep flannel | cut -f 1 -d " " | xargs docker restart
     docker ps | grep calico | cut -f 1 -d " " | xargs docker restart
     ```

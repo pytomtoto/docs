@@ -13,7 +13,7 @@ You can create custom catalogs of charts for use in Rancher. Custom catalogs are
 <br/>
 <br/>
 
->**Prerequisites:**
+>**先决条件:**
 >
 >- Recommended: Read [Catalogs and Charts]({{< baseurl >}}/rancher/v2.x/cn/concepts/catalogs).
 >- Create a GitHub repository to serve as your custom catalog.

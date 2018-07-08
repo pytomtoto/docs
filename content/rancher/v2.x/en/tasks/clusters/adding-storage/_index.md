@@ -4,7 +4,7 @@ weight: 3500
 draft: true
 ---
 
->**Prerequisites:** 
+>**先决条件:** 
 >
 >- Working with storage requires the `Manage Volumes` [role](../../../concepts/global-configuration/users-permissions-roles/#project-role-reference).
 >- You must have a storage medium provisioned. For more information, see [Provisioning Storage](provisioning-storage).

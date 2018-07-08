@@ -2,102 +2,88 @@
 title: 集群备份
 weight: 50
 ---
-This section describes how to create backups of your high-availability Rancher install.
 
->**Prerequisites:** {{< requirements_rollback >}}
+本节介绍在Rancher HA下如何备份数据。
 
-## Backup Outline
+## **先决条件:**
 
-Backing up your high-availability Rancher cluster is process that involves completing multiple tasks.
+- Rancher Kubernetes Engine v0.1.7或更高版本，
 
-1.  [Take Snapshots of the `etcd` Database](#1-take-snapshots-of-the-etcd-database)
+    RKE v0.1.7以及更高版本才支持`etcd`快照功能。
 
-	Take snapshots of your current `etcd` database using Rancher Kubernetes Engine (RKE).
+- rancher-cluster.yml
 
-1.  [Store Snapshot(s) Externally](#2-backup-snapshots-to-a-safe-location)
+    需要使用安装Rancher的RKE配置文件rancher-cluster.yml，将此文件放在与RKE二进制文件同级目录中。
 
-	After taking your snapshots, export them to a safe location that won't be affected if your cluster encounters issues.
+- 您必须将每个`etcd`节点还原到同一快照。在运行`etcd snapshot-restore`命令之前，将您正在使用的快照从一个节点复制到其他节点
 
-<br/>
+## 1. 创建`etcd`数据快照
 
-### 1. Take Snapshots of the `etcd` Database
+有两种方案创建`etcd`快照: 定时自动创建快照和或手动创建快照，每种方式对应特定的场景。
 
-Take snapshots of your `etcd` database. You can use these snapshots later to recover from a disaster scenario. There are two ways to take snapshots: recurringly, or as a one-off.  Each option is better suited to a specific use case. Read the short description below each link to know when to use each option.
+- 方案 A: 定时自动创建快照
 
-- [Option A: Recurring Snapshots](#option-a-recurring-snapshots)
+    在Rancher HA安装后，我们建议配置RKE以定时(默认5分钟)自动创建快照，以便始终拥有可用的安全恢复点。
 
-	After you stand up a high-availability Rancher install, we recommend configuring RKE to automatically take recurring snapshots so that you always have a safe restoration point available.
+- 方案 B: 手动创建快照
 
-- [Option B: One-Time Snapshots](#option-b-one-time-snapshots)
+    我们建议在升级或恢复其他快照等事件之前创建一次性快照。
 
-	We advise taking one-time snapshots before events like upgrades or restoration of another snapshot.
+### 方案 A: 定时自动创建快照
 
-#### Option A: Recurring Snapshots
+对于通过RKE高可用安装的Rancher，我们建议开启定时自动创建快照，以便始终拥有安全的恢复点。
 
-For all high-availability Rancher installs, we recommend taking recurring snapshots so that you always have a safe restoration point available.
+定时自动创建快照服务是RKE附带的服务，默认没有开启。可以通过在rancher-cluster.yml中添加配置来启用etcd-snapshot(定时自动创建快照)服务。
 
-To take recurring snapshots, enable the `etcd-snapshot` service, which is a service that's included with RKE. This service runs in a service container alongside the `etcd` container. You can enable this service by adding some code to `rancher-cluster.yml`.
+**启用定时自动创建快照:**
 
-**To Enable Recurring Snapshots:**
+1. 编辑`rancher-cluster.yml`配置文件；
 
-1. Open `rancher-cluster.yml` with your favorite text editor.
+2. 在`rancher-cluster.yml`配置文件中添加以下代码：
 
-2. Add the following code block to the bottom of the file:
+    ```yaml
+    services:
+      etcd:
+        snapshot: true  # 是否启用快照功能，默认false；
+        creation: 6h0s  # 快照创建间隔时间，不加此参数，默认5分钟；
+        retention: 24h  # 快照有效期，此时间后快照将被删除；
+    ```
 
-	```
-	services:
-	  etcd:
-	    snapshot: true # enables recurring etcd snapshots
-	    creation: 6h0s # time increment between snapshots
-	    retention: 24h # time increment before snapshot purge
-	```
+3. 根据实际需求跳转以上代码参数；
 
-3. Edit the code according to your requirements.
+4. 保存并关闭`rancher-cluster.yml`；
 
-4. Save and close `rancher-cluster.yml`.
+5. 打开**Terminal**并切换路径到RKE二进制文件所在目录.确保`rancher-cluster.yml`也在这个路径下；
 
-5. Open **Terminal** and change directory to the location of the RKE binary. Your `rancher-cluster.yml` file must reside in the same directory.
+6. 运行以下命令：
 
-6. Run one of the following commands:
+    ```bash
+    # MacOS
+    ./rke_darwin-amd64 up --config rancher-cluster.yml
+    # Linux
+    ./rke_linux-amd64 up --config rancher-cluster.yml
+    ```
 
-	```
-	# MacOS
-	./rke_darwin-amd64 up --config rancher-cluster.yml
-	# Linux
-	./rke_linux-amd64 up --config rancher-cluster.yml
-	```
+### 方案 B: 手动创建快照
 
+当您即将升级Rancher或将其恢复到以前的快照时，您应该对数据手动创建快照，以便数据异常时可供恢复。
 
-**Result:** RKE is configured to take recurring snapshots of `etcd` on all nodes running the `etcd` role. Snapshots are saved to the following directory: `/opt/rke/etcd-snapshots/`.
+**手动创建快照:**
 
-#### Option B: One-Time Snapshots
+1. 打开**Terminal**并切换路径到RKE二进制文件所在目录.确保`rancher-cluster.yml`也在这个路径下；
 
-When you're about to upgrade Rancher or restore it to a previous snapshot, you should snapshot your live image so that you have a backup of `etcd` in its last known state.
+2. 输入以下命令：
 
-**To Take a One-Time Snapshot:**
+    ```bash
+    # MacOS
+    ./rke_darwin-amd64 etcd snapshot-save --name <SNAPSHOT.db> --config rancher-cluster.yml
+    # Linux
+    ./rke_linux-amd64 etcd snapshot-save --name <SNAPSHOT.db> --config rancher-cluster.yml
+    ```
+    >注意：替换<SNAPSHOT.db>为你喜欢的名称，例如：<SNAPSHOT.db>
 
-1. Open **Terminal** and change directory to the location of the RKE binary. Your `rancher-cluster.yml` file must reside in the same directory.
+3. RKE会获取每个`etcd`节点的快照，并保存在`/opt/rke/etcd-snapshots`目录下；
 
-2. Enter the following command. Replace `<SNAPSHOT.db>` with any name that you want to use for the snapshot (e.g. `upgrade.db`).
+## 2. 备份快照到安全位置
 
-	```
-	# MacOS
-	./rke_darwin-amd64 etcd snapshot-save --name <SNAPSHOT.db> --config rancher-cluster.yml
-	# Linux
-	./rke_linux-amd64 etcd snapshot-save --name <SNAPSHOT.db> --config rancher-cluster.yml
-	```
-
-**Result:** RKE takes a snapshot of `etcd` running on each `etcd` node. The file is saved to `/opt/rke/etcd-snapshots`.
-
-### 2. Backup Snapshots to a Safe Location
-
-After taking the `etcd` snapshots, save them to a safe location so that they're unaffected if your cluster experiences a disaster scenario. This location should be persistent.
-
-In this documentation, as an example, we're using Amazon S3 as our safe location, and [S3cmd](http://s3tools.org/s3cmd) as our tool to create the backups. The backup location and tool that you use are ultimately your decision.
-
-**Example:**
-
-```
-root@node:~# s3cmd mb s3://rke-etcd-snapshots
-root@node:~# s3cmd /opt/rke/etcd-snapshots/snapshot.db s3://rke-etcd-snapshots/
-```
+在创建快照后，应该把它保存到安全的地方，以便在群集遇到灾难情况时快照不受影响，这个位置应该是持久的。

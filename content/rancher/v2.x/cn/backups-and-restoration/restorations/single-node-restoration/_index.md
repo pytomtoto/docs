@@ -3,19 +3,23 @@ title: 单节点恢复
 weight: 365
 ---
 
-Backup to a restoration point for your Rancher install if you encounter issues when upgrading.
+如果Rancher数据损坏、丢失，或在升级时遇到问题，可通过备份的数据进行恢复。
 
-1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
+1. 停止当前运行的Rancher容器.可通过`docker ps`查看`<RANCHER_CONTAINER_ID>`
 
+    ```bash
+    docker stop <RANCHER_CONTAINER_ID>
     ```
-docker stop <RANCHER_CONTAINER_ID>
-    ```
 
-1. Launch a new Rancher Server container using the most recent `rancher-backup-<RANCHER_VERSION>` container that you backed up.
- 
-    For more information on obtaining this container name, see [Creating Backups—Single Node Installs](/Users/markbishop/Documents/GitHub/docs/content/rancher/v2.x/en/upgrades/backups/single-node-backups/#backup).
+2. 通过创建的数据卷容器`rancher-backup-<RANCHER_IMAGES_TAG>`，创建新的Rancher容器:
 
-	```
-docker run -d --volumes-from rancher-backup-<RANCHER_VERSION> --restart=unless-stopped \
--p 80:80 -p 443:443 rancher/rancher:<CURRENT_RANCHER_VERSION>
+    有关数据备份方法，请查阅[单节点备份](../../backups/single-node-backups/).
+
+    ```bash
+    docker run -d --restart=unless-stopped \
+    -p 80:80 -p 443:443 \
+    --name rancher-server-`date +%Y%m%d%H%M%S` \
+    --volumes-from rancher-backup-<RANCHER_IMAGES_TAG>  \
+    rancher/rancher:<RANCHER_IMAGES_TAG>
     ```
+    >注: 设置容器名，可以快速定位容器，`date +%Y%m%d%H%M%S` 会精确到秒，防止容器名冲突。

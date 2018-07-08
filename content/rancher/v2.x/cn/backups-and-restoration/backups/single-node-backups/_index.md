@@ -3,32 +3,31 @@ title: 单节点备份
 weight: 25
 ---
 
-在完成Rancher的单节点安装后，或者在升级到更新版本的Rancher之前，请创建当前安装的备份。如果您在升级时遇到问题，请将此备份用作Rancher安装的恢复点。
+在完成Rancher的单节点安装后，或在升级Rancher到新版本之前，需要对Rancher进行数据备份。如果在Rancher数据损坏或者丢失，或者升级遇到问题时，可以通过最新的备份进行数据恢复。
 
->**Prerequisite:** 打开Rancher并记下浏览器左下角显示的版本号（例如：v2.0.0）,在备份过程中需要这个号码。
+>**Prerequisite:** 浏览器访问Rancher UI，记下浏览器左下角显示的版本号(例如：`v2.0.0`）,在后续备份过程中需要这个版本号。
 
-1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
+1. 停止当前运行Rancher Server的容器,替换`<RANCHER_CONTAINER_ID>`为你真实的Rancher容器的ID。
 
-    ```
-docker stop <RANCHER_CONTAINER_ID>
-    ```
-
-    >**Tip:** You can obtain the ID for your Rancher container by entering the following command: `docker ps`.
-
-2. <a id="backup"></a>Create a backup container. This container backs up the data from your current Rancher Server, which you can use as a recovery point.
-
-    - Replace `<RANCHER_CONTAINER_ID>` with the same ID from the previous step.
-    - Replace `<RANCHER_VERSION>` and `<RANCHER_CONTAINER_TAG>` with the version of Rancher that you are currently running, as mentioned in the  **Prerequisite** above.
-
-    ```
-docker create --volumes-from <RANCHER_CONTAINER_ID> \
---name rancher-backup-<RANCHER_VERSION> rancher/rancher:<RANCHER_CONTAINER_TAG>
+    ```bash
+    docker stop `<RANCHER_CONTAINER_ID>`
     ```
 
-3. Restart Rancher Server. Replace `<RANCHER_CONTAINER_ID>` with the ID of your Rancher container.
+    >**提示:** 您可以输入以下命令获取Rancher容器的ID: `docker ps`.
 
-    ```
-docker start <RANCHER_CONTAINER_ID>
-    ```
+2. 创建数据卷容器,备份当前Rancher Server容器运行的数据到数据卷容器中。
 
-**Result:** A backup of your Rancher Server is created. If you ever need to restore your backup, see [Restoring Backups: Single Node Installs]({{< baseurl >}}/rancher/v2.x/en/upgrades/restorations/single-node-restoration).
+    ```bash
+    docker create \
+    --volumes-from <RANCHER_CONTAINER_ID> \
+    --name rancher-backup-<RANCHER_IMAGES_TAG> \
+    rancher/rancher:<RANCHER_IMAGES_TAG>
+    ```
+    - 替换`<RANCHER_CONTAINER_ID>`为上一步获取到的Rancher容器的ID。
+    - 替换`<RANCHER_IMAGES_TAG>`为先决条件中获取到的Rancher版本号。
+
+    >在Rancher的版本规划中，Rancher UI左下角显示的版本号始终与镜像的ATG号保持一致，例如: `rancher/rancher:v2.0.4`
+
+3. 以上步骤利用Docker原生的创建数据卷容器来备份数据，Docker会把指定容器中的数据卷中数据全部复制到创建的数据卷容器中，从而实现备份的功能，[了解数据卷容器](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes)。
+
+4. 数据恢复请点击[单节点数据恢复](../../restorations/single-node-restoration/)
