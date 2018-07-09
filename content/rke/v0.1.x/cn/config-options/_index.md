@@ -10,48 +10,68 @@ There are several options that can be configured in cluster configuration option
 
 配置节点
 ### Configuring Nodes
+
 节点
 * [Nodes]({{< baseurl >}}/rke/v0.1.x/cn/config-options/nodes/)
+
 受支持的docker版本
 * [Ignoring unsupported Docker versions](#supported-docker-versions)
+
 私人仓库
 * [Private Registries]({{< baseurl >}}/rke/v0.1.x/cn/config-options/private-registries/)
+
 集群级别SSH秘钥路径
 * [Cluster Level SSH Key Path](#cluster-level-ssh-key-path)
+
 SSH客户端
 * [SSH Agent](#ssh-agent)
+
 堡垒机
 * [Bastion Host]({{< baseurl >}}/rke/v0.1.x/cn/config-options/bastion-host/)
 
 
 配置k8s集群
 ### Configuring Kubernetes Cluster
+
 集群名称
 * [Cluster Name](#cluster-name)
+
 k8s版本
 * [Kubernetes Version](#kubernetes-version)
+
 系统镜像
 * [System Images]({{< baseurl >}}/rke/v0.1.x/cn/config-options/system-images/)
+
 服务
 * [Services]({{< baseurl >}}/rke/v0.1.x/cn/config-options/services/)
+
 扩展参数、监听、环境变量
 * [Extra Args and Binds and Environment Variables]({{< baseurl >}}/rke/v0.1.x/cn/config-options/services/services-extras/)
+
 外部ETCD
 * [External Etcd]({{< baseurl >}}/rke/v0.1.x/cn/config-options/services/external-etcd/)
+
 认证
 * [Authentication]({{< baseurl >}}/rke/v0.1.x/cn/config-options/authentication/)
+
 搜权
 * [Authorization]({{< baseurl >}}/rke/v0.1.x/cn/config-options/authorization/)
+
 云支持
 * [Cloud Providers]({{< baseurl >}}/rke/v0.1.x/cn/config-options/cloud-providers/)
+
 额外
 * [Add-ons]({{< baseurl >}}/rke/v0.1.x/cn/config-options/add-ons/)
+
 	任务超时
   * [Add-ons Jobs Timeout](#add-ons-jobs-timeout)
+  
 	网络插件
   * [Network Plugins]({{< baseurl >}}/rke/v0.1.x/cn/config-options/add-ons/network-plugins/)
+  
 	Ingress控制器
   * [Ingress Controller]({{< baseurl >}}/rke/v0.1.x/cn/config-options/add-ons/ingress-controllers/)
+  
 	定义用户
   * [User-Defined-Add-ons]({{< baseurl >}}/rke/v0.1.x/cn/config-options/add-ons/user-defined-add-ons/)
 
